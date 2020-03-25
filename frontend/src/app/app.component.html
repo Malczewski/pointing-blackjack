@@ -1,0 +1,30 @@
+<header>
+	<!-- Fixed navbar -->
+	<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+		<a class="navbar-brand">Fixed navbar</a>
+		<div class="collapse navbar-collapse" id="navbarCollapse">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item active">
+					<a class="nav-link" href="/#">Home</a>
+				</li>
+				<!-- <li class="nav-item">
+					<a class="nav-link disabled">Retro</a>
+				</li> -->
+			</ul>
+			
+			<span class="mt-2 mt-md-0" [hidden]="!isLoggedIn()">{{getUserName()}}</span>
+			<a class="nav-link mt-2 mt-md-0" [hidden]="!isLoggedIn()" (ngClick)="logout()">Logout</a>
+		</div>
+	</nav>
+</header>
+
+<!-- Begin page content -->
+<main role="main" class="container">
+	<router-outlet></router-outlet>
+</main>
+
+<footer class="footer">
+	<div class="container">
+		<span class="text-muted">Powered by the energy from 1CNRhK. v0.0.1</span>
+	</div>
+</footer>
