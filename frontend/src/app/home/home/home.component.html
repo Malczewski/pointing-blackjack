@@ -1,0 +1,7 @@
+<div class="rooms">
+	<div class="door"
+		*ngFor="let door of doors"
+		(ngClick)="enterRoom(door.id)">
+		<span>{{door.name}}</span>
+	</div>
+</div>

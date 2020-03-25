@@ -1,0 +1,30 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-4">
+		</div>
+		<div class="col-md-4">
+			<form role="form" (ngSubmit)="onSubmit()" #messageForm="ngForm">
+				<div class="form-group">
+					<label for="nameInput">
+						Name
+					</label>
+					<input type="text" 
+						[(ngModel)]="userName" 
+						class="form-control" 
+						placeholder="Now, say my name"
+						id="nameInput"
+						name="nameInput"
+						required #nameInput="ngModel" />
+				</div>
+				<div [hidden]="true || !nameInput.pristine" class="alert alert-danger">Name is required</div>
+				<div [hidden]="true" class="alert alert-info">You're God damn right</div>
+				
+				<button type="submit" [disabled]="!messageForm.form.valid" class="btn btn-primary">
+					Join
+				</button>
+			</form>
+		</div>
+		<div class="col-md-4">
+		</div>
+	</div>
+</div>
