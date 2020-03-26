@@ -1,7 +1,7 @@
 <div class="rooms">
-	<div class="door btn bg-primary m-4"
+	<div class="door btn bg-primary m-36"
 		*ngFor="let door of doors"
-		(ngClick)="enterRoom(door.id)">
+		(click)="enterRoom(door.id)">
 		<span>{{door.name}}</span>
 	</div>
 </div>
