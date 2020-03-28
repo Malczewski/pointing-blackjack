@@ -2,15 +2,15 @@
 	<div class="players-list users-list">
 		<div class="voter" *ngFor="let user of state.players">
 			<span class="user-name">{{user.name}}</span>
-			<div [ngSwitch]="isShowVotes()">
-				<div class="user-vote" *ngSwitchCase="true">
+			<div class="user-vote" [ngSwitch]="isShowVotes()">
+				<div *ngSwitchCase="true">
 					{{user.vote}}
 					<div *ngIf="isNumber(user.vote)" class="vote-number" [style.background-color]="getVoteColor(user.vote)"></div>
 					<div *ngIf="isWait(user.vote)" class="vote-wait"></div>
 					<div *ngIf="isDunno(user.vote)" class="vote-dunno"></div>
 				</div>
-				<div class="user-vote" *ngSwitchCase="false">
-					{{user.vote}}
+				<div *ngSwitchCase="false">
+					Hidden({{user.vote}})
 					<div *ngIf="isVoted(user.vote)" class="vote-ready"></div>
 					<div *ngIf="isWait(user.vote)" class="vote-wait"></div>
 				</div>

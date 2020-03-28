@@ -1,6 +1,5 @@
 :host {
 	height: 100%;
-	display: block;
 	display: flex;
 	flex-direction: column;
 
@@ -20,5 +19,22 @@
 	.spectators {
 		height: auto;
 		display: block;
+	}
+
+	.voter {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: nowrap;
+
+		.user-name {
+			width: 50%;
+			text-align: right;
+			margin-right: 36px;
+		}
+
+		.user-vote {
+			width: 100px;
+			text-align: right;
+		}
 	}
 }

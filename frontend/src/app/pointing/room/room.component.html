@@ -21,13 +21,21 @@
 <div class="room-players bg-light">
 	<room-players [state]="roomState"></room-players>
 </div>
-<div class="room-content">
-	<div class="room-cards">
+<div class="room-content" [ngSwitch]="getMode()">
+	<room-cards class="room-cards" 
+		*ngSwitchCase="'cards'"
+		[state]="roomState">
+	</room-cards>
+	<div class="room-results"
+		*ngSwitchCase="'results'">
 		
 	</div>
-	<div class="room-results">
-		
-	</div>
+	<hangman-progress [progress]="getProgress()"
+		*ngSwitchCase="'progress'"></hangman-progress>
+</div>
+<div class="room-progress">
+	<hangman-progress [progress]="getProgress()"
+		[hidden]="!showMiniProgress()"></hangman-progress>
 </div>
 <!-- <div class="room-log">
 		

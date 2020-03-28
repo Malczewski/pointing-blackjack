@@ -1,6 +1,7 @@
 $header: 44px;
 $players: 30%;
 $log: 0; //150px;
+$progress: 200px;
 
 div {
 	box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
@@ -33,7 +34,7 @@ div {
 	left: $players;
 	top: $header;
 	bottom: $log;
-	right: 0;
+	right: $progress;
 }
 
 .room-cards {
@@ -54,4 +55,12 @@ div {
 	height: $log;
 	left: $players;
 	right: 0;
+}
+
+.room-progress {
+	position: absolute;
+	right: 0;
+	width: $progress;
+	top: $header;
+	height: $progress;
 }

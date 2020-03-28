@@ -17,11 +17,12 @@ import { RoomLogComponent } from './pointing/room-log/room-log.component';
 import { ClipboardModule } from 'ngx-clipboard';
 import { UidInterceptor } from 'src/app/common/uid.interceptor';
 import {NgPipesModule} from 'ngx-pipes';
-import {AtomSpinnerModule} from 'angular-epic-spinners';
+import {SelfBuildingSquareSpinnerModule} from 'angular-epic-spinners';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatInputModule} from '@angular/material/input';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatButtonModule} from '@angular/material/button';
+import { HangmanProgressComponent } from './pointing/hangman-progress/hangman-progress.component';
 
 @NgModule({
 	declarations: [
@@ -32,7 +33,8 @@ import {MatButtonModule} from '@angular/material/button';
 	RoomPlayersComponent,
 	RoomCardsComponent,
 	RoomResultsComponent,
-	RoomLogComponent
+	RoomLogComponent,
+	HangmanProgressComponent
 	],
 	imports: [
 	BrowserModule,
@@ -43,7 +45,7 @@ import {MatButtonModule} from '@angular/material/button';
 	NgbModule,
 	ClipboardModule,
 	NgPipesModule,
-	//AtomSpinnerModule,
+	SelfBuildingSquareSpinnerModule,
 	BrowserAnimationsModule,
 	//MatInputModule,
 	//MatProgressBarModule,

@@ -2,16 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { RoomState, Vote, VoteState } from 'src/app/pointing/room-state.class';
 import * as _ from 'lodash';
 import { UserStateService } from 'src/app/common/user-state.service';
-
-const VOTE_COLORS = {
-	1: 'green',
-	2: 'blue',
-	3: 'yellow',
-	5: 'orange',
-	8: 'red',
-	13: 'brown'
-};
-const VOTE_VALUES = [1, 2, 3, 5, 8, 13];
+import { PointingConstants } from 'src/app/pointing/pointing-constants.class';
+import { PointingUtils } from 'src/app/pointing/pointing-utils.service';
 
 @Component({
 	selector: 'room-players',
@@ -28,7 +20,7 @@ export class RoomPlayersComponent implements OnInit {
 	}
 
 	isShowVotes(): boolean {
-		return _.every(this.state.players, player => !_.isUndefined(player.vote));
+		return PointingUtils.isVotingFinished(this.state);
 	}
 
 	makePlayer(): void {
@@ -45,7 +37,7 @@ export class RoomPlayersComponent implements OnInit {
 		return _.isNumber(vote);
 	}
 	getVoteColor(vote: Vote): string {
-		return VOTE_COLORS[vote];
+		return PointingConstants.VOTE_COLORS[vote];
 	}
 	isDunno(vote: Vote): boolean {
 		return vote === VoteState.none;

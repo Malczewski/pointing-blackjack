@@ -1,0 +1,28 @@
+<div *ngFor="let card of cards" 
+	class="vote-card"
+	[hidden]="isCardHidden(card)">
+	<div class="card-button btn" 
+		[ngClass]="{'selected': isMyVote(card)}"
+		[style.background-color]="cardColors[card]"
+		(click)="selectCard(card)"
+		[ngSwitch]="card">
+		<div *ngSwitchCase="'none'">?</div>
+		<div *ngSwitchCase="'wait'" class="wait-container">
+			<app-self-building-square-spinner
+				class="wait-spinner"
+				[animationDuration]="6000"
+				[size]="40"
+				[color]="'#ff1d5e'"
+				></app-self-building-square-spinner>
+			<span class="wait-subtitle">Still thinking...</span>
+		</div>
+		<div *ngSwitchDefault class="number-card">
+			<div class="card-rectangles">
+				<div *ngFor="let item of [].constructor(card)"
+					class="card-rect"
+					[style.background-color]="subColor(cardColors[card])"></div>
+			</div>
+			<div class="card-value">{{card}}</div>
+		</div>
+	</div>
+</div>

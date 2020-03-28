@@ -15,19 +15,19 @@ $spaceamounts: (2, 3, 4, 7, 8, 16, 24, 32, 36, 48, 64, 72, 96); // Adjust this t
 $sides: (top, bottom, left, right); // Leave this variable alone
 
 @each $space in $spaceamounts {
-  @each $side in $sides {
-    .m-#{str-slice($side, 0, 1)}-#{$space} {
-      margin-#{$side}: #{$space}px !important;
-    }
-  
-    .p-#{str-slice($side, 0, 1)}-#{$space} {
-      padding-#{$side}: #{$space}px !important;
-    }
-  }
-  .m-#{$space} {
-    margin: #{$space}px !important;
-  }
-  .p-#{$space} {
-    padding: #{$space}px !important;
-  }
+	@each $side in $sides {
+		.m-#{str-slice($side, 0, 1)}-#{$space} {
+			margin-#{$side}: #{$space}px !important;
+		}
+	
+		.p-#{str-slice($side, 0, 1)}-#{$space} {
+			padding-#{$side}: #{$space}px !important;
+		}
+	}
+	.m-#{$space} {
+		margin: #{$space}px !important;
+	}
+	.p-#{$space} {
+		padding: #{$space}px !important;
+	}
 }
