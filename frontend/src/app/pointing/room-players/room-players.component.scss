@@ -1,0 +1,24 @@
+:host {
+	height: 100%;
+	display: block;
+	display: flex;
+	flex-direction: column;
+
+	.players {
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+	}
+	.players-list {
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+	}
+	.players button {
+		height: auto;
+	}
+	.spectators {
+		height: auto;
+		display: block;
+	}
+}

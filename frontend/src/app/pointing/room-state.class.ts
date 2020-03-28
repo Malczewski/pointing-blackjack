@@ -14,6 +14,6 @@ export class RoomState {
 	id: string;
 	name: string;
 	players: Player[];
-	observers: Player[];
-	log: string[];
+	spectators: Player[];
+	log: {time: number, message: string}[];
 }

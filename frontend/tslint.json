@@ -25,7 +25,7 @@
     "component-selector": [
       true,
       "element",
-      "app",
+      "",
       "kebab-case"
     ],
     "eofline": true,
@@ -140,7 +140,9 @@
     "template-banana-in-box": true,
     "template-no-negated-async": true,
     "use-lifecycle-interface": true,
-    "use-pipe-transform-interface": true
+    "use-pipe-transform-interface": true,
+    "comment-format": false,
+    "prefer-const": false
   },
   "rulesDirectory": [
     "codelyzer"

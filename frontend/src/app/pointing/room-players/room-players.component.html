@@ -1,0 +1,34 @@
+<div class="players">
+	<div class="players-list users-list">
+		<div class="voter" *ngFor="let user of state.players">
+			<span class="user-name">{{user.name}}</span>
+			<div [ngSwitch]="isShowVotes()">
+				<div class="user-vote" *ngSwitchCase="true">
+					{{user.vote}}
+					<div *ngIf="isNumber(user.vote)" class="vote-number" [style.background-color]="getVoteColor(user.vote)"></div>
+					<div *ngIf="isWait(user.vote)" class="vote-wait"></div>
+					<div *ngIf="isDunno(user.vote)" class="vote-dunno"></div>
+				</div>
+				<div class="user-vote" *ngSwitchCase="false">
+					{{user.vote}}
+					<div *ngIf="isVoted(user.vote)" class="vote-ready"></div>
+					<div *ngIf="isWait(user.vote)" class="vote-wait"></div>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+	<button class="btn btn-info" (click)="makePlayer()" [hidden]="isPlayer()">
+		I'm Player
+	</button>
+</div>
+<div class="spectators">
+	<button class="btn btn-info" (click)="makeSpectator()" [hidden]="isSpectator()">
+		I'm Spectator
+	</button>
+	<div class="spectator-list users-list">
+		<div class="voter" *ngFor="let user of state.spectators">
+			<span class="user-name">{{user.name}}</span>
+		</div>
+	</div>
+</div>

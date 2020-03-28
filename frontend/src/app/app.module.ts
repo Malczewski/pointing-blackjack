@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -16,6 +16,12 @@ import { RoomResultsComponent } from './pointing/room-results/room-results.compo
 import { RoomLogComponent } from './pointing/room-log/room-log.component';
 import { ClipboardModule } from 'ngx-clipboard';
 import { UidInterceptor } from 'src/app/common/uid.interceptor';
+import {NgPipesModule} from 'ngx-pipes';
+import {AtomSpinnerModule} from 'angular-epic-spinners';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatInputModule} from '@angular/material/input';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatButtonModule} from '@angular/material/button';
 
 @NgModule({
 	declarations: [
@@ -33,8 +39,15 @@ import { UidInterceptor } from 'src/app/common/uid.interceptor';
 	AppRoutingModule,
 	HttpClientModule,
 	FormsModule,
+	ReactiveFormsModule,
 	NgbModule,
-	ClipboardModule
+	ClipboardModule,
+	NgPipesModule,
+	//AtomSpinnerModule,
+	BrowserAnimationsModule,
+	//MatInputModule,
+	//MatProgressBarModule,
+	//MatButtonModule,
 	],
 	providers: [CookieService, { provide: HTTP_INTERCEPTORS, useClass: UidInterceptor, multi: true }, ],
 	bootstrap: [AppComponent]

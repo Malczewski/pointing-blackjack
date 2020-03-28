@@ -47,6 +47,10 @@ export class UserStateService {
 	}
 
 	private generateUID(): string {
-		return Math.random().toString(36).substring(2) + Date.now().toString(36);
+		return 'hardcoded'; // Math.random().toString(36).substring(2) + Date.now().toString(36);
+	}
+
+	getUid(): string {
+		return this.user.uid;
 	}
 }
