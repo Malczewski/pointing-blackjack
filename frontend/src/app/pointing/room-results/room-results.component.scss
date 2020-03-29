@@ -1,0 +1,39 @@
+.result {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+
+	.vote {
+		width: calc(50% - 60px);
+		font-size: 6vh;
+		text-align: right;
+	}
+
+	.count {
+		width: auto;
+		margin-left: 60px;
+		text-align: right;
+		display: flex;
+		align-items: center;
+		
+		.count-item {
+			width: 4vh;
+			height: 4vh;
+			margin-right: 1vh;
+			border: 1px solid transparent;
+
+			complication-indicator {
+				width: 100%;
+				height: 100%;
+			}
+		}
+	}
+}
+.vote-header {
+	.vote, .count {
+		font-size: 3vh;
+	}
+}
+:host {
+	padding-top: 32px;
+}

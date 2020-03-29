@@ -2,6 +2,7 @@
 	display: flex;
 	justify-content: space-evenly;
 	flex-wrap: wrap;
+	padding: 16px 0;
 
 	.vote-card {
 		flex: 0 0 26%;
@@ -9,13 +10,20 @@
 		height: 20vh;
 
 		.card-button {
-			font-size: 10vh;
+			font-size: 14vh;
+			line-height: 1;
+			font-weight: 600;
 			width: 20vh;
 			padding: 1vh 1.5vh;
 			height: 100%;
 			display: flex;
 			align-items: center;
 			justify-content: center;
+			border-width: 2px;
+
+			.font-white {
+				color: #ffffff;
+			}
 
 			.wait-container {
 				width: 100%;
@@ -26,7 +34,7 @@
 				height: 100%;
 			}
 			.wait-subtitle {
-				font-size: 1vh;
+				font-size: 1.5vh;
 				display: block;
 				margin-top: 4px;
 				width: 100%;
@@ -72,4 +80,13 @@
 		}
 	}
 	
+
+	&.has-selection {
+		.card-button {
+			opacity: 0.4;
+			&.selected {
+				opacity: 1;
+			}
+		}
+	}
 }

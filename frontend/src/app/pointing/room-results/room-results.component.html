@@ -1,0 +1,19 @@
+<div class="vote-header result">
+	<div class="vote">Points</div>
+	<div class="count">Count</div>
+</div>
+<div *ngFor="let result of getAggregatedResults() | orderBy:'-count'" class="result">
+	<div class="vote"
+		[ngClass]="{'font-weight-bold' : result.vote > 0, 'font-italic': !(result.vote > 0)}">
+		{{getVoteText(result.vote)}}
+	</div>
+	<div class="count">
+		<div class="count-item" 
+			*ngFor="let item of [].constructor(result.count)"
+			[style.background-color]="getVoteColor(result.vote)"
+			[style.border-color]="getVoteColor(result.vote) | shade:-0.4">
+			<!-- <complication-indicator *ngIf="result.vote > 0" [complexity]="result.vote"></complication-indicator> -->
+		</div>
+	</div>
+	
+</div>

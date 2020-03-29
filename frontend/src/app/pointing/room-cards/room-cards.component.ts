@@ -1,5 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { RoomState, Vote, VoteState } from 'src/app/pointing/room-state.class';
+import { Component, OnInit, Input, HostBinding } from '@angular/core';
+import { RoomState, Vote, VoteState, Player } from 'src/app/pointing/room-state.class';
 import * as _ from 'lodash';
 import { UserStateService } from 'src/app/common/user-state.service';
 import { PointingConstants } from 'src/app/pointing/pointing-constants.class';
@@ -29,13 +29,20 @@ export class RoomCardsComponent implements OnInit {
 
 	selectCard(vote: Vote): void {
 		// TODO api call
-		let me = _.find(this.state.players, {uid: this.userState.getUid()});
-		me.vote = vote;
+		this.getMyPlayer().vote = vote;
 	}
 
 	isMyVote(vote: Vote): boolean {
-		let me = _.find(this.state.players, {uid: this.userState.getUid()});
-		return vote === me.vote;
+		return vote === this.getMyPlayer().vote;
+	}
+
+	@HostBinding('class.has-selection')
+	get hasSelection(): boolean {
+		return PointingUtils.isVoted(this.getMyPlayer());
+	}
+
+	private getMyPlayer(): Player {
+		return _.find(this.state.players, {uid: this.userState.getUid()});
 	}
 
 	isCardHidden(vote: Vote): boolean {

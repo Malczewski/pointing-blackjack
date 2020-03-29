@@ -142,7 +142,8 @@
     "use-lifecycle-interface": true,
     "use-pipe-transform-interface": true,
     "comment-format": false,
-    "prefer-const": false
+    "prefer-const": false,
+    "one-variable-per-declaration": false
   },
   "rulesDirectory": [
     "codelyzer"

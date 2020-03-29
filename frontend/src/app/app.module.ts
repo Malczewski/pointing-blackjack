@@ -24,6 +24,7 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatButtonModule} from '@angular/material/button';
 import { HangmanProgressComponent } from './pointing/hangman-progress/hangman-progress.component';
 import { ComplicationIndicatorComponent } from './pointing/complication-indicator/complication-indicator.component';
+import { ShadePipe } from './common/shade.pipe';
 
 @NgModule({
 	declarations: [
@@ -36,7 +37,8 @@ import { ComplicationIndicatorComponent } from './pointing/complication-indicato
 	RoomResultsComponent,
 	RoomLogComponent,
 	HangmanProgressComponent,
-	ComplicationIndicatorComponent
+	ComplicationIndicatorComponent,
+	ShadePipe
 	],
 	imports: [
 	BrowserModule,

@@ -1,20 +1,43 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { RoomState, Vote, VoteState } from 'src/app/pointing/room-state.class';
+import * as _ from 'lodash';
+import { PointingConstants } from 'src/app/pointing/pointing-constants.class';
 
+
+interface IPointingResult {
+	vote: Vote;
+	count: number;
+}
 @Component({
-  selector: 'app-room-results',
-  template: `
-    <p>
-      room-results works!
-    </p>
-  `,
-  styles: [
-  ],
+	selector: 'room-results',
+	templateUrl: './room-results.component.html',
+	styleUrls: ['./room-results.component.scss']
 })
 export class RoomResultsComponent implements OnInit {
+	@Input() state: RoomState;
 
-  constructor() { }
+	constructor() { }
 
-  ngOnInit(): void {
-  }
+	ngOnInit(): void {
+	}
+
+	getAggregatedResults(): IPointingResult[] {
+		return _.chain(this.state.players)
+			.countBy(player => player.vote)
+			.map((count, key) => ({vote: key as Vote, count}))
+			.value();
+	}
+
+	getVoteColor(vote: Vote): string {
+		return PointingConstants.VOTE_COLORS[vote];
+	}
+
+	getVoteText(vote: Vote): string {
+		switch (vote) {
+			case VoteState.none: return '?';
+			case 'null': return 'Skipped';
+			default: return vote + '';
+		}
+	}
 
 }

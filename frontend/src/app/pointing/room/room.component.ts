@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostBinding } from '@angular/core';
 import { PointingApiService } from 'src/app/pointing/pointing-api.service';
 import { ActivatedRoute } from '@angular/router';
 import { RoomState, VoteState } from 'src/app/pointing/room-state.class';
@@ -39,7 +39,7 @@ export class RoomComponent implements OnInit {
 				{uid: 'user6', name: 'User 6', vote: 3},
 				{uid: 'user7', name: 'User 7 long name bla bla bla', vote: 2},
 				{uid: 'user8', name: 'User 8', vote: 3},
-				{uid: 'user9', name: 'User 9', vote: 5},
+				{uid: 'user9', name: 'User 9', vote: undefined},
 				{uid: 'user10', name: 'User 10', vote: 1},
 				{uid: 'user1', name: 'User 11', vote: 3},
 			],
@@ -59,7 +59,7 @@ export class RoomComponent implements OnInit {
 
 	showVotes(): void {
 		//this.pointingApi.show(this.roomId).subscribe();
-		_.each(this.roomState.players, player => player.vote = player.vote || null);
+		_.each(this.roomState.players, player => player.vote = PointingUtils.isVoted(player) ? player.vote : null);
 	}
 
 	getMode(): string {

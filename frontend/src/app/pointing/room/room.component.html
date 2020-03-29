@@ -26,10 +26,10 @@
 		*ngSwitchCase="'cards'"
 		[state]="roomState">
 	</room-cards>
-	<div class="room-results"
-		*ngSwitchCase="'results'">
-		
-	</div>
+	<room-results class="room-results"
+		*ngSwitchCase="'results'"
+		[state]="roomState">
+	</room-results>
 	<hangman-progress [progress]="getProgress()"
 		*ngSwitchCase="'progress'"></hangman-progress>
 </div>
