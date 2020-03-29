@@ -40,4 +40,10 @@ export class RoomResultsComponent implements OnInit {
 		}
 	}
 
+	isTopResult(vote: Vote): boolean {
+		let results = this.getAggregatedResults();
+		let voteCount = _.find(results, {vote}).count;
+		return voteCount === _.maxBy(results, result => result.count).count;
+	}
+
 }

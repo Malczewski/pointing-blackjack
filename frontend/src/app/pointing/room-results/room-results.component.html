@@ -1,13 +1,11 @@
-<div class="vote-header result">
-	<div class="vote">Points</div>
-	<div class="count">Count</div>
-</div>
-<div *ngFor="let result of getAggregatedResults() | orderBy:'-count'" class="result">
+<div class="vote result-header">Points</div>
+<div class="count result-header">Count</div>
+<ng-container *ngFor="let result of getAggregatedResults() | orderBy:'-count'">
 	<div class="vote"
-		[ngClass]="{'font-weight-bold' : result.vote > 0, 'font-italic': !(result.vote > 0)}">
+		[ngClass]="{'font-weight-bold' : result.vote > 0, 'font-italic': !(result.vote > 0), 'top-result': isTopResult(result.vote)}">
 		{{getVoteText(result.vote)}}
 	</div>
-	<div class="count">
+	<div class="count" [ngClass]="{'top-result': isTopResult(result.vote)}">
 		<div class="count-item" 
 			*ngFor="let item of [].constructor(result.count)"
 			[style.background-color]="getVoteColor(result.vote)"
@@ -15,5 +13,4 @@
 			<!-- <complication-indicator *ngIf="result.vote > 0" [complexity]="result.vote"></complication-indicator> -->
 		</div>
 	</div>
-	
-</div>
+</ng-container>

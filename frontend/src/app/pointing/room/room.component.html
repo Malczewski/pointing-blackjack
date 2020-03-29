@@ -18,20 +18,22 @@
 		</button>
 	</div>
 </div>
-<div class="room-players bg-light">
+<div class="room-players">
 	<room-players [state]="roomState"></room-players>
 </div>
 <div class="room-content" [ngSwitch]="getMode()">
-	<room-cards class="room-cards" 
-		*ngSwitchCase="'cards'"
-		[state]="roomState">
-	</room-cards>
-	<room-results class="room-results"
-		*ngSwitchCase="'results'"
-		[state]="roomState">
-	</room-results>
-	<hangman-progress [progress]="getProgress()"
-		*ngSwitchCase="'progress'"></hangman-progress>
+	<div class="room-content-center">
+		<room-cards class="room-cards" 
+			*ngSwitchCase="'cards'"
+			[state]="roomState">
+		</room-cards>
+		<room-results class="room-results"
+			*ngSwitchCase="'results'"
+			[state]="roomState">
+		</room-results>
+		<hangman-progress [progress]="getProgress()"
+			*ngSwitchCase="'progress'"></hangman-progress>
+	</div>
 </div>
 <div class="room-progress">
 	<hangman-progress [progress]="getProgress()"

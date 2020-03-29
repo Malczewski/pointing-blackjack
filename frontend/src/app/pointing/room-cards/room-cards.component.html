@@ -3,8 +3,8 @@
 	[hidden]="isCardHidden(card)">
 	<div class="card-button btn" 
 		[ngClass]="{'selected': isMyVote(card)}"
-		[style.background-color]="cardColors[card]"
-		[style.color]="cardColors[card] | shade: (card < 5 ? -0.9 : 0.9)"
+		[style.background-color]="cardColors[card] | shade: 0.2"
+		[style.color]="cardColors[card] | shade: (card < 5 ? -0.8 : 0.9)"
 		[style.border-color]="cardColors[card] | shade: -0.4"
 		(click)="selectCard(card)"
 		[ngSwitch]="card">

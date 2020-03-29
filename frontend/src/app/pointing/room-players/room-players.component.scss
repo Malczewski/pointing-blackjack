@@ -2,6 +2,7 @@
 	height: 100%;
 	display: flex;
 	flex-direction: column;
+	padding: 16px;
 
 	.players {
 		height: 100%;
@@ -30,6 +31,8 @@
 			width: 50%;
 			text-align: right;
 			margin-right: 36px;
+			text-overflow: ellipsis;
+			overflow: hidden;
 		}
 
 		.user-vote {

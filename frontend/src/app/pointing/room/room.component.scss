@@ -4,7 +4,7 @@ $log: 0; //150px;
 $progress: 200px;
 
 div {
-	box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
+	//box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
 }
 
 .room-header {
@@ -35,18 +35,24 @@ div {
 	top: $header;
 	bottom: $log;
 	right: $progress;
+
+	.room-content-center {
+		width: 100%;
+		height: 100%;
+		display: flex;
+		justify-content: center;
+	}
 }
 
 .room-cards {
 	position: absolute;
-	width: 100%;
+	width: auto;
 	height: 100%;
 }
 
 .room-results {
 	position: absolute;
-	width: 100%;
-	height: 100%;
+	width: auto;
 }
 
 .room-log {
