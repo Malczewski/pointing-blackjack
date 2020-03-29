@@ -1,7 +1,9 @@
 <div class="vote result-header">Points</div>
 <div class="count result-header">Count</div>
 <ng-container *ngFor="let result of getAggregatedResults() | orderBy:'-count'">
-	<div class="vote"
+	<div class="vote clickable"
+		title="Click to change vote"
+		(click)="changeVote(result.vote)"
 		[ngClass]="{'font-weight-bold' : result.vote > 0, 'font-italic': !(result.vote > 0), 'top-result': isTopResult(result.vote)}">
 		{{getVoteText(result.vote)}}
 	</div>

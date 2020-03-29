@@ -1,34 +1,47 @@
-<div class="players">
-	<div class="players-list users-list">
-		<div class="voter" *ngFor="let user of state.players">
-			<span class="user-name">{{user.name}}</span>
-			<div class="user-vote" [ngSwitch]="isShowVotes()">
-				<div *ngSwitchCase="true">
-					{{user.vote}}
-					<div *ngIf="isNumber(user.vote)" class="vote-number" [style.background-color]="getVoteColor(user.vote)"></div>
-					<div *ngIf="isWait(user.vote)" class="vote-wait"></div>
-					<div *ngIf="isDunno(user.vote)" class="vote-dunno"></div>
-				</div>
-				<div *ngSwitchCase="false">
-					Hidden({{user.vote}})
-					<div *ngIf="isVoted(user.vote)" class="vote-ready"></div>
-					<div *ngIf="isWait(user.vote)" class="vote-wait"></div>
+
+<div class="players-list" [ngClass]="{'many-players': state.players.length > 12}">
+	<ng-container *ngFor="let user of state.players; let i = index">
+		<span class="user-name" 
+			[ngClass]="{ 'odd': i %2 == 1, 'text-primary': isMyUser(user) } " 
+			[style.background-color]="getDifferenceColor(user.vote)">
+			{{user.name}}
+		</span>
+		<div class="user-vote" 
+			[ngSwitch]="isShowVotes()" 
+			[ngClass]="{ 'odd': i %2 == 1 } "
+			[style.background-color]="getDifferenceColor(user.vote)">
+			<div *ngSwitchCase="true">
+				<div *ngIf="user.vote !== null" class="vote-number" [style.background-color]="getVoteColor(user.vote)">
+					{{isNumber(user.vote) ? user.vote : '?'}}
 				</div>
 			</div>
-			
+			<div *ngSwitchCase="false">
+				<div *ngIf="isVoted(user.vote)" class="vote-ready"></div>
+				<div *ngIf="isWait(user.vote)" class="vote-wait">
+					<app-circles-to-rhumbuses-spinner
+						[animationDuration]="1200"
+						[circlesNum]="3"
+						[circleSize]="9"
+						[color]="'#A3ABBD'"
+					></app-circles-to-rhumbuses-spinner>
+				</div>
+			</div>
 		</div>
-	</div>
-	<button class="btn btn-info" (click)="makePlayer()" [hidden]="isPlayer()">
-		I'm Player
-	</button>
+	</ng-container>
 </div>
-<div class="spectators">
-	<button class="btn btn-info" (click)="makeSpectator()" [hidden]="isSpectator()">
-		I'm Spectator
-	</button>
-	<div class="spectator-list users-list">
-		<div class="voter" *ngFor="let user of state.spectators">
-			<span class="user-name">{{user.name}}</span>
-		</div>
+<div class="bottom-list">
+	<div class="actions">
+		<button class="btn btn-primary" (click)="makePlayer()" [disabled]="isPlayer()">
+			I'm Player
+		</button>
+		<button class="btn btn-info" (click)="makeSpectator()" [disabled]="isSpectator()">
+			I'm Spectator
+		</button>
+	</div>
+	<div class="players-list">
+		<ng-container *ngFor="let user of state.spectators">
+			<span class="user-name" [ngClass]="{'text-primary':isMyUser(user)}">{{user.name}}</span>
+			<div></div>
+		</ng-container>
 	</div>
 </div>

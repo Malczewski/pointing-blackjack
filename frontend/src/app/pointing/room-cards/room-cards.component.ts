@@ -38,7 +38,7 @@ export class RoomCardsComponent implements OnInit {
 
 	@HostBinding('class.has-selection')
 	get hasSelection(): boolean {
-		return PointingUtils.isVoted(this.getMyPlayer());
+		return PointingUtils.isVoted(this.getMyPlayer().vote);
 	}
 
 	private getMyPlayer(): Player {

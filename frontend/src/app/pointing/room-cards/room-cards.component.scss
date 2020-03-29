@@ -64,7 +64,8 @@
 			.card-value {
 				grid-column: 1;
 				grid-row: 1;
-				z-index:1;
+				z-index: 1;
+				opacity: 0.75;
 				height: 100%;
 				align-items: center;
 				display: flex;

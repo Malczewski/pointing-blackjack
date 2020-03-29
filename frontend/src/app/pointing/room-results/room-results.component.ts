@@ -2,12 +2,9 @@ import { Component, OnInit, Input } from '@angular/core';
 import { RoomState, Vote, VoteState } from 'src/app/pointing/room-state.class';
 import * as _ from 'lodash';
 import { PointingConstants } from 'src/app/pointing/pointing-constants.class';
+import { IPointingResult, PointingUtils } from 'src/app/pointing/pointing-utils.service';
+import { UserStateService } from 'src/app/common/user-state.service';
 
-
-interface IPointingResult {
-	vote: Vote;
-	count: number;
-}
 @Component({
 	selector: 'room-results',
 	templateUrl: './room-results.component.html',
@@ -16,16 +13,13 @@ interface IPointingResult {
 export class RoomResultsComponent implements OnInit {
 	@Input() state: RoomState;
 
-	constructor() { }
+	constructor(private userState: UserStateService) { }
 
 	ngOnInit(): void {
 	}
 
 	getAggregatedResults(): IPointingResult[] {
-		return _.chain(this.state.players)
-			.countBy(player => player.vote)
-			.map((count, key) => ({vote: key as Vote, count}))
-			.value();
+		return PointingUtils.getAggregatedResults(this.state);
 	}
 
 	getVoteColor(vote: Vote): string {
@@ -42,8 +36,14 @@ export class RoomResultsComponent implements OnInit {
 
 	isTopResult(vote: Vote): boolean {
 		let results = this.getAggregatedResults();
-		let voteCount = _.find(results, {vote}).count;
-		return voteCount === _.maxBy(results, result => result.count).count;
+		return _.find(results, {vote}).isTop;
+	}
+
+	changeVote(vote: Vote): void {
+		//TODO api call
+		let me = _.find(this.state.players, {uid: this.userState.getUid()});
+		if (me)
+			me.vote = vote;
 	}
 
 }

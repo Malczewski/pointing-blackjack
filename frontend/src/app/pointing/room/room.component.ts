@@ -37,7 +37,7 @@ export class RoomComponent implements OnInit {
 				{uid: 'user4', name: 'User 4', vote: 1},
 				{uid: 'user5', name: 'User 5', vote: VoteState.none},
 				{uid: 'user6', name: 'User 6', vote: 3},
-				{uid: 'user7', name: 'User 7 long name bla bla bla', vote: 2},
+				{uid: 'user7', name: 'User 7 long name bla bla bla jskjdskdj askdjkdjk skdjajkdsjkd d', vote: 2},
 				{uid: 'user8', name: 'User 8', vote: 3},
 				{uid: 'user9', name: 'User 9', vote: undefined},
 				{uid: 'user10', name: 'User 10', vote: 1},
@@ -53,13 +53,15 @@ export class RoomComponent implements OnInit {
 	}
 
 	resetVotes(): void {
+		//TODO api call
 		//this.pointingApi.reset(this.roomId).subscribe();
 		this.roomState = _.cloneDeep(this.originalState);
 	}
 
 	showVotes(): void {
+		//TODO api call
 		//this.pointingApi.show(this.roomId).subscribe();
-		_.each(this.roomState.players, player => player.vote = PointingUtils.isVoted(player) ? player.vote : null);
+		_.each(this.roomState.players, player => player.vote = PointingUtils.isVoted(player.vote) ? player.vote : null);
 	}
 
 	getMode(): string {
