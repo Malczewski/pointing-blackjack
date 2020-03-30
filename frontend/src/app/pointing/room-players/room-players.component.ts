@@ -71,8 +71,9 @@ export class RoomPlayersComponent implements OnInit {
 			return red + alpha;
 		if (vote === null)
 			return '';
-		let voteIndex = PointingConstants.VOTE_VALUES.indexOf(vote);
+		let voteNum = vote as number;
 		let topVotes = PointingUtils.getAggregatedResults(this.state).filter(topVote => topVote.isTop);
+		/* let voteIndex = PointingConstants.VOTE_VALUES.indexOf(vote);
 		let indexDiff = _.chain(topVotes)
 			.map(topVote => PointingConstants.VOTE_VALUES.indexOf(topVote.vote))
 			.map(index => Math.abs(index - voteIndex))
@@ -81,7 +82,18 @@ export class RoomPlayersComponent implements OnInit {
 		if (indexDiff === 0)
 			return green + alpha;
 		let totalValues = PointingConstants.VOTE_VALUES.length - 2; // none and wait
-		return ColorUtils.blendColors(green, red, indexDiff / totalValues) + alpha;
+		return ColorUtils.blendColors(green, red, indexDiff / totalValues) + alpha; */
+		let diff = _.chain(topVotes)
+			.map(topVote => topVote.vote)
+			.filter(topVote => topVote > 0)
+			.map((topVote: number) => Math.abs(topVote - voteNum))
+			.max()
+			.value();
+		if (diff === 0)
+			return green + alpha;
+		let maxVote = _.maxBy(PointingConstants.VOTE_VALUES, v => _.isNumber(v) ? v : 0) as number;
+		return ColorUtils.blendColors(green, red, diff / (maxVote - 1)) + alpha;
+
 
 	}
 

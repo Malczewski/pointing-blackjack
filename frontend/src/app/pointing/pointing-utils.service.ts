@@ -28,7 +28,7 @@ export class PointingUtils {
 		return _.chain(roomState.players)
 			.countBy(player => player.vote)
 			.each(count => max = count > max ? count : max)
-			.map((count, key) => ({vote: key as Vote, count, isTop: count === max}))
+			.map((count, key) => ({vote: isNaN(Number(key)) ? key as VoteState : Number(key), count, isTop: count === max}))
 			.value();
 	}
 }
