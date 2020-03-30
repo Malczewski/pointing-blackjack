@@ -17,11 +17,14 @@ import { RoomLogComponent } from './pointing/room-log/room-log.component';
 import { ClipboardModule } from 'ngx-clipboard';
 import { UidInterceptor } from 'src/app/common/uid.interceptor';
 import {NgPipesModule} from 'ngx-pipes';
-import {SelfBuildingSquareSpinnerModule, CirclesToRhumbusesSpinnerModule, AtomSpinnerModule} from 'angular-epic-spinners';
+import {SelfBuildingSquareSpinnerModule, CirclesToRhumbusesSpinnerModule} from 'angular-epic-spinners';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HangmanProgressComponent } from './pointing/hangman-progress/hangman-progress.component';
 import { ComplicationIndicatorComponent } from './pointing/complication-indicator/complication-indicator.component';
 import { ShadePipe } from './common/shade.pipe';
+import { SocketIoModule } from 'ngx-socket-io';
+import { AppSocket } from 'src/app/common/sockets/app-socket';
+import { PointingApiService } from 'src/app/pointing/pointing-api.service';
 
 @NgModule({
 	declarations: [
@@ -50,11 +53,17 @@ import { ShadePipe } from './common/shade.pipe';
 	CirclesToRhumbusesSpinnerModule,
 	CirclesToRhumbusesSpinnerModule,
 	BrowserAnimationsModule,
+	SocketIoModule,
 	//MatInputModule,
 	//MatProgressBarModule,
 	//MatButtonModule,
 	],
-	providers: [CookieService, { provide: HTTP_INTERCEPTORS, useClass: UidInterceptor, multi: true }, ],
+	providers: [
+		CookieService,
+		//{ provide: HTTP_INTERCEPTORS, useClass: UidInterceptor, multi: true },
+		AppSocket,
+		PointingApiService
+	],
 	bootstrap: [AppComponent]
 })
 export class AppModule { }

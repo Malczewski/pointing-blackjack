@@ -4,6 +4,7 @@ import * as _ from 'lodash';
 import { UserStateService } from 'src/app/common/user-state.service';
 import { PointingConstants } from 'src/app/pointing/pointing-constants.class';
 import { PointingUtils } from 'src/app/pointing/pointing-utils.service';
+import { PointingApiService } from 'src/app/pointing/pointing-api.service';
 
 
 @Component({
@@ -18,7 +19,9 @@ export class RoomCardsComponent implements OnInit {
 	cards = PointingConstants.VOTE_VALUES;
 	cardColors = PointingConstants.VOTE_COLORS;
 
-	constructor(private userState: UserStateService) { }
+	constructor(
+		private userState: UserStateService,
+		private pointingApi: PointingApiService) { }
 
 	ngOnInit(): void {
 	}
@@ -28,8 +31,8 @@ export class RoomCardsComponent implements OnInit {
 	}
 
 	selectCard(vote: Vote): void {
-		// TODO api call
-		this.getMyPlayer().vote = vote;
+		this.pointingApi.vote(vote);
+		//this.getMyPlayer().vote = vote;
 	}
 
 	isMyVote(vote: Vote): boolean {

@@ -5,6 +5,7 @@ import { UserStateService } from 'src/app/common/user-state.service';
 import { PointingConstants } from 'src/app/pointing/pointing-constants.class';
 import { PointingUtils } from 'src/app/pointing/pointing-utils.service';
 import { ColorUtils } from 'src/app/common/color-utils.class';
+import { PointingApiService } from 'src/app/pointing/pointing-api.service';
 
 @Component({
 	selector: 'room-players',
@@ -15,7 +16,9 @@ export class RoomPlayersComponent implements OnInit {
 
 	@Input() state: RoomState;
 
-	constructor(private userState: UserStateService) { }
+	constructor(
+		private userState: UserStateService,
+		private pointingApi: PointingApiService) { }
 
 	ngOnInit(): void {
 	}
@@ -25,15 +28,15 @@ export class RoomPlayersComponent implements OnInit {
 	}
 
 	makePlayer(): void {
-		//TODO api call
-		let current = _.remove(this.state.spectators, {uid: this.userState.getUid()})[0];
-		this.state.players.push(current);
+		this.pointingApi.switchToPlayer();
+		//let current = _.remove(this.state.spectators, {uid: this.userState.getUid()})[0];
+		//this.state.players.push(current);
 	}
 
 	makeSpectator(): void {
-		//TODO api call
-		let current = _.remove(this.state.players, {uid: this.userState.getUid()})[0];
-		this.state.spectators.push(current);
+		this.pointingApi.switchToSpectator();
+		//let current = _.remove(this.state.players, {uid: this.userState.getUid()})[0];
+		//this.state.spectators.push(current);
 	}
 
 	isNumber(vote: Vote): boolean {

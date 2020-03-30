@@ -1,7 +1,7 @@
-import { Component, OnInit, HostBinding } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { PointingApiService } from 'src/app/pointing/pointing-api.service';
 import { ActivatedRoute } from '@angular/router';
-import { RoomState, VoteState } from 'src/app/pointing/room-state.class';
+import { RoomState } from 'src/app/pointing/room-state.class';
 import * as _ from 'lodash';
 import { PointingUtils } from 'src/app/pointing/pointing-utils.service';
 import { UserStateService } from 'src/app/common/user-state.service';
@@ -16,7 +16,7 @@ export class RoomComponent implements OnInit {
 	roomUrl: string;
 	private roomId: string;
 	roomState: RoomState;
-	private originalState: RoomState;
+	//private originalState: RoomState;
 
 	constructor(
 		private pointingApi: PointingApiService,
@@ -27,7 +27,9 @@ export class RoomComponent implements OnInit {
 		this.roomId = this.route.snapshot.paramMap.get('id');
 		this.roomUrl = location.href;
 
-		this.roomState = {
+		this.pointingApi.getStateObserver().subscribe(state => this.roomState = state);
+		this.pointingApi.joinRoom(this.roomId);
+		/* this.roomState = {
 			id: 'blabla',
 			name: 'bleble name',
 			players: [
@@ -48,20 +50,18 @@ export class RoomComponent implements OnInit {
 				{uid: 'obs2', name: 'watcher 2'}
 			],
 			log: [{time: 1000, message: 'User1 joined'}, {time: 2000, message: 'User2 joined'}]
-		};
-		this.originalState = _.cloneDeep(this.roomState);
+		}; */
+		//this.originalState = _.cloneDeep(this.roomState);
 	}
 
 	resetVotes(): void {
-		//TODO api call
-		//this.pointingApi.reset(this.roomId).subscribe();
-		this.roomState = _.cloneDeep(this.originalState);
+		this.pointingApi.reset();
+		//this.roomState = _.cloneDeep(this.originalState);
 	}
 
 	showVotes(): void {
-		//TODO api call
-		//this.pointingApi.show(this.roomId).subscribe();
-		_.each(this.roomState.players, player => player.vote = PointingUtils.isVoted(player.vote) ? player.vote : null);
+		this.pointingApi.show();
+		//_.each(this.roomState.players, player => player.vote = PointingUtils.isVoted(player.vote) ? player.vote : null);
 	}
 
 	getMode(): string {

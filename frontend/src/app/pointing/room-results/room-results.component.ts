@@ -4,6 +4,7 @@ import * as _ from 'lodash';
 import { PointingConstants } from 'src/app/pointing/pointing-constants.class';
 import { IPointingResult, PointingUtils } from 'src/app/pointing/pointing-utils.service';
 import { UserStateService } from 'src/app/common/user-state.service';
+import { PointingApiService } from 'src/app/pointing/pointing-api.service';
 
 @Component({
 	selector: 'room-results',
@@ -13,7 +14,9 @@ import { UserStateService } from 'src/app/common/user-state.service';
 export class RoomResultsComponent implements OnInit {
 	@Input() state: RoomState;
 
-	constructor(private userState: UserStateService) { }
+	constructor(
+		private userState: UserStateService,
+		private pointingApi: PointingApiService) { }
 
 	ngOnInit(): void {
 	}
@@ -40,10 +43,10 @@ export class RoomResultsComponent implements OnInit {
 	}
 
 	changeVote(vote: Vote): void {
-		//TODO api call
 		let me = _.find(this.state.players, {uid: this.userState.getUid()});
 		if (me)
-			me.vote = vote;
+			this.pointingApi.vote(vote);
+			//me.vote = vote;
 	}
 
 }

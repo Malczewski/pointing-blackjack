@@ -1,45 +1,47 @@
 import { Injectable } from '@angular/core';
-import { environment } from 'src/environments/environment';
-import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { RoomState, Vote } from 'src/app/pointing/room-state.class';
+import { AppSocket } from 'src/app/common/sockets/app-socket';
+import { UserStateService } from 'src/app/common/user-state.service';
 
-@Injectable({
-	providedIn: 'root'
-})
+@Injectable()
 export class PointingApiService {
 
-	private baseUrl: string;
-
-	constructor(private http: HttpClient) {
-		this.baseUrl = `${environment.api}/pointing`;
+	constructor(
+		private appSocket: AppSocket,
+		private userState: UserStateService) {
 	}
 
-	private roomUrl(roomId: string): string {
-		return `${this.baseUrl}/${roomId}`;
+	getStateObserver(): Observable<RoomState> {
+		return this.appSocket.fromEvent('refresh');
 	}
 
-	public getRoomState(roomId: string): Observable<RoomState> {
-		return this.http.get<RoomState>(this.roomUrl(roomId));
+	joinRoom(roomId: string, ): void {
+		this.appSocket.emit('join', {
+			uid: this.userState.getUid(),
+			name: this.userState.user.name,
+			room: roomId
+		});
 	}
 
-	public vote(roomId: string, vote: Vote): Observable<void> {
-		return this.http.put<void>(this.roomUrl(roomId) + '/vote', vote);
+	public vote(vote: Vote): void {
+		this.appSocket.emit('vote', vote);
 	}
 
-	public reset(roomId: string): Observable<void> {
-		return this.http.put<void>(this.roomUrl(roomId) + '/reset', null);
+	public reset(): void {
+		this.appSocket.emit('reset');
 	}
 
-	public show(roomId: string): Observable<void> {
-		return this.http.put<void>(this.roomUrl(roomId) + '/show', null);
+	public show(): void {
+		this.appSocket.emit('show');
 	}
 
-	public switchToSpectator(roomId: string): Observable<void> {
-		return this.http.put<void>(this.roomUrl(roomId) + '/spec', null);
+	public switchToSpectator(): void {
+		this.appSocket.emit('role', 'spectator');
 	}
 
-	public switchToPlayer(roomId: string): Observable<void> {
-		return this.http.put<void>(this.roomUrl(roomId) + '/player', null);
+	public switchToPlayer(): void {
+		this.appSocket.emit('role', 'player');
 	}
+
 }
