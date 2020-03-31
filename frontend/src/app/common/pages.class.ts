@@ -1,5 +1,5 @@
 export class Pages {
 	static login() { return ['/login']; }
-	static home() { return ['/home']; }
-	static room(id: string) { return ['/room', id]; }
+	static home() { return ['/galaxy']; }
+	static room(id: string) { return ['/planet', id]; }
 }

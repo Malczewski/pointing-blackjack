@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import * as _ from 'lodash';
 import { Router } from '@angular/router';
 import { Pages } from '../../common/pages.class';
+import { Planets } from 'src/app/home/home/planets.const';
 
 interface Door {
 	id: string;
@@ -19,12 +20,7 @@ export class HomeComponent implements OnInit {
 	constructor(private router: Router) { }
 
 	ngOnInit() {
-		this.doors = _.range(1, 11).map(i => {
-			return {
-				id: i + '',
-				name: i + ''
-			};
-		});
+		this.doors = _.map(Planets, planet => ({ id: planet, name: planet, url: `assets/planets/${planet}.jpg` }));
 	}
 
 	enterRoom(id: string): void {

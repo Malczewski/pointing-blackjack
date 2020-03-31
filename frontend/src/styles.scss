@@ -14,3 +14,16 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .btn[disabled] {
 	cursor: default;
 }
+
+
+*::-webkit-scrollbar {
+	width: 5px;
+}
+
+*::-webkit-scrollbar-track {
+	background: #ddd;
+}
+
+*::-webkit-scrollbar-thumb {
+	background: #666; 
+}

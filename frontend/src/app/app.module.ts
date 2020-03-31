@@ -59,7 +59,6 @@ import { PointingApiService } from 'src/app/pointing/pointing-api.service';
 	//MatButtonModule,
 	],
 	providers: [
-		CookieService,
 		//{ provide: HTTP_INTERCEPTORS, useClass: UidInterceptor, multi: true },
 		AppSocket,
 		PointingApiService

@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { CookieService } from 'ngx-cookie-service';
 import { Pages } from './pages.class';
 import { UserStateService } from './user-state.service';
 
 @Injectable({
 	providedIn: 'root'
 })
-export class HasCookieGuard implements CanActivate {
+export class IsAuthenticatedGuard implements CanActivate {
 
 	constructor(
 		private userStateService: UserStateService,
@@ -19,7 +18,7 @@ export class HasCookieGuard implements CanActivate {
 		state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 		const loggedIn = this.userStateService.isLoggedIn();
 		if (!loggedIn) {
-			this.router.navigate(Pages.login());
+			this.router.navigate(Pages.login(), { queryParams: { returnUrl: state.url }});
 		}
 		return loggedIn;
 	}

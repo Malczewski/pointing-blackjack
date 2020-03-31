@@ -1,24 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import * as _ from 'lodash';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { UserStateService } from '../../common/user-state.service';
 import { Pages } from '../../common/pages.class';
-import { FormControl, Validators } from '@angular/forms';
 
-/*
-			<form class="example-form">
-				<mat-form-field class="example-full-width">
-					<mat-label>Email</mat-label>
-					<input matInput [formControl]="nameFormControl" placeholder="Now, say my name">
-					<mat-error *ngIf="nameFormControl.hasError('required')">
-						Name is <strong>required</strong>
-					</mat-error>
-					<mat-hint align="start" *ngIf="heisenberg">
-						<strong>>You're God damn right</strong>
-					</mat-hint>
-				</mat-form-field>
-			</form>
-			*/
 @Component({
 	selector: 'app-login',
 	template: `
@@ -56,17 +41,16 @@ import { FormControl, Validators } from '@angular/forms';
 	`]
 })
 export class LoginComponent implements OnInit {
-	/* nameFormControl = new FormControl('', [
-		Validators.required,
-		Validators.minLength(3)
-	]); */
+	private returnUrl: string;
 	userName: string;
 	heisenberg = false;
 	constructor(
+		private route: ActivatedRoute,
 		private userStateService: UserStateService,
 		private router: Router) { }
 
 	ngOnInit() {
+		this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/';
 	}
 
 	onSubmit() {
@@ -75,9 +59,9 @@ export class LoginComponent implements OnInit {
 			if (/heisenberg/i.test(this.userName)) {
 				this.heisenberg = true;
 				setTimeout(() => {
-					this.router.navigate(Pages.home());
+					this.router.navigateByUrl(this.returnUrl);
 				}, 2000);
-			} else this.router.navigate(Pages.home());
+			} else this.router.navigateByUrl(this.returnUrl);
 		}
 	}
 

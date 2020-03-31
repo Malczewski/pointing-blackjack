@@ -1,7 +1,9 @@
 <div class="rooms">
-	<div class="door btn bg-primary m-36"
+	<div class="rooms-header">Choose your destination</div>
+	<div class="door clickable"
 		*ngFor="let door of doors"
 		(click)="enterRoom(door.id)">
-		<span>{{door.name}}</span>
+		<img class="planet" [src]="door.url">
+		<span class="name">{{door.name}}</span>
 	</div>
 </div>

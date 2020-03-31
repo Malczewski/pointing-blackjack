@@ -1,11 +1,11 @@
 import { TestBed, async, inject } from '@angular/core/testing';
 
-import { HasCookieGuard } from './has-cookie.guard';
+import { IsAuthenticatedGuard } from './is-authenticated.guard';
 
 describe('HasCookieGuard', () => {
 	beforeEach(() => {
 		TestBed.configureTestingModule({
-			providers: [HasCookieGuard]
+			providers: [IsAuthenticatedGuard]
 		});
 	});
 

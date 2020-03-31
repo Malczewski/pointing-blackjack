@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CookieService } from 'ngx-cookie-service';
-import { Cookies } from './cookies.enum';
+import { Property } from './storage/property.enum';
 import * as _ from 'lodash';
 
 export interface UserState {
@@ -11,20 +10,19 @@ export interface UserState {
 	providedIn: 'root'
 })
 export class UserStateService {
-	readonly PERSISTENT = false;
+	readonly PERSISTENT = true;
 
 	user: UserState;
 
-	constructor(
-		private cookieService: CookieService) { }
+	constructor() { }
 
 	isLoggedIn(): boolean {
 		return !!this.user;
 	}
 
 	tryLogin(): boolean {
-		const uid = this.PERSISTENT ? this.cookieService.get(Cookies.UID) : null;
-		const name = this.PERSISTENT ? this.cookieService.get(Cookies.NAME) : null;
+		const uid = this.PERSISTENT ? sessionStorage.getItem(Property.UID) : null;
+		const name = this.PERSISTENT ? sessionStorage.getItem(Property.NAME) : null;
 		const loggedIn = !_.isEmpty(uid) && !_.isEmpty(name);
 		if (loggedIn) {
 			this.user = {uid, name};
@@ -38,14 +36,14 @@ export class UserStateService {
 			name
 		};
 		if (this.PERSISTENT) {
-			this.cookieService.set(Cookies.UID, this.user.uid);
-			this.cookieService.set(Cookies.NAME, this.user.name);
+			sessionStorage.setItem(Property.UID, this.user.uid);
+			sessionStorage.setItem(Property.NAME, this.user.name);
 		}
 
 	}
 
 	logout(): void {
-		if (this.PERSISTENT) this.cookieService.deleteAll();
+		if (this.PERSISTENT) sessionStorage.clear();
 		delete this.user;
 	}
 
