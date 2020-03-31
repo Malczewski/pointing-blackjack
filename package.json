@@ -10,7 +10,6 @@
 		"ws": "^7.2.3"
 	},
 	"scripts": {
-		"build": "cd server && npm run-script build",
 		"start": "node dist/server.js"
 	},
 	"author": "Yurius the Great",
