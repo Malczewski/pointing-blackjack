@@ -18,8 +18,6 @@ export class AppComponent implements OnInit {
 
 	}
 	ngOnInit(): void {
-		if (!this.userStateService.tryLogin())
-			this.router.navigate(Pages.login(), {queryParams: {returnUrl: this.route.url}});
 	}
 
 	getUserName(): string {
