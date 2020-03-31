@@ -1,4 +1,4 @@
-import { Player, Vote } from './player';
+import { Player, Vote, VoteState } from './player';
 import * as _ from 'lodash';
 export class RoomState {
 	id: string;
@@ -37,6 +37,6 @@ export class RoomState {
 	}
 
 	showVotes() {
-		_.each(this.players, player => player.vote = null);
+		_.each(this.players, player => player.vote = (player.vote && player.vote !== VoteState.wait) ? player.vote : null);
 	}
 }

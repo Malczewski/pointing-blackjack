@@ -27,6 +27,10 @@ export class RoomComponent implements OnInit {
 		this.roomId = this.route.snapshot.paramMap.get('id');
 		this.roomUrl = location.href;
 
+		this.roomState = {
+			players: [],
+			spectators: []
+		} as RoomState;
 		this.pointingApi.getStateObserver().subscribe(state => this.roomState = state);
 		this.pointingApi.joinRoom(this.roomId);
 		/* this.roomState = {

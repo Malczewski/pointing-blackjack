@@ -13,15 +13,18 @@ export class PointingApiService {
 	}
 
 	getStateObserver(): Observable<RoomState> {
+		this.appSocket.connect();
 		return this.appSocket.fromEvent('refresh');
 	}
 
-	joinRoom(roomId: string, ): void {
+	joinRoom(roomId: string): void {
 		this.appSocket.emit('join', {
 			uid: this.userState.getUid(),
 			name: this.userState.user.name,
 			room: roomId
 		});
+		this.appSocket.removeAllListeners('reconnect');
+		this.appSocket.on('reconnect', () => this.joinRoom(roomId));
 	}
 
 	public vote(vote: Vote): void {

@@ -17,7 +17,7 @@ export class HasCookieGuard implements CanActivate {
 	canActivate(
 		next: ActivatedRouteSnapshot,
 		state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-		const loggedIn = this.userStateService.tryLogin();
+		const loggedIn = this.userStateService.isLoggedIn();
 		if (!loggedIn) {
 			this.router.navigate(Pages.login());
 		}

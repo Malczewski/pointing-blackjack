@@ -5,7 +5,7 @@ import { Socket } from 'ngx-socket-io';
 export class AppSocket extends Socket {
 
 	constructor() {
-		super({ url: `/pointing`, options: {} });
+		super({ url: '', options: { path: '/pointing' } });
 	}
 
 }

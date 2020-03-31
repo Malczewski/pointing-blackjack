@@ -12,7 +12,7 @@ export class GlobalState {
 	checkRoom(room: string) {
 		let state = this.states[room];
 		if (state) {
-			if (_.isEmpty(state.players && state.spectators))
+			if (_.isEmpty(state.players) && _.isEmpty(state.spectators))
 				delete this.states[room];
 		}
 	}

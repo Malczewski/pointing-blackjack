@@ -11,6 +11,7 @@ export interface UserState {
 	providedIn: 'root'
 })
 export class UserStateService {
+	readonly PERSISTENT = false;
 
 	user: UserState;
 
@@ -22,8 +23,8 @@ export class UserStateService {
 	}
 
 	tryLogin(): boolean {
-		const uid = this.cookieService.get(Cookies.UID);
-		const name = this.cookieService.get(Cookies.NAME);
+		const uid = this.PERSISTENT ? this.cookieService.get(Cookies.UID) : null;
+		const name = this.PERSISTENT ? this.cookieService.get(Cookies.NAME) : null;
 		const loggedIn = !_.isEmpty(uid) && !_.isEmpty(name);
 		if (loggedIn) {
 			this.user = {uid, name};
@@ -36,18 +37,20 @@ export class UserStateService {
 			uid: this.generateUID(),
 			name
 		};
-		this.cookieService.set(Cookies.UID, this.user.uid);
-		this.cookieService.set(Cookies.NAME, this.user.name);
+		if (this.PERSISTENT) {
+			this.cookieService.set(Cookies.UID, this.user.uid);
+			this.cookieService.set(Cookies.NAME, this.user.name);
+		}
 
 	}
 
 	logout(): void {
-		this.cookieService.deleteAll();
+		if (this.PERSISTENT) this.cookieService.deleteAll();
 		delete this.user;
 	}
 
 	private generateUID(): string {
-		return 'hardcoded'; // Math.random().toString(36).substring(2) + Date.now().toString(36);
+		return Math.random().toString(36).substring(2) + Date.now().toString(36);
 	}
 
 	getUid(): string {

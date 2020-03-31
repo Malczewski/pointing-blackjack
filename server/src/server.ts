@@ -65,7 +65,7 @@ io.on('connection', (socket: PointingSocket) => {
 	socket.on('vote', (vote: Vote) => {
 		let room = socket.room;
 		let player = socket.player;
-		console.log(`vote: ${room}, value: ${vote}, player: ${player.name}`);
+		console.log(`vote: ${room}, value: ${vote}, player: ${JSON.stringify(player)}`);
 		if (room) {
 			globalState.getRoom(room).setVote(socket.player, vote);
 			refreshRoom(room);
@@ -74,7 +74,7 @@ io.on('connection', (socket: PointingSocket) => {
 	socket.on('role', (role: 'player' | 'spectator') => {
 		let room = socket.room;
 		let player = socket.player;
-		console.log(`change role: ${room}, value: ${role}, player: ${player.name}`);
+		console.log(`change role: ${room}, value: ${role}, player: ${JSON.stringify(player)}`);
 		if (room) {
 			let roomState = globalState.getRoom(room);
 			roomState.removePlayer(socket.player);
@@ -87,15 +87,21 @@ io.on('connection', (socket: PointingSocket) => {
 	});
 
 	socket.on('disconnect', () => {
+		console.log(`disconnect: ${JSON.stringify(socket.player)}, room: ${socket.room}`);
 		if (socket.room)
 			socket.leave(socket.room);
-		if (socket.player)
+		if (socket.player) {
 			globalState.removePlayer(socket.player);
+			if (socket.room) {
+				globalState.checkRoom(socket.room as string);
+				refreshRoom(socket.room);
+			}
+		}
 	});
 });
 
-function refreshRoom(room: string) {
-	console.log(`refresh: ${room}`);
+async function refreshRoom(room: string) {
+	console.log(`refresh: ${room}\n` + JSON.stringify(globalState.getRoom(room)));
 	io.in(room).emit('refresh', globalState.getRoom(room));
 }
 
@@ -104,3 +110,8 @@ server.listen(process.env.PORT || 8999, () => {
 	console.log(`Server started on port ${(server.address() as any).port} :)`);
 
 });
+
+process.on('uncaughtException', err => {
+	console.error(`Uncaught Exception: ${err.message}`);
+	console.error(err.stack);
+})
