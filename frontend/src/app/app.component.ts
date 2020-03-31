@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { UserStateService } from './common/user-state.service';
 import { Pages } from './common/pages.class';
 
@@ -11,7 +11,6 @@ import { Pages } from './common/pages.class';
 export class AppComponent implements OnInit {
 
 	constructor(
-		private route: ActivatedRoute,
 		private router: Router,
 		private userStateService: UserStateService
 	) {

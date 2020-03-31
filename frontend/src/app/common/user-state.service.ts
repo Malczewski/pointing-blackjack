@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Property } from './storage/property.enum';
 import * as _ from 'lodash';
+import { IStorage } from 'src/app/common/storage/storage.interface';
+import { CookieStorageService } from 'src/app/common/storage/cookie-storage.service';
+import { SessionStorageService } from 'src/app/common/storage/session-storage.service';
 
 export interface UserState {
 	uid: string;
@@ -10,19 +13,21 @@ export interface UserState {
 	providedIn: 'root'
 })
 export class UserStateService {
-	readonly PERSISTENT = true;
+	readonly COOKIES = true;
 
 	user: UserState;
 
-	constructor() { }
+	constructor(private cookieStorage: CookieStorageService, private sessionStorage: SessionStorageService) { }
 
 	isLoggedIn(): boolean {
 		return !!this.user;
 	}
 
 	tryLogin(): boolean {
-		const uid = this.PERSISTENT ? sessionStorage.getItem(Property.UID) : null;
-		const name = this.PERSISTENT ? sessionStorage.getItem(Property.NAME) : null;
+		if (this.isLoggedIn())
+			return true;
+		const uid = this.getStorage().get(Property.UID);
+		const name = this.getStorage().get(Property.NAME);
 		const loggedIn = !_.isEmpty(uid) && !_.isEmpty(name);
 		if (loggedIn) {
 			this.user = {uid, name};
@@ -35,16 +40,18 @@ export class UserStateService {
 			uid: this.generateUID(),
 			name
 		};
-		if (this.PERSISTENT) {
-			sessionStorage.setItem(Property.UID, this.user.uid);
-			sessionStorage.setItem(Property.NAME, this.user.name);
-		}
+		this.getStorage().put(Property.UID, this.user.uid);
+		this.getStorage().put(Property.NAME, this.user.name);
 
 	}
 
 	logout(): void {
-		if (this.PERSISTENT) sessionStorage.clear();
+		this.getStorage().clear();
 		delete this.user;
+	}
+
+	private getStorage(): IStorage {
+		return this.COOKIES ? this.cookieStorage : this.sessionStorage;
 	}
 
 	private generateUID(): string {

@@ -16,7 +16,7 @@ export class IsAuthenticatedGuard implements CanActivate {
 	canActivate(
 		next: ActivatedRouteSnapshot,
 		state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-		const loggedIn = this.userStateService.isLoggedIn();
+		const loggedIn = this.userStateService.tryLogin();
 		if (!loggedIn) {
 			this.router.navigate(Pages.login(), { queryParams: { returnUrl: state.url }});
 		}
