@@ -1,0 +1,18 @@
+{
+	"name": "pointing-blackjack",
+	"version": "0.0.1",
+	"description": "Pointing Poker with blackjack and hookers",
+	"main": "dist/server.js",
+	"dependencies": {
+		"express": "^4.17.1",
+		"lodash": "^4.17.15",
+		"socket.io": "^2.3.0",
+		"ws": "^7.2.3"
+	},
+	"scripts": {
+		"build": "cd server && npm run-script build",
+		"start": "node dist/server.js"
+	},
+	"author": "Yurius the Great",
+	"license": "MIT"
+}

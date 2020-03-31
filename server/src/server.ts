@@ -12,10 +12,10 @@ interface PointingSocket extends socketio.Socket {
 
 const app = express();
 console.log(__dirname);
-app.use(express.static(path.resolve(path.join(__dirname, '/../../frontend/dist'))));
+app.use(express.static(path.resolve(path.join(__dirname, '/frontend/'))));
 
 app.get('*', (req, res, next) => {
-	res.sendFile(path.resolve(__dirname + "/../../frontend/dist/index.html"));
+	res.sendFile(path.resolve(__dirname + "/frontend/index.html"));
 });
 
 let server = http.createServer(app);
