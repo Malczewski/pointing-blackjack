@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { UserStateService } from './common/user-state.service';
 import { Pages } from './common/pages.class';
 
@@ -11,6 +11,7 @@ import { Pages } from './common/pages.class';
 export class AppComponent implements OnInit {
 
 	constructor(
+		private route: ActivatedRoute,
 		private router: Router,
 		private userStateService: UserStateService
 	) {
@@ -18,7 +19,7 @@ export class AppComponent implements OnInit {
 	}
 	ngOnInit(): void {
 		if (!this.userStateService.tryLogin())
-			this.router.navigate(Pages.login());
+			this.router.navigate(Pages.login(), {queryParams: {returnUrl: this.route.url}});
 	}
 
 	getUserName(): string {

@@ -94,13 +94,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 class AppComponent {
-    constructor(router, userStateService) {
+    constructor(route, router, userStateService) {
+        this.route = route;
         this.router = router;
         this.userStateService = userStateService;
     }
     ngOnInit() {
         if (!this.userStateService.tryLogin())
-            this.router.navigate(_common_pages_class__WEBPACK_IMPORTED_MODULE_1__["Pages"].login());
+            this.router.navigate(_common_pages_class__WEBPACK_IMPORTED_MODULE_1__["Pages"].login(), { queryParams: { returnUrl: this.route.url } });
     }
     getUserName() {
         return this.userStateService.user && this.userStateService.user.name;
@@ -113,7 +114,7 @@ class AppComponent {
         this.router.navigate(_common_pages_class__WEBPACK_IMPORTED_MODULE_1__["Pages"].login());
     }
 }
-AppComponent.ɵfac = function AppComponent_Factory(t) { return new (t || AppComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_common_user_state_service__WEBPACK_IMPORTED_MODULE_3__["UserStateService"])); };
+AppComponent.ɵfac = function AppComponent_Factory(t) { return new (t || AppComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_common_user_state_service__WEBPACK_IMPORTED_MODULE_3__["UserStateService"])); };
 AppComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: AppComponent, selectors: [["app-root"]], decls: 22, vars: 3, consts: [[1, "navbar", "navbar-expand-md", "navbar-dark", "fixed-top", "bg-dark"], [1, "navbar-brand", "m-r-64"], ["id", "navbarCollapse", 1, "collapse", "navbar-collapse"], [1, "navbar-nav", "mr-auto"], [1, "nav-item", "active"], ["routerLink", "galaxy", 1, "nav-link"], [1, "navbar-nav"], [1, "nav-link", 3, "hidden"], ["title", "Logout", 1, "nav-link", "clickable", 3, "hidden", "click"], [1, "fa", "fa-sign-out"], ["role", "main", 1, ""], [1, "footer"], [1, "container"], [1, "text-muted"]], template: function AppComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "header");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "nav", 0);
@@ -169,7 +170,7 @@ AppComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineCompo
                 templateUrl: './app.component.html',
                 styleUrls: ['./app.component.scss']
             }]
-    }], function () { return [{ type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"] }, { type: _common_user_state_service__WEBPACK_IMPORTED_MODULE_3__["UserStateService"] }]; }, null); })();
+    }], function () { return [{ type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"] }, { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"] }, { type: _common_user_state_service__WEBPACK_IMPORTED_MODULE_3__["UserStateService"] }]; }, null); })();
 
 
 /***/ }),

@@ -216,9 +216,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     "./node_modules/@ng-bootstrap/ng-bootstrap/__ivy_ngcc__/fesm2015/ng-bootstrap.js");
 
     var AppComponent = /*#__PURE__*/function () {
-      function AppComponent(router, userStateService) {
+      function AppComponent(route, router, userStateService) {
         _classCallCheck(this, AppComponent);
 
+        this.route = route;
         this.router = router;
         this.userStateService = userStateService;
       }
@@ -226,7 +227,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       _createClass(AppComponent, [{
         key: "ngOnInit",
         value: function ngOnInit() {
-          if (!this.userStateService.tryLogin()) this.router.navigate(_common_pages_class__WEBPACK_IMPORTED_MODULE_1__["Pages"].login());
+          if (!this.userStateService.tryLogin()) this.router.navigate(_common_pages_class__WEBPACK_IMPORTED_MODULE_1__["Pages"].login(), {
+            queryParams: {
+              returnUrl: this.route.url
+            }
+          });
         }
       }, {
         key: "getUserName",
@@ -250,7 +255,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }();
 
     AppComponent.ɵfac = function AppComponent_Factory(t) {
-      return new (t || AppComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_common_user_state_service__WEBPACK_IMPORTED_MODULE_3__["UserStateService"]));
+      return new (t || AppComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_common_user_state_service__WEBPACK_IMPORTED_MODULE_3__["UserStateService"]));
     };
 
     AppComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({
@@ -371,6 +376,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }]
       }], function () {
         return [{
+          type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"]
+        }, {
           type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]
         }, {
           type: _common_user_state_service__WEBPACK_IMPORTED_MODULE_3__["UserStateService"]
