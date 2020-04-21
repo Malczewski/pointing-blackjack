@@ -42,6 +42,11 @@ div {
 		display: flex;
 		justify-content: center;
 	}
+
+	.loading {
+		display: flex;
+		align-self: center;
+	}
 }
 
 .room-cards {
@@ -53,6 +58,15 @@ div {
 .room-results {
 	position: absolute;
 	width: auto;
+}
+
+.room-progress-center {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 }
 
 .room-log {

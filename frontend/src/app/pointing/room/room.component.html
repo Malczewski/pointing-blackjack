@@ -31,8 +31,18 @@
 			*ngSwitchCase="'results'"
 			[state]="roomState">
 		</room-results>
-		<hangman-progress [progress]="getProgress()"
-			*ngSwitchCase="'progress'"></hangman-progress>
+		<div *ngSwitchCase="'progress'" class="room-progress-center">
+			<hangman-progress [progress]="getProgress()"></hangman-progress>
+			<span class="progress-text">Vote in progress...</span>
+		</div>
+		<div class="loading"
+			*ngSwitchCase="'loading'">
+			<app-atom-spinner
+				[animationDuration]="1000"
+				[size]="200"
+				[color]="'#007bff'"
+			></app-atom-spinner>
+		</div>
 	</div>
 </div>
 <div class="room-progress">

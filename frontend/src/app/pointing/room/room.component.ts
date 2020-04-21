@@ -16,6 +16,7 @@ export class RoomComponent implements OnInit {
 	roomUrl: string;
 	private roomId: string;
 	roomState: RoomState;
+	private loaded: boolean;
 	//private originalState: RoomState;
 
 	constructor(
@@ -26,12 +27,16 @@ export class RoomComponent implements OnInit {
 	ngOnInit(): void {
 		this.roomId = this.route.snapshot.paramMap.get('id');
 		this.roomUrl = location.href;
+		this.loaded = false;
 
 		this.roomState = {
 			players: [],
 			spectators: []
 		} as RoomState;
-		this.pointingApi.getStateObserver().subscribe(state => this.roomState = state);
+		this.pointingApi.getStateObserver().subscribe(state => {
+			this.roomState = state;
+			this.loaded = true;
+		});
 		this.pointingApi.joinRoom(this.roomId);
 		/* this.roomState = {
 			id: 'blabla',
@@ -69,6 +74,8 @@ export class RoomComponent implements OnInit {
 	}
 
 	getMode(): string {
+		if (!this.loaded)
+			return 'loading';
 		if (PointingUtils.isVotingFinished(this.roomState))
 			return 'results';
 		if (this.isSpectator())

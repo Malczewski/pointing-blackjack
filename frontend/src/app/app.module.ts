@@ -5,7 +5,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { LoginComponent } from './login/login/login.component';
 import { HomeComponent } from './home/home/home.component';
@@ -15,9 +15,8 @@ import { RoomCardsComponent } from './pointing/room-cards/room-cards.component';
 import { RoomResultsComponent } from './pointing/room-results/room-results.component';
 import { RoomLogComponent } from './pointing/room-log/room-log.component';
 import { ClipboardModule } from 'ngx-clipboard';
-import { UidInterceptor } from 'src/app/common/uid.interceptor';
 import {NgPipesModule} from 'ngx-pipes';
-import {SelfBuildingSquareSpinnerModule, CirclesToRhumbusesSpinnerModule} from 'angular-epic-spinners';
+import {SelfBuildingSquareSpinnerModule, CirclesToRhumbusesSpinnerModule, AtomSpinnerModule} from 'angular-epic-spinners';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HangmanProgressComponent } from './pointing/hangman-progress/hangman-progress.component';
 import { ComplicationIndicatorComponent } from './pointing/complication-indicator/complication-indicator.component';
@@ -51,7 +50,7 @@ import { PointingApiService } from 'src/app/pointing/pointing-api.service';
 	NgPipesModule,
 	SelfBuildingSquareSpinnerModule,
 	CirclesToRhumbusesSpinnerModule,
-	CirclesToRhumbusesSpinnerModule,
+	AtomSpinnerModule,
 	BrowserAnimationsModule,
 	SocketIoModule,
 	//MatInputModule,
