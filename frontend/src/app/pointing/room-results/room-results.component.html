@@ -4,7 +4,12 @@
 	<div class="vote clickable"
 		title="Click to change vote"
 		(click)="changeVote(result.vote)"
-		[ngClass]="{'font-weight-bold' : result.vote > 0, 'font-italic': !(result.vote > 0), 'top-result': isTopResult(result.vote)}">
+		[ngClass]="{
+			'font-weight-bold' : result.vote > 0, 
+			'font-italic': !(result.vote > 0), 
+			'top-result': isTopResult(result.vote)
+		}">
+		<div class="vote-indicator" [ngClass]="{'my-vote': isMyVote(result.vote)}"></div>
 		{{getVoteText(result.vote)}}
 	</div>
 	<div class="count" [ngClass]="{'top-result': isTopResult(result.vote)}">

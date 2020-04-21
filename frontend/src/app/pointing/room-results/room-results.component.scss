@@ -7,6 +7,19 @@
 	text-align: right;
 	padding-right: 24px;
 	border-right: 1px solid;
+	display: flex;
+	justify-content: space-between;
+}
+
+.vote-indicator {
+	border: 3vh solid transparent;
+	height: 3vh;
+	justify-self: center;
+	align-self: center;
+	margin-left: 1vh;
+	&.my-vote {
+		border-left-color: black;
+	}
 }
 
 .count {

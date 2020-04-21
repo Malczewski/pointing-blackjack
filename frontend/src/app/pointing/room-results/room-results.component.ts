@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { RoomState, Vote, VoteState } from 'src/app/pointing/room-state.class';
+import { RoomState, Vote, VoteState, Player } from 'src/app/pointing/room-state.class';
 import * as _ from 'lodash';
 import { PointingConstants } from 'src/app/pointing/pointing-constants.class';
 import { IPointingResult, PointingUtils } from 'src/app/pointing/pointing-utils.service';
@@ -47,6 +47,15 @@ export class RoomResultsComponent implements OnInit {
 		if (me)
 			this.pointingApi.vote(vote);
 			//me.vote = vote;
+	}
+
+	isMyVote(vote: Vote): boolean {
+		let me = this.getMyPlayer();
+		return vote === me?.vote;
+	}
+
+	private getMyPlayer(): Player {
+		return _.find(this.state.players, {uid: this.userState.getUid()});
 	}
 
 }
