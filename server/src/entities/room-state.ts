@@ -50,5 +50,8 @@ export class RoomState {
 
 	addLog(msg: string) {
 		this.log.push(new LogMessage(msg));
+		if (this.log.length > 20) {
+			this.log.splice(0, 1);
+		}
 	}
 }
