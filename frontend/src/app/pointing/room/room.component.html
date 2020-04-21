@@ -49,6 +49,6 @@
 	<hangman-progress [progress]="getProgress()"
 		[hidden]="!showMiniProgress()"></hangman-progress>
 </div>
-<!-- <div class="room-log">
-		
-</div> -->
+<div class="room-log">
+	<room-log [state]="roomState"></room-log>
+</div>

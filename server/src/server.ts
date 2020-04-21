@@ -2,7 +2,7 @@ import * as express from 'express';
 import * as http from 'http';
 import * as path from 'path';
 import * as socketio  from 'socket.io';
-import { Player, Vote } from './entities/player';
+import { Player, Vote, VoteState } from './entities/player';
 import { GlobalState } from './entities/global-state';
 
 interface PointingSocket extends socketio.Socket {
@@ -41,24 +41,35 @@ io.on('connection', (socket: PointingSocket) => {
 		socket.player = player;
 
 		globalState.removePlayer(player);
-		globalState.getRoom(room).addPlayer(player);
+		let roomState = globalState.getRoom(room);
+		/* if (roomState.isAllVoted() && roomState.players.length > 5) {
+			player.vote = null;
+		} */
+		roomState.addPlayer(player);
+		roomState.addLog(`${player.name} joined.`);
 
 		refreshRoom(room);
 	});
 
 	socket.on('reset', () => {
 		let room = socket.room;
+		let player = socket.player;
 		console.log(`reset: ${room}`);
 		if (room) {
-			globalState.getRoom(room).clearVotes();
+			let roomState = globalState.getRoom(room);
+			roomState.clearVotes();
+			roomState.addLog(`${player.name} cleared votes.`);
 			refreshRoom(room);
 		}
 	});
 	socket.on('show', () => {
 		let room = socket.room;
+		let player = socket.player;
 		console.log(`show: ${room}`);
 		if (room) {
-			globalState.getRoom(room).showVotes();
+			let roomState = globalState.getRoom(room);
+			roomState.showVotes();
+			roomState.addLog(`${player.name} showed votes.`);
 			refreshRoom(room);
 		}
 	});
@@ -88,8 +99,13 @@ io.on('connection', (socket: PointingSocket) => {
 
 	socket.on('disconnect', () => {
 		console.log(`disconnect: ${JSON.stringify(socket.player)}, room: ${socket.room}`);
-		if (socket.room)
+		if (socket.room) {
+			if (socket.player) {
+				let roomState = globalState.getRoom(socket.room);
+				roomState.addLog(`${socket.player.name} left.`);
+			}
 			socket.leave(socket.room);
+		}
 		if (socket.player) {
 			globalState.removePlayer(socket.player);
 			if (socket.room) {

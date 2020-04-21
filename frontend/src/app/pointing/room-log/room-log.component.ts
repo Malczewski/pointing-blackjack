@@ -1,20 +1,39 @@
-import { Component, OnInit } from '@angular/core';
-
+import { Component, OnInit, Input, ChangeDetectionStrategy, OnChanges, SimpleChanges } from '@angular/core';
+import * as _ from 'lodash';
+import * as moment from 'moment';
+import { RoomState } from 'src/app/pointing/room-state.class';
 @Component({
-  selector: 'app-room-log',
-  template: `
-    <p>
-      room-log works!
-    </p>
-  `,
-  styles: [
-  ],
+	selector: 'room-log',
+	templateUrl: './room-log.component.html',
+	styleUrls: ['./room-log.component.scss']
 })
-export class RoomLogComponent implements OnInit {
+export class RoomLogComponent implements OnInit, OnChanges {
 
-  constructor() { }
+	@Input() state: RoomState;
 
-  ngOnInit(): void {
-  }
+	messages: Array<{time: string, text: string}>;
+
+	constructor() { }
+
+	ngOnInit(): void {
+		this.updateMessages();
+		setInterval(() => {
+			this.updateMessages();
+		}, 30000);
+	}
+
+	ngOnChanges(changes: SimpleChanges): void {
+		if (changes.state.currentValue !== changes.state.previousValue) {
+			this.updateMessages();
+		}
+	}
+
+	private updateMessages(): void {
+		this.messages = _.map(this.state.log, log => ({
+			time: moment(new Date(log.timestamp)).fromNow(),
+			text: log.text
+		})).reverse();
+	}
 
 }
+

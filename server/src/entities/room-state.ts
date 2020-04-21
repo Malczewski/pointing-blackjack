@@ -1,15 +1,19 @@
 import { Player, Vote, VoteState } from './player';
 import * as _ from 'lodash';
+import { LogMessage } from './log-message';
 export class RoomState {
 	id: string;
 	name: string;
 	players: Player[];
 	spectators: Player[];
+	log: LogMessage[];
+
 	constructor(id: string) {
 		this.id = id;
 		this.name = `Room ${id}`;
 		this.players = [];
 		this.spectators = [];
+		this.log = [];
 	}
 
 	removePlayer(player: Player) {
@@ -36,7 +40,15 @@ export class RoomState {
 		_.each(this.spectators, player => delete player.vote);
 	}
 
+	isAllVoted() {
+		return !_.some(this.players, player => player.vote === undefined || player.vote === VoteState.wait);
+	}
+
 	showVotes() {
 		_.each(this.players, player => player.vote = (player.vote && player.vote !== VoteState.wait) ? player.vote : null);
+	}
+
+	addLog(msg: string) {
+		this.log.push(new LogMessage(msg));
 	}
 }

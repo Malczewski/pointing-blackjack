@@ -1,7 +1,7 @@
 $header: 44px;
 $players: 30%;
-$log: 0; //150px;
 $progress: 200px;
+$log: 200px;
 
 div {
 	//box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
@@ -33,8 +33,8 @@ div {
 	position: absolute;
 	left: $players;
 	top: $header;
-	bottom: $log;
-	right: $progress;
+	bottom: 0;
+	right: $log;
 
 	.room-content-center {
 		width: 100%;
@@ -71,16 +71,16 @@ div {
 
 .room-log {
 	position: absolute;
-	bottom: 0;
-	height: $log;
-	left: $players;
 	right: 0;
+	width: $log;
+	bottom: 0;
+	top: $header + $progress;
 }
 
 .room-progress {
 	position: absolute;
 	right: 0;
-	width: $progress;
+	width: $log;
 	top: $header;
 	height: $progress;
 }

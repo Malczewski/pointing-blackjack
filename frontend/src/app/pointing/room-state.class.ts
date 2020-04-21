@@ -15,5 +15,5 @@ export class RoomState {
 	name: string;
 	players: Player[];
 	spectators: Player[];
-	log: {time: number, message: string}[];
+	log: {timestamp: number, text: string}[];
 }
