@@ -18,13 +18,9 @@
 			<span class="wait-subtitle">Still thinking...</span>
 		</div>
 		<div *ngSwitchDefault class="number-card">
-			<!-- <div class="card-rectangles">
-				<div *ngFor="let item of [].constructor(card)"
-					class="card-rect"
-					[style.background-color]="subColor(cardColors[card])"></div>
-			</div> -->
 			<complication-indicator [complexity]="card"></complication-indicator>
 			<div class="card-value">{{card}}</div>
+			<!-- <div class="card-value inverse">{{card}}</div> -->
 		</div>
 	</div>
 </div>

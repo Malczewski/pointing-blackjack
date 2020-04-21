@@ -10,11 +10,11 @@
 		height: 20vh;
 
 		.card-button {
-			font-size: 14vh;
+			font-size: 6vh;
 			line-height: 1;
 			font-weight: 600;
 			width: 20vh;
-			padding: 1vh 1.5vh;
+			padding: 0;
 			height: 100%;
 			display: flex;
 			align-items: center;
@@ -24,6 +24,7 @@
 
 			.font-white {
 				color: #ffffff;
+				font-size: 12vh;
 			}
 
 			.wait-container {
@@ -44,6 +45,8 @@
 
 			.number-card {
 				display: grid;
+				width: 100%;
+				height: 100%;
 			}
 
 			/* .card-rectangles {
@@ -64,17 +67,25 @@
 				grid-column: 1;
 				grid-row: 1;
 				z-index: 1;
-				opacity: 0.75;
 				height: 100%;
-				align-items: center;
+				padding: 1vh 1.5vh;
+				align-items: start;
 				display: flex;
-				justify-content: center;
+				justify-content: start;
+				text-shadow: -1px 0 #ccc, 0 1px #ccc, 1px 0 #ccc, 0 -1px #ccc;
+			}
+
+			.card-value.inverse {
+				rotate: 180;
+				align-items: end;
+				justify-content: end;
 			}
 
 			complication-indicator {
+				padding: 1vh 1.5vh 1vh 0;
 				grid-column: 1;
 				grid-row: 1;
-				opacity: 0.7;
+				opacity: 0.75;
 				width: 100%;
 				height: 100%;
 			}
