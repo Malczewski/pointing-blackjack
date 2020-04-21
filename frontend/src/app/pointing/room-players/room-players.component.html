@@ -12,7 +12,17 @@
 			[style.background-color]="getDifferenceColor(user.vote)">
 			<div *ngSwitchCase="true">
 				<div *ngIf="user.vote !== null" class="vote-number" [style.background-color]="getVoteColor(user.vote)">
-					{{isNumber(user.vote) ? user.vote : '?'}}
+					<i *ngIf="isMyUser(user)"
+						title="Less points"
+						class="fa fa-minus change-vote clickable" 
+						[ngClass]="{'visible': showDecrease(user.vote)}"
+						(click)="changeVote(-1)"></i>
+					<span>{{isNumber(user.vote) ? user.vote : '?'}}</span>
+					<i *ngIf="isMyUser(user)"
+						title="More points"
+						class="fa fa-plus change-vote clickable"
+						[ngClass]="{'visible': showIncrease(user.vote)}"
+						(click)="changeVote(1)"></i>
 				</div>
 			</div>
 			<div *ngSwitchCase="false">

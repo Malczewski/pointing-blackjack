@@ -39,6 +39,26 @@ export class RoomPlayersComponent implements OnInit {
 		//this.state.spectators.push(current);
 	}
 
+	changeVote(direction: number): void {
+		let myUser = _.find(this.state.players, player => this.isMyUser(player));
+		if (myUser) {
+			let currentVote = myUser.vote;
+			let vote = !this.isNumber(currentVote)
+				? 1
+				: PointingConstants.VOTE_VALUES[PointingConstants.VOTE_VALUES.indexOf(currentVote) + direction];
+			if (this.isNumber(vote))
+				this.pointingApi.vote(vote);
+		}
+	}
+
+	showDecrease(vote: Vote): boolean {
+		return this.isNumber(vote) && vote > 1;
+	}
+
+	showIncrease(vote: Vote): boolean {
+		return !this.isNumber(vote) || vote < 13;
+	}
+
 	isNumber(vote: Vote): boolean {
 		return _.isNumber(vote);
 	}
