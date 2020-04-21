@@ -38,6 +38,9 @@ class RoomState {
     }
     addLog(msg) {
         this.log.push(new log_message_1.LogMessage(msg));
+        if (this.log.length > 20) {
+            this.log.splice(0, 1);
+        }
     }
 }
 exports.RoomState = RoomState;
