@@ -1,0 +1,1 @@
+{"version":3,"file":"log-message.js","sourceRoot":"","sources":["../../server/src/entities/log-message.ts"],"names":[],"mappings":";;AAAA,MAAa,UAAU;IAItB,YAAY,GAAW;QACtB,IAAI,CAAC,SAAS,GAAG,IAAI,IAAI,EAAE,CAAC,OAAO,EAAE,CAAC;QACtC,IAAI,CAAC,IAAI,GAAG,GAAG,CAAC;IACjB,CAAC;CACD;AARD,gCAQC"}

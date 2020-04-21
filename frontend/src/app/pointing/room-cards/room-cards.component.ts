@@ -51,9 +51,4 @@ export class RoomCardsComponent implements OnInit {
 	isCardHidden(vote: Vote): boolean {
 		return vote === VoteState.wait && PointingUtils.getProgress(this.state) <= PointingConstants.ALMOST_FINISHED;
 	}
-
-	subColor(color: string): string {
-		return 'white'; //TODO
-	}
-
 }

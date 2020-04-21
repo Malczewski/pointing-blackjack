@@ -39,22 +39,33 @@ io.on('connection', (socket) => {
         let player = new player_1.Player(uid, name);
         socket.player = player;
         globalState.removePlayer(player);
-        globalState.getRoom(room).addPlayer(player);
+        let roomState = globalState.getRoom(room);
+        /* if (roomState.isAllVoted() && roomState.players.length > 5) {
+            player.vote = null;
+        } */
+        roomState.addPlayer(player);
+        roomState.addLog(`${player.name} joined.`);
         refreshRoom(room);
     });
     socket.on('reset', () => {
         let room = socket.room;
+        let player = socket.player;
         console.log(`reset: ${room}`);
         if (room) {
-            globalState.getRoom(room).clearVotes();
+            let roomState = globalState.getRoom(room);
+            roomState.clearVotes();
+            roomState.addLog(`${player.name} cleared votes.`);
             refreshRoom(room);
         }
     });
     socket.on('show', () => {
         let room = socket.room;
+        let player = socket.player;
         console.log(`show: ${room}`);
         if (room) {
-            globalState.getRoom(room).showVotes();
+            let roomState = globalState.getRoom(room);
+            roomState.showVotes();
+            roomState.addLog(`${player.name} showed votes.`);
             refreshRoom(room);
         }
     });
@@ -83,8 +94,13 @@ io.on('connection', (socket) => {
     });
     socket.on('disconnect', () => {
         console.log(`disconnect: ${JSON.stringify(socket.player)}, room: ${socket.room}`);
-        if (socket.room)
+        if (socket.room) {
+            if (socket.player) {
+                let roomState = globalState.getRoom(socket.room);
+                roomState.addLog(`${socket.player.name} left.`);
+            }
             socket.leave(socket.room);
+        }
         if (socket.player) {
             globalState.removePlayer(socket.player);
             if (socket.room) {
