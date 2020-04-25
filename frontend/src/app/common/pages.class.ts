@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 export class Pages {
 	static login() { return ['/login']; }
 	static home() { return ['/galaxy']; }

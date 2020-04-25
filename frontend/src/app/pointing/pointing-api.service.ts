@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { RoomState, Vote } from '@pointing/room-state.class';
@@ -20,7 +21,7 @@ export class PointingApiService {
 	joinRoom(roomId: string): void {
 		this.appSocket.emit('join', {
 			uid: this.userState.getUid(),
-			name: this.userState.user.name,
+			name: this.userState.getUser().name,
 			room: roomId
 		});
 		this.appSocket.removeAllListeners('reconnect');

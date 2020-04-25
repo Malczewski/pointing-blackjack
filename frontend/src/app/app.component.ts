@@ -21,7 +21,7 @@ export class AppComponent implements OnInit {
 	}
 
 	getUserName(): string {
-		return this.userStateService.user && this.userStateService.user.name;
+		return this.userStateService.getUser()?.name;
 	}
 
 	isLoggedIn(): boolean {

@@ -15,7 +15,7 @@ export interface UserState {
 })
 export class UserStateService {
 
-	user: UserState;
+	private user: UserState;
 
 	constructor(private localStorage: LocalStorageService, private sessionStorage: SessionStorageService) { }
 
@@ -33,6 +33,10 @@ export class UserStateService {
 			this.user = {uid, name};
 		}
 		return loggedIn;
+	}
+
+	getUser(): UserState {
+		return this.user;
 	}
 
 	login(name: string): void {

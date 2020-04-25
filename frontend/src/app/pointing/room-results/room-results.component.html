@@ -1,6 +1,6 @@
 <div class="vote result-header">Points</div>
 <div class="count result-header">Count</div>
-<ng-container *ngFor="let result of getAggregatedResults() | orderBy:'-count'">
+<ng-container *ngFor="let result of getAggregatedResults() | orderBy:['-count', '-vote']">
 	<div class="vote clickable"
 		title="Click to change vote"
 		(click)="changeVote(result.vote)"
@@ -17,7 +17,6 @@
 			*ngFor="let item of [].constructor(result.count)"
 			[style.background-color]="getVoteColor(result.vote)"
 			[style.border-color]="getVoteColor(result.vote) | shade:-0.4">
-			<!-- <complication-indicator *ngIf="result.vote > 0" [complexity]="result.vote"></complication-indicator> -->
 		</div>
 	</div>
 </ng-container>

@@ -1,12 +1,20 @@
 import { ShadePipe } from './shade.pipe';
 
 describe('ShadePipe', () => {
-	it('create an instance', () => {
-		const pipe = new ShadePipe();
-		expect(pipe).toBeTruthy();
+	let pipe: ShadePipe;
+	beforeEach(() => {
+		pipe = new ShadePipe();
 	});
 
-	/* it('make darken', () => {
+	it('create an instance', () => {
+		expect(pipe).toBeDefined();
+	});
 
-	}); */
+	it('make lighter', () => {
+		expect(pipe.transform('#ff0000', 0.5)).toBe('#ff8080');
+	});
+
+	it('make darken', () => {
+		expect(pipe.transform('#ff0000', -0.5)).toBe('#880808');
+	});
 });

@@ -26,13 +26,8 @@ export class RoomCardsComponent implements OnInit {
 	ngOnInit(): void {
 	}
 
-	getCardText(vote: Vote): string {
-		return vote + '';
-	}
-
 	selectCard(vote: Vote): void {
 		this.pointingApi.vote(vote);
-		//this.getMyPlayer().vote = vote;
 	}
 
 	isMyVote(vote: Vote): boolean {

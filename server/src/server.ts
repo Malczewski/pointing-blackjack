@@ -2,7 +2,7 @@ import * as express from "express";
 import * as http from "http";
 import * as path from "path";
 import * as socketio from "socket.io";
-import { Player, Vote, VoteState } from "./entities/player";
+import { Player, Vote } from "./entities/player";
 import { GlobalState } from "./entities/global-state";
 
 interface PointingSocket extends socketio.Socket {
@@ -11,7 +11,6 @@ interface PointingSocket extends socketio.Socket {
 }
 
 const app = express();
-console.log(__dirname);
 app.use(express.static(path.resolve(path.join(__dirname, "/frontend/"))));
 
 app.get("*", (req, res, next) => {
@@ -19,14 +18,14 @@ app.get("*", (req, res, next) => {
 });
 
 let server = http.createServer(app);
-let io = socketio(server, {
+let pointingSocket = socketio(server, {
 	pingInterval: 5000,
 	path: "/pointing",
 });
 
 let globalState = new GlobalState();
 
-io.on("connection", (socket: PointingSocket) => {
+pointingSocket.on("connection", (socket: PointingSocket) => {
 	console.log("new connection");
 	socket.on("join", ({ room, uid, name }) => {
 		console.log(`User ${name}(${uid}) joining room ${room}`);
@@ -75,9 +74,7 @@ io.on("connection", (socket: PointingSocket) => {
 	socket.on("vote", (vote: Vote) => {
 		let room = socket.room;
 		let player = socket.player;
-		console.log(
-			`vote: ${room}, value: ${vote}, player: ${JSON.stringify(player)}`
-		);
+		console.log(`vote: ${room}, value: ${vote}, player: ${JSON.stringify(player)}`);
 		if (room) {
 			globalState.getRoom(room).setVote(socket.player, vote);
 			refreshRoom(room);
@@ -86,11 +83,7 @@ io.on("connection", (socket: PointingSocket) => {
 	socket.on("role", (role: "player" | "spectator") => {
 		let room = socket.room;
 		let player = socket.player;
-		console.log(
-			`change role: ${room}, value: ${role}, player: ${JSON.stringify(
-				player
-			)}`
-		);
+		console.log(`change role: ${room}, value: ${role}, player: ${JSON.stringify(player)}`);
 		if (room) {
 			let roomState = globalState.getRoom(room);
 			roomState.removePlayer(socket.player);
@@ -102,9 +95,7 @@ io.on("connection", (socket: PointingSocket) => {
 	});
 
 	socket.on("disconnect", () => {
-		console.log(
-			`disconnect: ${JSON.stringify(socket.player)}, room: ${socket.room}`
-		);
+		console.log(`disconnect: ${JSON.stringify(socket.player)}, room: ${socket.room}`);
 		if (socket.room) {
 			if (socket.player) {
 				let roomState = globalState.getRoom(socket.room);
@@ -123,10 +114,8 @@ io.on("connection", (socket: PointingSocket) => {
 });
 
 async function refreshRoom(room: string) {
-	console.log(
-		`refresh: ${room}\n` + JSON.stringify(globalState.getRoom(room))
-	);
-	io.in(room).emit("refresh", globalState.getRoom(room));
+	console.log(`refresh: ${room}\n` + JSON.stringify(globalState.getRoom(room)));
+	pointingSocket.in(room).emit("refresh", globalState.getRoom(room));
 }
 
 //start our server

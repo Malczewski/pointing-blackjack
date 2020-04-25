@@ -41,14 +41,11 @@ export class RoomPlayersComponent implements OnInit {
 
 	changeVote(direction: number): void {
 		let myUser = _.find(this.state.players, player => this.isMyUser(player));
-		if (myUser) {
-			let currentVote = myUser.vote;
-			let vote = !this.isNumber(currentVote)
-				? 1
-				: PointingConstants.VOTE_VALUES[PointingConstants.VOTE_VALUES.indexOf(currentVote) + direction];
-			if (this.isNumber(vote))
-				this.pointingApi.vote(vote);
-		}
+		let currentVote = myUser.vote;
+		let vote = !this.isNumber(currentVote)
+			? 1
+			: PointingConstants.VOTE_VALUES[PointingConstants.VOTE_VALUES.indexOf(currentVote) + direction];
+		this.pointingApi.vote(vote);
 	}
 
 	showDecrease(vote: Vote): boolean {
@@ -64,9 +61,6 @@ export class RoomPlayersComponent implements OnInit {
 	}
 	getVoteColor(vote: Vote): string {
 		return PointingConstants.VOTE_COLORS[vote];
-	}
-	isDunno(vote: Vote): boolean {
-		return vote === VoteState.none;
 	}
 	isVoted(vote: Vote): boolean {
 		return PointingUtils.isVoted(vote);

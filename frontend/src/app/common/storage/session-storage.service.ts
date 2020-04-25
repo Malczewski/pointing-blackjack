@@ -1,9 +1,11 @@
+/* istanbul ignore file */
 import { Injectable } from '@angular/core';
+import { IStorage } from '@app/common/storage/storage.interface';
 
 @Injectable({
 	providedIn: 'root'
 })
-export class SessionStorageService {
+export class SessionStorageService implements IStorage {
 
 	constructor() { }
 

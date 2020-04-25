@@ -19,13 +19,11 @@ export class RoomLogComponent implements OnInit, OnChanges {
 		this.updateMessages();
 		setInterval(() => {
 			this.updateMessages();
-		}, 30000);
+		}, 10000);
 	}
 
 	ngOnChanges(changes: SimpleChanges): void {
-		if (changes.state.currentValue !== changes.state.previousValue) {
-			this.updateMessages();
-		}
+		this.updateMessages();
 	}
 
 	private updateMessages(): void {
