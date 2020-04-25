@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { RoomState, Vote } from 'src/app/pointing/room-state.class';
-import { AppSocket } from 'src/app/common/sockets/app-socket';
-import { UserStateService } from 'src/app/common/user-state.service';
+import { RoomState, Vote } from '@pointing/room-state.class';
+import { AppSocket } from '@app/common/sockets/app-socket';
+import { UserStateService } from '@app/common/user-state.service';
 
 @Injectable()
 export class PointingApiService {

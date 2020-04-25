@@ -1,4 +1,4 @@
-import { VoteState } from 'src/app/pointing/room-state.class';
+import { VoteState } from '@pointing/room-state.class';
 
 export class PointingConstants {
 	static readonly VOTE_COLORS = {

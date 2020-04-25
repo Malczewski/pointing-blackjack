@@ -1,4 +1,4 @@
-import { RoomState, VoteState, Vote, Player } from 'src/app/pointing/room-state.class';
+import { RoomState, VoteState, Vote } from '@pointing/room-state.class';
 import * as _ from 'lodash';
 
 export interface IPointingResult {

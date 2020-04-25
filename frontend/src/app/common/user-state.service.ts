@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Property } from './storage/property.enum';
 import * as _ from 'lodash';
-import { IStorage } from 'src/app/common/storage/storage.interface';
-import { SessionStorageService } from 'src/app/common/storage/session-storage.service';
+import { IStorage } from '@app/common/storage/storage.interface';
+import { SessionStorageService } from '@app/common/storage/session-storage.service';
 import { environment } from 'src/environments/environment';
-import { LocalStorageService } from 'src/app/common/storage/local-storage.service';
+import { LocalStorageService } from '@app/common/storage/local-storage.service';
 
 export interface UserState {
 	uid: string;

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import * as _ from 'lodash';
 import { Router } from '@angular/router';
 import { Pages } from '../../common/pages.class';
-import { Planets } from 'src/app/home/home/planets.const';
+import { Planets } from '@app/home/home/planets.const';
 
 interface Door {
 	id: string;

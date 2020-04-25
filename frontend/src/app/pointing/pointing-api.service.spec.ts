@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
+import { PointingApiService } from '@pointing/pointing-api.service';
 
-import { PointingApiService } from './pointing-api.service';
 
 describe('PointingApiService', () => {
 	let service: PointingApiService;

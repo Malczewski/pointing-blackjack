@@ -4,7 +4,7 @@ import {
 	Player,
 	RoomState,
 	VoteState,
-} from 'src/app/pointing/room-state.class';
+} from '@pointing/room-state.class';
 
 describe('PointingUtilsService', () => {
 	let service: PointingUtils;

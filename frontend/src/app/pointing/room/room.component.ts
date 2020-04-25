@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { PointingApiService } from 'src/app/pointing/pointing-api.service';
+import { PointingApiService } from '@pointing/pointing-api.service';
 import { ActivatedRoute } from '@angular/router';
-import { RoomState } from 'src/app/pointing/room-state.class';
+import { RoomState } from '@pointing/room-state.class';
 import * as _ from 'lodash';
-import { PointingUtils } from 'src/app/pointing/pointing-utils.service';
-import { UserStateService } from 'src/app/common/user-state.service';
+import { PointingUtils } from '@pointing/pointing-utils.service';
+import { UserStateService } from '@app/common/user-state.service';
 
 @Component({
 	selector: 'app-room',

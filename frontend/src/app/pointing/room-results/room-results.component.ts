@@ -1,10 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { RoomState, Vote, VoteState, Player } from 'src/app/pointing/room-state.class';
+import { RoomState, Vote, VoteState, Player } from '@pointing/room-state.class';
 import * as _ from 'lodash';
-import { PointingConstants } from 'src/app/pointing/pointing-constants.class';
-import { IPointingResult, PointingUtils } from 'src/app/pointing/pointing-utils.service';
-import { UserStateService } from 'src/app/common/user-state.service';
-import { PointingApiService } from 'src/app/pointing/pointing-api.service';
+import { PointingConstants } from '@pointing/pointing-constants.class';
+import { IPointingResult, PointingUtils } from '@pointing/pointing-utils.service';
+import { UserStateService } from '@app/common/user-state.service';
+import { PointingApiService } from '@pointing/pointing-api.service';
 
 @Component({
 	selector: 'room-results',

@@ -1,7 +1,7 @@
-import { Component, OnInit, Input, ChangeDetectionStrategy, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import * as _ from 'lodash';
 import * as moment from 'moment';
-import { RoomState } from 'src/app/pointing/room-state.class';
+import { RoomState } from '@pointing/room-state.class';
 @Component({
 	selector: 'room-log',
 	templateUrl: './room-log.component.html',

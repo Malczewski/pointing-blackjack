@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import * as _ from 'lodash';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UserStateService } from '../../common/user-state.service';
-import { Pages } from '../../common/pages.class';
 
 @Component({
 	selector: 'app-login',
