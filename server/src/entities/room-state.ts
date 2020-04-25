@@ -1,6 +1,6 @@
-import { Player, Vote, VoteState } from './player';
-import * as _ from 'lodash';
-import { LogMessage } from './log-message';
+import { Player, Vote, VoteState } from "./player";
+import * as _ from "lodash";
+import { LogMessage } from "./log-message";
 export class RoomState {
 	id: string;
 	name: string;
@@ -17,8 +17,8 @@ export class RoomState {
 	}
 
 	removePlayer(player: Player) {
-		_.remove(this.players, {uid: player.uid});
-		_.remove(this.spectators, {uid: player.uid});
+		_.remove(this.players, { uid: player.uid });
+		_.remove(this.spectators, { uid: player.uid });
 	}
 
 	addPlayer(player: Player) {
@@ -30,22 +30,32 @@ export class RoomState {
 	}
 
 	setVote(player: Player, vote: Vote) {
-		let existing = _.find(this.players, {uid: player.uid});
-		if (existing)
-			existing.vote = vote;
+		let existing = _.find(this.players, { uid: player.uid });
+		if (existing) existing.vote = vote;
 	}
 
 	clearVotes() {
-		_.each(this.players, player => delete player.vote);
-		_.each(this.spectators, player => delete player.vote);
+		_.each(this.players, (player) => delete player.vote);
+		_.each(this.spectators, (player) => delete player.vote);
 	}
 
 	isAllVoted() {
-		return !_.some(this.players, player => player.vote === undefined || player.vote === VoteState.wait);
+		return !_.some(
+			this.players,
+			(player) =>
+				player.vote === undefined || player.vote === VoteState.wait
+		);
 	}
 
 	showVotes() {
-		_.each(this.players, player => player.vote = (player.vote && player.vote !== VoteState.wait) ? player.vote : null);
+		_.each(
+			this.players,
+			(player) =>
+				(player.vote =
+					player.vote && player.vote !== VoteState.wait
+						? player.vote
+						: null)
+		);
 	}
 
 	addLog(msg: string) {

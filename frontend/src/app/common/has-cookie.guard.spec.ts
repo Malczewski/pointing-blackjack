@@ -5,7 +5,7 @@ import { IsAuthenticatedGuard } from './is-authenticated.guard';
 describe('HasCookieGuard', () => {
 	beforeEach(() => {
 		TestBed.configureTestingModule({
-			providers: [IsAuthenticatedGuard]
+			providers: [IsAuthenticatedGuard],
 		});
 	});
 

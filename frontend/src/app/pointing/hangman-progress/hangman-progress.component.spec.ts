@@ -9,9 +9,8 @@ describe('HangmanProgressComponent', () => {
 
 	beforeEach(async(() => {
 		TestBed.configureTestingModule({
-			declarations: [ HangmanProgressComponent ]
-		})
-		.compileComponents();
+			declarations: [HangmanProgressComponent],
+		}).compileComponents();
 	}));
 
 	beforeEach(() => {
@@ -30,5 +29,4 @@ describe('HangmanProgressComponent', () => {
 		expect(fixture.debugElement.query(By.css('.pct-40')).styles.display).toBeFalsy();
 		expect(fixture.debugElement.query(By.css('.pct-50')).styles.display).toBeTruthy();
 	}); */
-
 });

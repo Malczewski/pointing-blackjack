@@ -8,9 +8,8 @@ describe('ComplicationIndicatorComponent', () => {
 
 	beforeEach(async(() => {
 		TestBed.configureTestingModule({
-			declarations: [ ComplicationIndicatorComponent ]
-		})
-		.compileComponents();
+			declarations: [ComplicationIndicatorComponent],
+		}).compileComponents();
 	}));
 
 	beforeEach(() => {

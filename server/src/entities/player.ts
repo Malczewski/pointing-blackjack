@@ -1,7 +1,6 @@
-
 export enum VoteState {
-	wait = 'wait',
-	none = 'none'
+	wait = "wait",
+	none = "none",
 }
 export type Vote = number | VoteState | null;
 
