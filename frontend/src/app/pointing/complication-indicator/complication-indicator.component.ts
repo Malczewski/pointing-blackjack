@@ -14,7 +14,7 @@ export class ComplicationIndicatorComponent implements OnInit {
 		5: _.range(1, 8),
 		8: _.range(1, 11),
 		13: _.range(1, 14)
-	}
+	};
 
 	@Input() complexity: number;
 

@@ -6,7 +6,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
-import { CookieService } from 'ngx-cookie-service';
 import { LoginComponent } from './login/login/login.component';
 import { HomeComponent } from './home/home/home.component';
 import { RoomComponent } from './pointing/room/room.component';
@@ -53,13 +52,8 @@ import { PointingApiService } from 'src/app/pointing/pointing-api.service';
 	AtomSpinnerModule,
 	BrowserAnimationsModule,
 	SocketIoModule,
-	//MatInputModule,
-	//MatProgressBarModule,
-	//MatButtonModule,
 	],
 	providers: [
-		CookieService,
-		//{ provide: HTTP_INTERCEPTORS, useClass: UidInterceptor, multi: true },
 		AppSocket,
 		PointingApiService
 	],

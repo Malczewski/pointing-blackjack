@@ -2,30 +2,30 @@
 	"$schema": "./node_modules/@angular/cli/lib/config/schema.json",
 	"version": 1,
 	"newProjectRoot": "projects",
+	"schematics": {
+		"@schematics/angular:component": {
+			"style": "scss",
+			"lintFix": true
+		},
+		"@schematics/angular:class": {
+			"lintFix": true
+		},
+		"@schematics/angular:directive": {
+			"lintFix": true
+		},
+		"@schematics/angular:module": {
+			"lintFix": true
+		},
+		"@schematics/angular:pipe": {
+			"lintFix": true
+		},
+		"@schematics/angular:service": {
+			"lintFix": true
+		}
+	},
 	"projects": {
 		"frontend": {
 			"projectType": "application",
-			"schematics": {
-				"@schematics/angular:component": {
-					"style": "scss",
-					"lintFix": true
-				},
-				"@schematics/angular:class": {
-					"lintFix": true
-				},
-				"@schematics/angular:directive": {
-					"lintFix": true
-				},
-				"@schematics/angular:module": {
-					"lintFix": true
-				},
-				"@schematics/angular:pipe": {
-					"lintFix": true
-				},
-				"@schematics/angular:service": {
-					"lintFix": true
-				}
-			},
 			"root": "",
 			"sourceRoot": "src",
 			"prefix": "app",
