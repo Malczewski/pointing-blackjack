@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { RoomState, Vote, VoteState, Player } from '@pointing/room-state.class';
 import * as _ from 'lodash';
 import { UserStateService } from '@app/common/user-state.service';
@@ -12,15 +12,21 @@ import { PointingApiService } from '@pointing/pointing-api.service';
 	templateUrl: './room-players.component.html',
 	styleUrls: ['./room-players.component.scss']
 })
-export class RoomPlayersComponent implements OnInit {
+export class RoomPlayersComponent implements OnInit, OnChanges {
 
 	@Input() state: RoomState;
+
+	private calculatedDifference: {[key: number]: number};
 
 	constructor(
 		private userState: UserStateService,
 		private pointingApi: PointingApiService) { }
 
 	ngOnInit(): void {
+	}
+	
+	ngOnChanges(changes: SimpleChanges): void {
+		this.recalculateDifferences();
 	}
 
 	isShowVotes(): boolean {
@@ -88,30 +94,39 @@ export class RoomPlayersComponent implements OnInit {
 			return red + alpha;
 		if (vote === null)
 			return '';
-		let voteNum = vote as number;
+		let diff = this.calculatedDifference[vote];
+		if (diff === 0)
+			return green + alpha;
+		return ColorUtils.blendColors(green, red, diff) + alpha;
+	}
+
+	recalculateDifferences(): void {
+		this.calculatedDifference = {};
 		let topVotes = PointingUtils.getAggregatedResults(this.state).filter(topVote => topVote.isTop);
 		/* let voteIndex = PointingConstants.VOTE_VALUES.indexOf(vote);
 		let indexDiff = _.chain(topVotes)
-			.map(topVote => PointingConstants.VOTE_VALUES.indexOf(topVote.vote))
-			.map(index => Math.abs(index - voteIndex))
-			.max()
-			.value();
+		.map(topVote => PointingConstants.VOTE_VALUES.indexOf(topVote.vote))
+		.map(index => Math.abs(index - voteIndex))
+		.max()
+		.value();
 		if (indexDiff === 0)
-			return green + alpha;
+		return green + alpha;
 		let totalValues = PointingConstants.VOTE_VALUES.length - 2; // none and wait
 		return ColorUtils.blendColors(green, red, indexDiff / totalValues) + alpha; */
-		let diff = _.chain(topVotes)
-			.map(topVote => topVote.vote)
-			.filter(topVote => topVote > 0)
-			.map((topVote: number) => Math.abs(topVote - voteNum))
-			.max()
-			.value();
-		if (diff === 0)
-			return green + alpha;
 		let maxVote = _.maxBy(PointingConstants.VOTE_VALUES, v => _.isNumber(v) ? v : 0) as number;
-		return ColorUtils.blendColors(green, red, diff / (maxVote - 1)) + alpha;
-
-
+		_.chain(PointingConstants.VOTE_VALUES)
+			.filter(vote => _.isNumber(vote))
+			.each((vote: number) => {
+				let diff = _.chain(topVotes)
+					.map(topVote => topVote.vote)
+					.filter(topVote => topVote > 0)
+					.map((topVote: number) => Math.abs(topVote - vote))
+					.max()
+					.value();
+				this.calculatedDifference[vote] = Math.sqrt(diff / (maxVote - 1));
+				
+			}).value();
+		
 	}
 
 }
