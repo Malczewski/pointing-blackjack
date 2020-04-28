@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/Malczewski/pointing-blackjack.svg?branch=develop)](https://travis-ci.org/Malczewski/pointing-blackjack)
+
 [Demo]
 
 ## Requirements

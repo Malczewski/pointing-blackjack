@@ -1,5 +1,5 @@
 before_script:
-  - npm install -g angular-cli typescript
+  - npm install -g @angular/cli typescript
 cache:
   directories:
     - ./node_modules
