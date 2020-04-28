@@ -10,7 +10,11 @@
 		"ws": "^7.2.3"
 	},
 	"scripts": {
-		"start": "node dist/server.js"
+		"build": "cd server && tsc && cd ../frontend && ng build",
+		"build-prod": "cd server && tsc && cd ../frontend && ng build --prod",
+		"test": "cd frontend && ng lint && ng test --watch=false --no-progress --browsers=ChromeHeadlessNoSandbox",
+		"start": "node dist/server.js",
+		"postinstall": "cd server && npm install && cd ../frontend && npm install"
 	},
 	"author": "Yurius the Great",
 	"license": "MIT"

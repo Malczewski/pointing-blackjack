@@ -16,7 +16,6 @@
 		"typescript": "^3.8.3"
 	},
 	"scripts": {
-		"test": "test",
 		"build": "tsc"
 	},
 	"author": "Yurius the Great",

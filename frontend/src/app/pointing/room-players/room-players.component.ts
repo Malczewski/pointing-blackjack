@@ -23,6 +23,7 @@ export class RoomPlayersComponent implements OnInit, OnChanges {
 		private pointingApi: PointingApiService) { }
 
 	ngOnInit(): void {
+		this.recalculateDifferences();
 	}
 	
 	ngOnChanges(changes: SimpleChanges): void {
