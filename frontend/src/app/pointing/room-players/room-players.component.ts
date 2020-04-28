@@ -35,7 +35,7 @@ export class RoomPlayersComponent implements OnInit, OnChanges {
 	}
 
 	makePlayer(): void {
-		this.pointingApi.switchToPlayer();
+		//this.pointingApi.switchToPlayer();
 		//let current = _.remove(this.state.spectators, {uid: this.userState.getUid()})[0];
 		//this.state.players.push(current);
 	}
