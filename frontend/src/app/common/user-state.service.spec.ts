@@ -18,13 +18,13 @@ describe('UserStateService', () => {
 				{provide: LocalStorageService, useValue: jasmine.createSpyObj(['get', 'put', 'clear'])},
 			]
 		});
-		sessionStorage = TestBed.get(SessionStorageService);
-		localStorage = TestBed.get(LocalStorageService);
+		sessionStorage = TestBed.inject(SessionStorageService) as any;
+		localStorage = TestBed.inject(LocalStorageService) as any;
 	});
 
 	beforeEach(() => {
 		environment.useSession = true;
-		service = TestBed.get(UserStateService);
+		service = TestBed.inject(UserStateService);
 	});
 
 	it('should be created', () => {
