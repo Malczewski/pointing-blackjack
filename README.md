@@ -5,27 +5,21 @@
 ## Requirements
 Globals: `npm`, `ng`, `tsc`
 
-## Build Frontend
-`cd frontend`
-
-`npm install`
-
-`ng build --prod`
-
-## Build Backend
-`cd server`
-
-`npm install`
-
-`npm run-script build`
-
 ## Start server
 `npm install`
-`npm run-script start`
+
+`npm run build`
+
+`npm run start`
+
+## Deploy
+Build production bundle: `npm run build-prod`
+
+Commit _dist_ changes to `master`
 
 ## Angular Debug mode (active server with ng serve)
 Start the server
-`npm run-script start`
+`npm run start`
 
 Run Angular in debug mode
 `cd frontend`
