@@ -15,7 +15,6 @@
 		"bootstrap": "^4.4.1",
 		"font-awesome": "^4.7.0",
 		"lodash": "^4.17.15",
-		"materialize-css": "^1.0.0-rc.2",
 		"moment": "^2.24.0",
 		"ngx-clipboard": "^13.0.0",
 		"ngx-cookie-service": "^3.0.3",

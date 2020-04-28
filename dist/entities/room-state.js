@@ -27,14 +27,17 @@ class RoomState {
             existing.vote = vote;
     }
     clearVotes() {
-        _.each(this.players, player => delete player.vote);
-        _.each(this.spectators, player => delete player.vote);
+        _.each(this.players, (player) => delete player.vote);
+        _.each(this.spectators, (player) => delete player.vote);
     }
     isAllVoted() {
-        return !_.some(this.players, player => player.vote === undefined || player.vote === player_1.VoteState.wait);
+        return !_.some(this.players, (player) => player.vote === undefined || player.vote === player_1.VoteState.wait);
     }
     showVotes() {
-        _.each(this.players, player => player.vote = (player.vote && player.vote !== player_1.VoteState.wait) ? player.vote : null);
+        _.each(this.players, (player) => (player.vote =
+            player.vote && player.vote !== player_1.VoteState.wait
+                ? player.vote
+                : null));
     }
     addLog(msg) {
         this.log.push(new log_message_1.LogMessage(msg));

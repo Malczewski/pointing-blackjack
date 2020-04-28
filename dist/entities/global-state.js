@@ -14,7 +14,7 @@ class GlobalState {
         }
     }
     removePlayer(player) {
-        _.each(this.states, state => state.removePlayer(player));
+        _.each(this.states, (state) => state.removePlayer(player));
     }
     getRoom(room) {
         if (!this.states[room])
