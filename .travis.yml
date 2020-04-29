@@ -9,7 +9,7 @@ install:
   - npm install
 
 script:
-  - npm run build
+  - npm run build-dev
   - npm test
 language: node_js
 node_js: 12

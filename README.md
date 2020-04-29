@@ -5,6 +5,8 @@
 ## Start server
 `npm install`
 
+`npm run build`
+
 `npm run start`
 
 Go to `localhost:8999'
