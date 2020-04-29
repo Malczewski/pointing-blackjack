@@ -2,20 +2,12 @@
 
 [Demo]
 
-## Requirements
-Globals: `npm`, `ng`, `tsc`
-
 ## Start server
 `npm install`
 
-`npm run build`
-
 `npm run start`
 
-## Deploy
-Build production bundle: `npm run build-prod`
-
-Commit _dist_ changes to `master`
+Go to `localhost:8999'
 
 ## Angular Debug mode (active server with ng serve)
 Start the server
