@@ -39,7 +39,7 @@ describe('AppComponent', () => {
 	});
 
 	it('should logout', () => {
-		let router = TestBed.get(Router);
+		let router = TestBed.inject(Router);
 		spyOn(router, 'navigate');
 		userStateMock.isLoggedIn.and.returnValue(true);
 		fixture.detectChanges();

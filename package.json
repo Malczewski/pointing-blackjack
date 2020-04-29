@@ -9,8 +9,14 @@
 		"socket.io": "^2.3.0",
 		"ws": "^7.2.3"
 	},
+	"devDependencies": {},
 	"scripts": {
-		"start": "node dist/server.js"
+		"build": "cd server && npx tsc && cd ../frontend && npx ng build",
+		"build-prod": "cd server && npx tsc && cd ../frontend && npx ng build --prod",
+		"test": "cd frontend && ng lint && ng test --watch=false --no-progress --browsers=ChromeHeadlessNoSandbox",
+		"prestart": "npm run build-prod",
+		"start": "node dist/server.js",
+		"postinstall": "cd server && npm install && cd ../frontend && npm install"
 	},
 	"author": "Yurius the Great",
 	"license": "MIT"

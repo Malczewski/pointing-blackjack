@@ -1,0 +1,15 @@
+before_script:
+  - npm install -g @angular/cli typescript
+cache:
+  directories:
+    - ./node_modules
+    - ./frontend/node_modules
+    - ./server/node_modules
+install:
+  - npm install
+
+script:
+  - npm run build
+  - npm test
+language: node_js
+node_js: 12

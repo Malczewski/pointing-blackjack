@@ -1,29 +1,17 @@
+[![Build Status](https://travis-ci.org/Malczewski/pointing-blackjack.svg?branch=develop)](https://travis-ci.org/Malczewski/pointing-blackjack)
+
 [Demo]
-
-## Requirements
-Globals: `npm`, `ng`, `tsc`
-
-## Build Frontend
-`cd frontend`
-
-`npm install`
-
-`ng build --prod`
-
-## Build Backend
-`cd server`
-
-`npm install`
-
-`npm run-script build`
 
 ## Start server
 `npm install`
-`npm run-script start`
+
+`npm run start`
+
+Go to `localhost:8999'
 
 ## Angular Debug mode (active server with ng serve)
 Start the server
-`npm run-script start`
+`npm run start`
 
 Run Angular in debug mode
 `cd frontend`
