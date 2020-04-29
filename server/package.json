@@ -10,11 +10,10 @@
 		"@types/lodash": "^4.14.149",
 		"@types/socket.io": "^2.1.4",
 		"@types/ws": "^7.2.3",
-		"ws": "^7.2.3"
-	},
-	"devDependencies": {
+		"ws": "^7.2.3",
 		"typescript": "^3.8.3"
 	},
+	"devDependencies": {},
 	"scripts": {
 		"build": "tsc"
 	},
