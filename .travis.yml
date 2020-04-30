@@ -1,5 +1,7 @@
-before_script:
-  - npm install -g @angular/cli typescript
+branches:
+  only:
+  - master
+  - develop
 cache:
   directories:
     - ./node_modules
@@ -7,7 +9,6 @@ cache:
     - ./server/node_modules
 install:
   - npm install
-
 script:
   - npm run build-dev
   - npm test

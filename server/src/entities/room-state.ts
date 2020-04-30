@@ -7,6 +7,7 @@ export class RoomState {
 	players: Player[];
 	spectators: Player[];
 	log: LogMessage[];
+	lastChangeUid?: string;
 
 	constructor(id: string) {
 		this.id = id;

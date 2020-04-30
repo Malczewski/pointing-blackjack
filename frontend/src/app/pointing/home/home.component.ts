@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as _ from 'lodash';
 import { Router } from '@angular/router';
-import { Planets } from '@app/home/home/planets.const';
+import { Planets } from '@pointing/home/planets.const';
 import { Pages } from '@app/common/pages.class';
 
 interface Door {

@@ -1,6 +1,6 @@
 {
 	"name": "pointing-blackjack",
-	"version": "0.0.3",
+	"version": "0.1.0",
 	"description": "Pointing Poker with blackjack and hookers",
 	"main": "dist/server.js",
 	"dependencies": {
@@ -12,9 +12,9 @@
 	"devDependencies": {},
 	"scripts": {
 		"heroku-postbuild": "cd server && npx tsc && cd ../frontend && npx ng build --prod",
-		"build-dev": "cd server && tsc && cd ../frontend && ng build",
-		"build-prod": "cd server && tsc && cd ../frontend && ng build --prod",
-		"test": "cd frontend && ng lint && ng test --watch=false --no-progress --browsers=ChromeHeadlessNoSandbox",
+		"build-dev": "cd server && npx tsc && cd ../frontend && npx ng build",
+		"build-prod": "cd server && npx tsc && cd ../frontend && npx ng build --prod",
+		"test": "cd frontend && npx ng lint && npx ng test --watch=false --no-progress --browsers=ChromeHeadlessNoSandbox --code-coverage",
 		"start": "node dist/server.js",
 		"postinstall": "cd server && npm install && cd ../frontend && npm install"
 	},

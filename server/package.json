@@ -1,6 +1,6 @@
 {
 	"name": "blackjack-server",
-	"version": "0.0.3",
+	"version": "0.1.0",
 	"description": "Socket based server for pointing",
 	"dependencies": {
 		"express": "^4.17.1",

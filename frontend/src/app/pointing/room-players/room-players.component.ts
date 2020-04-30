@@ -6,15 +6,30 @@ import { PointingConstants } from '@pointing/pointing-constants.class';
 import { PointingUtils } from '@pointing/pointing-utils.service';
 import { ColorUtils } from '@app/common/color-utils.class';
 import { PointingApiService } from '@pointing/pointing-api.service';
+import { trigger, state, style, transition, animate, keyframes } from '@angular/animations';
+
+interface HighlightedPlayer extends Player {
+	highlight?: any;
+}
 
 @Component({
 	selector: 'room-players',
 	templateUrl: './room-players.component.html',
-	styleUrls: ['./room-players.component.scss']
+	styleUrls: ['./room-players.component.scss'],
+	animations: [
+		trigger('highlight', [
+			state('none', style({'text-shadow': 'none'})),
+			state('active', style({'text-shadow': '0 0 5px #00FF00'})),
+			transition('none => active', animate('0.2s')),
+			transition('active => none', animate('0.5s')),
+		]),
+	],
 })
 export class RoomPlayersComponent implements OnInit, OnChanges {
 
 	@Input() state: RoomState;
+	players: HighlightedPlayer[] = [];
+	spectators: HighlightedPlayer[] = [];
 
 	private calculatedDifference: {[key: number]: number};
 
@@ -27,7 +42,35 @@ export class RoomPlayersComponent implements OnInit, OnChanges {
 	}
 	
 	ngOnChanges(changes: SimpleChanges): void {
-		this.recalculateDifferences();
+		if (changes.state.currentValue !== changes.state.previousValue) {
+			this.processPlayers(this.players, this.state.players);
+			this.processPlayers(this.spectators, this.state.spectators);
+			if (this.state.lastChangeUid)
+				this.highlightPlayer(this.state.lastChangeUid);
+			this.recalculateDifferences();
+		}
+	}
+
+	private processPlayers(current: Player[], updated: Player[]): void {
+		let updateMap: {[uid: string]: Player} = {};
+		_.each(updated, update => updateMap[update.uid] = update);
+		_.remove(current, player => !updateMap[player.uid]);
+		_.each(current, player => {
+			_.extend(player, updateMap[player.uid]);
+			delete updateMap[player.uid];
+		});
+		[].push.apply(current, _.values(updateMap));
+	}
+
+	private highlightPlayer(uid: string): void {
+		let highlightedPlayer = _.find(_.union(this.players, this.spectators), player => player.uid === uid);
+		if (highlightedPlayer) {
+			if (highlightedPlayer.highlight)
+				clearTimeout(highlightedPlayer.highlight);
+			highlightedPlayer.highlight = setTimeout(() => {
+				delete highlightedPlayer.highlight;
+			}, 500);
+		}
 	}
 
 	isShowVotes(): boolean {

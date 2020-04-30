@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 
 import { RoomPlayersComponent } from './room-players.component';
 import { PointingApiService } from '@pointing/pointing-api.service';
@@ -7,17 +7,27 @@ import { UserStateService } from '@app/common/user-state.service';
 import { Vote, RoomState, VoteState } from '@pointing/room-state.class';
 import { By } from '@angular/platform-browser';
 import { CirclesToRhumbusesSpinnerModule } from 'angular-epic-spinners';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { Component } from '@angular/core';
+
+@Component({
+	template: `<room-players [state]="state"></room-players>`,
+})
+export class TestWrapperComponent {
+	state: RoomState;
+}
+
 
 describe('RoomPlayersComponent', () => {
-	let component: RoomPlayersComponent;
-	let fixture: ComponentFixture<RoomPlayersComponent>;
+	let component: TestWrapperComponent;
+	let fixture: ComponentFixture<TestWrapperComponent>;
 	let pointingApiMock: jasmine.SpyObj<PointingApiService>;
 
 	beforeEach(async(() => {
 		pointingApiMock = jasmine.createSpyObj(['vote', 'switchToPlayer', 'switchToSpectator']);
 		TestBed.configureTestingModule({
-			imports: [CirclesToRhumbusesSpinnerModule],
-			declarations: [RoomPlayersComponent, ShadePipe],
+			imports: [CirclesToRhumbusesSpinnerModule, NoopAnimationsModule],
+			declarations: [TestWrapperComponent, RoomPlayersComponent, ShadePipe],
 			providers: [
 				{provide: PointingApiService, useValue: pointingApiMock},
 				{provide: UserStateService, useValue: {getUid: () => 'my_id'}}
@@ -26,7 +36,7 @@ describe('RoomPlayersComponent', () => {
 	}));
 
 	beforeEach(() => {
-		fixture = TestBed.createComponent(RoomPlayersComponent);
+		fixture = TestBed.createComponent(TestWrapperComponent);
 		component = fixture.componentInstance;
 		component.state = {
 			players: [],
@@ -57,12 +67,14 @@ describe('RoomPlayersComponent', () => {
 	});
 
 	it('should make player', () => {
-		component.makePlayer();
+		fixture.debugElement.query(By.css('.btn-primary')).nativeElement.click();
+		fixture.detectChanges();
 		expect(pointingApiMock.switchToPlayer).toHaveBeenCalled();
 	});
 
 	it('should make spectator', () => {
-		component.makeSpectator();
+		fixture.debugElement.query(By.css('.btn-info')).nativeElement.click();
+		fixture.detectChanges();
 		expect(pointingApiMock.switchToSpectator).toHaveBeenCalled();
 	});
 
@@ -164,4 +176,26 @@ describe('RoomPlayersComponent', () => {
 		fixture.detectChanges();
 		expect(pointingApiMock.vote).toHaveBeenCalledWith(1);
 	});
+
+	it('should highlight player and disappear after 0.5s', fakeAsync(() => {
+		component.state = state([1, 3, VoteState.none]);
+		fixture.detectChanges();
+		expect(getPlayerTextShadow(0)).toBe('none');
+
+		component.state = state([1, 3, VoteState.none]);
+		component.state.lastChangeUid = 'my_id';
+		fixture.detectChanges();
+		tick(300); // wait for animation
+		expect(getPlayerTextShadow(0)).not.toBe('none');
+		
+		tick(1000); // wait for timeout
+		fixture.detectChanges();
+		tick(1000); // wait for animation
+		expect(getPlayerTextShadow(0)).toBe('none');
+	}));
+
+	function getPlayerTextShadow(index: number): string {
+		let playerElm = fixture.debugElement.queryAll(By.css('.user-name'))[index].nativeElement;
+		return window.getComputedStyle(playerElm).textShadow;
+	}
 });

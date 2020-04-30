@@ -5,11 +5,11 @@
 ## Start server
 `npm install`
 
-`npm run build`
+`npm run build-prod`
 
 `npm run start`
 
-Go to `localhost:8999'
+Go to `localhost:8999`
 
 ## Angular Debug mode (active server with ng serve)
 Start the server
