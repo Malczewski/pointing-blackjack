@@ -14,7 +14,7 @@ div {
 	width: 100%;
 
 	.room-link {
-		width: 600px;
+		flex-shrink: 0;
 	}
 	.room-actions {
 		width: 100%;

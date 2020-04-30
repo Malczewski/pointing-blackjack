@@ -1,7 +1,7 @@
 <div class="room-header d-flex flex-row bg-secondary p-7">
 	<div class="room-link">
 		<div class="input-group input-group-sm">
-			<input [(ngModel)]="roomUrl" type="text" class="form-control">
+			<div class="form-control" contenteditable="false">{{roomUrl}}</div>
 			<div class="input-group-append">
 				<button ngxClipboard [cbContent]="roomUrl" class="btn btn-icon btn-secondary" title="Copy link">
 					<i class="fa fa-copy"></i>
