@@ -40,6 +40,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 		SocketIoModule,
 		NgPipesModule,
 		FormsModule,
+		BrowserModule,
+		BrowserAnimationsModule,
 	],
 	providers: [
 		AppSocket,

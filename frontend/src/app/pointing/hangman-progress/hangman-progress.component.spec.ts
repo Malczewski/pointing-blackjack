@@ -3,6 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HangmanProgressComponent } from './hangman-progress.component';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('HangmanProgressComponent', () => {
 	let component: HangmanProgressComponent;
@@ -10,6 +11,7 @@ describe('HangmanProgressComponent', () => {
 
 	beforeEach(async(() => {
 		TestBed.configureTestingModule({
+			imports: [NoopAnimationsModule],
 			declarations: [HangmanProgressComponent],
 		}).compileComponents();
 	}));
@@ -25,7 +27,7 @@ describe('HangmanProgressComponent', () => {
 	});
 
 	function isHidden(elm: DebugElement): boolean {
-		return window.getComputedStyle(elm.nativeElement, null).display === 'none';
+		return window.getComputedStyle(elm.nativeElement, null).opacity === '0';
 	}
 
 	it('should apply visibility styles according to progress', () => {
@@ -41,12 +43,9 @@ describe('HangmanProgressComponent', () => {
 		expect(isHidden(fixture.debugElement.query(By.css('.pct-60')))).toBeTruthy();
 	});
 
-	it('should return correct classes', () => {
+	it('should return correct state', () => {
 		component.progress = 0.11;
-		expect(component.getProgressClasses()).toBe('has-10');
-		component.progress = 0.30;
-		expect(component.getProgressClasses()).toBe('has-10 has-20 has-30');
-		component.progress = 1;
-		expect(component.getProgressClasses()).toContain('has-100');
+		expect(component.getState(0.2)).toBe('hide');
+		expect(component.getState(0.1)).toBe('show');
 	});
 });
