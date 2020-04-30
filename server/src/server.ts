@@ -46,7 +46,7 @@ pointingSocket.on("connection", (socket: PointingSocket) => {
 		roomState.addPlayer(player);
 		roomState.addLog(`${player.name} joined.`);
 
-		refreshRoom(room);
+		refreshRoom(room, player);
 	});
 
 	socket.on("reset", () => {
@@ -57,7 +57,7 @@ pointingSocket.on("connection", (socket: PointingSocket) => {
 			let roomState = globalState.getRoom(room);
 			roomState.clearVotes();
 			roomState.addLog(`${player.name} cleared votes.`);
-			refreshRoom(room);
+			refreshRoom(room, player);
 		}
 	});
 	socket.on("show", () => {
@@ -68,7 +68,7 @@ pointingSocket.on("connection", (socket: PointingSocket) => {
 			let roomState = globalState.getRoom(room);
 			roomState.showVotes();
 			roomState.addLog(`${player.name} showed votes.`);
-			refreshRoom(room);
+			refreshRoom(room, player);
 		}
 	});
 	socket.on("vote", (vote: Vote) => {
@@ -77,7 +77,7 @@ pointingSocket.on("connection", (socket: PointingSocket) => {
 		console.log(`vote: ${room}, value: ${vote}, player: ${JSON.stringify(player)}`);
 		if (room) {
 			globalState.getRoom(room).setVote(socket.player, vote);
-			refreshRoom(room);
+			refreshRoom(room, player);
 		}
 	});
 	socket.on("role", (role: "player" | "spectator") => {
@@ -90,7 +90,7 @@ pointingSocket.on("connection", (socket: PointingSocket) => {
 			if (role === "player") roomState.addPlayer(socket.player);
 			else roomState.addSpectator(socket.player);
 
-			refreshRoom(room);
+			refreshRoom(room, player);
 		}
 	});
 
@@ -107,15 +107,17 @@ pointingSocket.on("connection", (socket: PointingSocket) => {
 			globalState.removePlayer(socket.player);
 			if (socket.room) {
 				globalState.checkRoom(socket.room as string);
-				refreshRoom(socket.room);
+				refreshRoom(socket.room, null);
 			}
 		}
 	});
 });
 
-async function refreshRoom(room: string) {
-	console.log(`refresh: ${room}\n` + JSON.stringify(globalState.getRoom(room)));
-	pointingSocket.in(room).emit("refresh", globalState.getRoom(room));
+async function refreshRoom(room: string, lastPlayer: Player | null) {
+	let state = globalState.getRoom(room);
+	state.lastChangeUid = lastPlayer?.uid;
+	console.log(`refresh: ${room}\n` + JSON.stringify(state));
+	pointingSocket.in(room).emit("refresh", state);
 }
 
 //start our server
