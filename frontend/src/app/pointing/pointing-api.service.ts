@@ -22,6 +22,7 @@ export class PointingApiService {
 		this.appSocket.emit('join', {
 			uid: this.userState.getUid(),
 			name: this.userState.getUser().name,
+			role: this.userState.getLastRole(),
 			room: roomId
 		});
 		this.appSocket.removeAllListeners('reconnect');

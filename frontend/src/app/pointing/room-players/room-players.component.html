@@ -1,9 +1,9 @@
 
-<div class="players-list players" [ngClass]="{'many-players': players.length > 12}">
-	<ng-container *ngFor="let user of players; let i = index">
+<div class="players-list players" [ngClass]="{'many-players': state.players.length > 12}">
+	<ng-container *ngFor="let user of state.players; let i = index">
 		<span class="user-name" 
 			[ngClass]="{ 'odd': i %2 == 1, 'text-primary': isMyUser(user) } " 
-			[@highlight]="user.highlight ? 'active' : 'none'"
+			[@highlight]="!!highlightedPlayers[user.uid] ? 'active' : 'none'"
 			[style.background-color]="getDifferenceColor(user.vote)">
 			{{user.name}}
 		</span>
@@ -50,7 +50,7 @@
 		</button>
 	</div>
 	<div class="players-list spectators">
-		<ng-container *ngFor="let user of spectators">
+		<ng-container *ngFor="let user of state.spectators">
 			<span class="user-name" 
 				[@highlight]="user.highlight ? 'active' : 'none'"
 				[ngClass]="{'text-primary':isMyUser(user)}">

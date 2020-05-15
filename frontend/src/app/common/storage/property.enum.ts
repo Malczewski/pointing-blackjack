@@ -1,4 +1,5 @@
 export enum Property {
 	UID = 'pb-uid',
-	NAME = 'pb-name'
+	NAME = 'pb-name',
+	ROLE = 'pb-role'
 }

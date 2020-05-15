@@ -5,6 +5,7 @@ import { IStorage } from '@app/common/storage/storage.interface';
 import { SessionStorageService } from '@app/common/storage/session-storage.service';
 import { environment } from 'src/environments/environment';
 import { LocalStorageService } from '@app/common/storage/local-storage.service';
+import { PlayerRole } from '@pointing/room-state.class';
 
 export interface UserState {
 	uid: string;
@@ -64,5 +65,13 @@ export class UserStateService {
 
 	getUid(): string {
 		return this.user.uid;
+	}
+
+	setLastRole(role: PlayerRole): void {
+		this.getStorage().put(Property.ROLE, role);
+	}
+
+	getLastRole(): PlayerRole {
+		return this.getStorage().get(Property.ROLE) as PlayerRole;
 	}
 }
