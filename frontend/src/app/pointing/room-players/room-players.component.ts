@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { RoomState, Vote, VoteState, Player } from '@pointing/room-state.class';
+import { RoomState, Vote, VoteState, Player, PlayerRole } from '@pointing/room-state.class';
 import * as _ from 'lodash';
 import { UserStateService } from '@app/common/user-state.service';
 import { PointingConstants } from '@pointing/pointing-constants.class';
@@ -71,12 +71,14 @@ export class RoomPlayersComponent implements OnInit, OnChanges {
 
 	makePlayer(): void {
 		this.pointingApi.switchToPlayer();
+		this.userState.setLastRole(PlayerRole.player);
 		//let current = _.remove(this.state.spectators, {uid: this.userState.getUid()})[0];
 		//this.state.players.push(current);
 	}
 
 	makeSpectator(): void {
 		this.pointingApi.switchToSpectator();
+		this.userState.setLastRole(PlayerRole.spectator);
 		//let current = _.remove(this.state.players, {uid: this.userState.getUid()})[0];
 		//this.state.spectators.push(current);
 	}

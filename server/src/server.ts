@@ -27,7 +27,7 @@ let globalState = new GlobalState();
 
 pointingSocket.on("connection", (socket: PointingSocket) => {
 	console.log("new connection");
-	socket.on("join", ({ room, uid, name }) => {
+	socket.on("join", ({ room, uid, name, role }) => {
 		console.log(`User ${name}(${uid}) joining room ${room}`);
 		if (socket.room) {
 			socket.leave(room);
@@ -43,7 +43,9 @@ pointingSocket.on("connection", (socket: PointingSocket) => {
 		/* if (roomState.isAllVoted() && roomState.players.length > 5) {
 			player.vote = null;
 		} */
-		roomState.addPlayer(player);
+		if (role === 'spectator')
+			roomState.addSpectator(player);
+		else roomState.addPlayer(player);
 		roomState.addLog(`${player.name} joined.`);
 
 		refreshRoom(room, player);

@@ -8,6 +8,11 @@ export interface Player {
 	name: string;
 	vote?: Vote;
 }
+export enum PlayerRole {
+	player = 'player',
+	spectator = 'spectator'
+}
+
 export type Vote = number | VoteState | null;
 
 export class RoomState {
