@@ -8,9 +8,6 @@ import { ColorUtils } from '@app/common/color-utils.class';
 import { PointingApiService } from '@pointing/pointing-api.service';
 import { trigger, state, style, transition, animate, keyframes } from '@angular/animations';
 
-interface HighlightedPlayer extends Player {
-	highlight?: any;
-}
 
 @Component({
 	selector: 'room-players',
@@ -28,8 +25,8 @@ interface HighlightedPlayer extends Player {
 export class RoomPlayersComponent implements OnInit, OnChanges {
 
 	@Input() state: RoomState;
-	players: HighlightedPlayer[] = [];
-	spectators: HighlightedPlayer[] = [];
+
+	highlightedPlayers: {[uid: string]: any} = {};
 
 	private calculatedDifference: {[key: number]: number};
 
@@ -43,8 +40,6 @@ export class RoomPlayersComponent implements OnInit, OnChanges {
 	
 	ngOnChanges(changes: SimpleChanges): void {
 		if (changes.state.currentValue !== changes.state.previousValue) {
-			this.processPlayers(this.players, this.state.players);
-			this.processPlayers(this.spectators, this.state.spectators);
 			if (this.state.lastChangeUid)
 				this.highlightPlayer(this.state.lastChangeUid);
 			this.recalculateDifferences();
@@ -63,14 +58,11 @@ export class RoomPlayersComponent implements OnInit, OnChanges {
 	}
 
 	private highlightPlayer(uid: string): void {
-		let highlightedPlayer = _.find(_.union(this.players, this.spectators), player => player.uid === uid);
-		if (highlightedPlayer) {
-			if (highlightedPlayer.highlight)
-				clearTimeout(highlightedPlayer.highlight);
-			highlightedPlayer.highlight = setTimeout(() => {
-				delete highlightedPlayer.highlight;
-			}, 500);
-		}
+		if (this.highlightedPlayers[uid])
+			clearTimeout(this.highlightedPlayers[uid]);
+		this.highlightedPlayers[uid] = setTimeout(() => {
+				delete this.highlightedPlayers[uid];
+		}, 500);
 	}
 
 	isShowVotes(): boolean {

@@ -194,6 +194,20 @@ describe('RoomPlayersComponent', () => {
 		expect(getPlayerTextShadow(0)).toBe('none');
 	}));
 
+	it('should clear votes on updates', () => {
+		component.state = state([3]);
+		fixture.detectChanges();
+		expect(count('.vote-number')).toBe(1);
+		expect(count('.vote-ready')).toBe(0);
+		
+		let newState = state([1]);
+		delete newState.players[0].vote;
+		component.state = newState;
+		fixture.detectChanges();
+		expect(count('.vote-number')).toBe(0);
+		expect(count('.vote-ready')).toBe(0);
+	});
+
 	function getPlayerTextShadow(index: number): string {
 		let playerElm = fixture.debugElement.queryAll(By.css('.user-name'))[index].nativeElement;
 		return window.getComputedStyle(playerElm).textShadow;
