@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { RoomState, Vote, VoteState, Player } from '@pointing/room-state.class';
+import { RoomState, Vote, VoteState, Player, PlayerRole } from '@pointing/room-state.class';
 import * as _ from 'lodash';
 import { UserStateService } from '@app/common/user-state.service';
 import { PointingConstants } from '@pointing/pointing-constants.class';
@@ -8,9 +8,6 @@ import { ColorUtils } from '@app/common/color-utils.class';
 import { PointingApiService } from '@pointing/pointing-api.service';
 import { trigger, state, style, transition, animate, keyframes } from '@angular/animations';
 
-interface HighlightedPlayer extends Player {
-	highlight?: any;
-}
 
 @Component({
 	selector: 'room-players',
@@ -28,8 +25,8 @@ interface HighlightedPlayer extends Player {
 export class RoomPlayersComponent implements OnInit, OnChanges {
 
 	@Input() state: RoomState;
-	players: HighlightedPlayer[] = [];
-	spectators: HighlightedPlayer[] = [];
+
+	highlightedPlayers: {[uid: string]: any} = {};
 
 	private calculatedDifference: {[key: number]: number};
 
@@ -43,8 +40,6 @@ export class RoomPlayersComponent implements OnInit, OnChanges {
 	
 	ngOnChanges(changes: SimpleChanges): void {
 		if (changes.state.currentValue !== changes.state.previousValue) {
-			this.processPlayers(this.players, this.state.players);
-			this.processPlayers(this.spectators, this.state.spectators);
 			if (this.state.lastChangeUid)
 				this.highlightPlayer(this.state.lastChangeUid);
 			this.recalculateDifferences();
@@ -63,14 +58,11 @@ export class RoomPlayersComponent implements OnInit, OnChanges {
 	}
 
 	private highlightPlayer(uid: string): void {
-		let highlightedPlayer = _.find(_.union(this.players, this.spectators), player => player.uid === uid);
-		if (highlightedPlayer) {
-			if (highlightedPlayer.highlight)
-				clearTimeout(highlightedPlayer.highlight);
-			highlightedPlayer.highlight = setTimeout(() => {
-				delete highlightedPlayer.highlight;
-			}, 500);
-		}
+		if (this.highlightedPlayers[uid])
+			clearTimeout(this.highlightedPlayers[uid]);
+		this.highlightedPlayers[uid] = setTimeout(() => {
+				delete this.highlightedPlayers[uid];
+		}, 500);
 	}
 
 	isShowVotes(): boolean {
@@ -79,12 +71,14 @@ export class RoomPlayersComponent implements OnInit, OnChanges {
 
 	makePlayer(): void {
 		this.pointingApi.switchToPlayer();
+		this.userState.setLastRole(PlayerRole.player);
 		//let current = _.remove(this.state.spectators, {uid: this.userState.getUid()})[0];
 		//this.state.players.push(current);
 	}
 
 	makeSpectator(): void {
 		this.pointingApi.switchToSpectator();
+		this.userState.setLastRole(PlayerRole.spectator);
 		//let current = _.remove(this.state.players, {uid: this.userState.getUid()})[0];
 		//this.state.spectators.push(current);
 	}
