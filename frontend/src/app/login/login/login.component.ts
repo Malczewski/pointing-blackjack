@@ -17,7 +17,7 @@ import { UserStateService } from '../../common/user-state.service';
 						#name="ngModel"
 						required minlength="3" />
 					<div class="input-group-append">
-						<button type="submit" [disabled]="name.invalid" class="btn btn-icon btn-primary">
+						<button type="submit" [disabled]="name.invalid" class="btn btn-icon btn-dark">
 							<i class="fa fa-sign-in"></i>
 						</button>
 					</div>

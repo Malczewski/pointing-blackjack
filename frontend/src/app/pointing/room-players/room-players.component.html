@@ -41,11 +41,11 @@
 	</ng-container>
 </div>
 <div class="bottom-list">
-	<div class="actions">
-		<button class="btn btn-primary" (click)="makePlayer()" [disabled]="isPlayer()">
+	<div class="actions btn-group btn-group-toggle ">
+		<button class="btn btn-info" (click)="makePlayer()" [class.active]="isPlayer()">
 			I'm Player <i class="fa fa-user"></i>
 		</button>
-		<button class="btn btn-info" (click)="makeSpectator()" [disabled]="isSpectator()">
+		<button class="btn btn-info" (click)="makeSpectator()" [class.active]="isSpectator()">
 			I'm Spectator <i class="fa fa-eye"></i>
 		</button>
 	</div>
