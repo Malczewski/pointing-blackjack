@@ -32,7 +32,7 @@ export class RoomResultsComponent implements OnInit {
 	getVoteText(vote: Vote): string {
 		switch (vote) {
 			case VoteState.none: return '?';
-			case null: return 'Skipped';
+			case null: return '<span style="font-size:5vh;">z<sup>z<sup>z</sup></sup></span>';
 			default: return vote + '';
 		}
 	}
