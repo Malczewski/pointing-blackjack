@@ -1,18 +1,18 @@
 import { TestBed } from '@angular/core/testing';
 
-import { AppSocket } from '@app/common/sockets/app-socket';
-import { DisconnectHookGuard } from '@pointing/disconnect-hook.guard';
+import { PointingSocket } from '@pointing/pointing-socket';
+import { PointingDisconnectHookGuard } from '@pointing/pointing-disconnect-hook.guard';
 
-describe('DisconnectGuardGuard', () => {
-	let guard: DisconnectHookGuard;
-	let appSocketMock: AppSocket;
+describe('PointingDisconnectHookGuard', () => {
+	let guard: PointingDisconnectHookGuard;
+	let appSocketMock: PointingSocket;
 
 	beforeEach(() => {
 		appSocketMock = jasmine.createSpyObj(['disconnect']);
 		TestBed.configureTestingModule({
-			providers: [{provide: AppSocket, useValue: appSocketMock}]
+			providers: [{provide: PointingSocket, useValue: appSocketMock}]
 		});
-		guard = TestBed.inject(DisconnectHookGuard);
+		guard = TestBed.inject(PointingDisconnectHookGuard);
 	});
 
 	it('should be created', () => {

@@ -13,7 +13,7 @@ import { HangmanProgressComponent } from '@pointing/hangman-progress/hangman-pro
 import { ComplicationIndicatorComponent } from '@pointing/complication-indicator/complication-indicator.component';
 import { ShadePipe } from '@app/common/shade.pipe';
 import { NgPipesModule } from 'ngx-pipes';
-import { AppSocket } from '@app/common/sockets/app-socket';
+import { PointingSocket } from '@pointing/pointing-socket';
 import { FormsModule } from '@angular/forms';
 import { HomeComponent } from '@pointing/home/home.component';
 import { BrowserModule } from '@angular/platform-browser';
@@ -44,7 +44,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 		BrowserAnimationsModule,
 	],
 	providers: [
-		AppSocket,
+		PointingSocket,
 		PointingApiService,
 	]
 })
