@@ -10,7 +10,7 @@
 			'top-result': isTopResult(result.vote)
 		}">
 		<div class="vote-indicator" [ngClass]="{'my-vote': isMyVote(result.vote)}"></div>
-		{{getVoteText(result.vote)}}
+		<span [innerHtml]="getVoteText(result.vote)"></span>
 	</div>
 	<div class="count" [ngClass]="{'top-result': isTopResult(result.vote)}">
 		<div class="count-item" 

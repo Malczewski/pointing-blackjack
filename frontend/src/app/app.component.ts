@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserStateService } from './common/user-state.service';
 import { Pages } from './common/pages.class';
+import { version } from '../../../package.json';
 
 @Component({
 	selector: 'app-root',
@@ -9,6 +10,8 @@ import { Pages } from './common/pages.class';
 	styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
+
+	public version: string = version;
 
 	constructor(
 		private router: Router,

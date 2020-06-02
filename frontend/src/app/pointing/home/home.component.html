@@ -1,9 +1,16 @@
 <div class="rooms">
 	<div class="rooms-header">Choose your destination</div>
-	<div class="door clickable"
-		*ngFor="let door of doors"
-		(click)="enterRoom(door.id)">
-		<img class="planet" [src]="door.url">
-		<span class="name">{{door.name}}</span>
+	<div class="door"
+		*ngFor="let door of doors">
+		<div class="porthole">
+			<div class="planet">
+				<img [src]="door.url">
+			</div>
+			<div class="glass" *ngIf="!door.glass"></div>
+			<img class="glass" *ngIf="door.glass" [src]="'assets/planets/glass/' + door.glass + '.png'">
+			<img class="porthole-border" 
+				src="assets/planets/porthole.png">
+			<span class="name metal linear clickable" (click)="enterRoom(door.id)">{{door.name}}</span>
+		</div>
 	</div>
 </div>
