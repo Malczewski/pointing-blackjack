@@ -1,6 +1,6 @@
 {
 	"name": "pointing-blackjack",
-	"version": "0.1.2",
+	"version": "0.2.0",
 	"description": "Pointing Poker with blackjack and hookers",
 	"main": "dist/server.js",
 	"dependencies": {

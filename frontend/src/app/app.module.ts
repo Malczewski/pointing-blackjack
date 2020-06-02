@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login/login.component';
 
 import { PointingModule } from 'src/app/pointing/pointing.module';
+import { RetroModule } from '@app/retro/retro.module';
 
 @NgModule({
 	declarations: [
@@ -18,6 +19,7 @@ import { PointingModule } from 'src/app/pointing/pointing.module';
 	AppRoutingModule,
 	FormsModule,
 	PointingModule,
+	RetroModule,
 	],
 	providers: [
 	],
