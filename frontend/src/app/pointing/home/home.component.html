@@ -9,8 +9,7 @@
 			<div class="glass" *ngIf="!door.glass"></div>
 			<img class="glass" *ngIf="door.glass" [src]="'assets/planets/glass/' + door.glass + '.png'">
 			<img class="porthole-border" 
-				src="assets/planets/porthole.png" 
-				[style.transform]="'rotate(' + door.rotation + 'deg)'">
+				src="assets/planets/porthole.png">
 			<span class="name metal linear clickable" (click)="enterRoom(door.id)">{{door.name}}</span>
 		</div>
 	</div>
