@@ -16,7 +16,8 @@
 			"@pointing/*": ["src/app/pointing/*"],
 			"@app/*": ["src/app/*"],
 			"@env/*": ["src/environments/*"]
-		}
+		},
+		"resolveJsonModule": true
 	},
 	"angularCompilerOptions": {
 		"fullTemplateTypeCheck": true,

@@ -53,7 +53,7 @@ describe('RoomResultsComponent', () => {
 		fixture.detectChanges();
 		let elms = fixture.debugElement.queryAll(By.css('.vote:not(.result-header)'));
 		expect(elms.length).toBe(6);
-		expect(elms.map(elm => elm.nativeElement.textContent.trim())).toEqual(['1', '3', '5', '2', 'Skipped', '?']);
+		expect(elms.map(elm => elm.nativeElement.textContent.trim())).toEqual(['1', '3', '5', '2', 'zzz', '?']);
 		expect(elms[0].classes['top-result']).toBeTruthy();
 		expect(elms[1].classes['top-result']).toBeUndefined();
 	});

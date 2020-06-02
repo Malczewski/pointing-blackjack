@@ -84,12 +84,8 @@
 		flex-direction: column;
 
 		.actions {
-			display: flex;
-			flex-direction: row;
-			justify-content: center;
-			
-			.btn {
-				margin-right: 16px;
+			.btn:not(.active) {
+				opacity: 0.5;
 			}
 		}
 	}

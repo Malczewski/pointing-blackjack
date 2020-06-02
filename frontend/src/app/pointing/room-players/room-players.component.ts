@@ -46,17 +46,6 @@ export class RoomPlayersComponent implements OnInit, OnChanges {
 		}
 	}
 
-	private processPlayers(current: Player[], updated: Player[]): void {
-		let updateMap: {[uid: string]: Player} = {};
-		_.each(updated, update => updateMap[update.uid] = update);
-		_.remove(current, player => !updateMap[player.uid]);
-		_.each(current, player => {
-			_.extend(player, updateMap[player.uid]);
-			delete updateMap[player.uid];
-		});
-		[].push.apply(current, _.values(updateMap));
-	}
-
 	private highlightPlayer(uid: string): void {
 		if (this.highlightedPlayers[uid])
 			clearTimeout(this.highlightedPlayers[uid]);
@@ -70,6 +59,8 @@ export class RoomPlayersComponent implements OnInit, OnChanges {
 	}
 
 	makePlayer(): void {
+		if (this.isPlayer())
+			return;
 		this.pointingApi.switchToPlayer();
 		this.userState.setLastRole(PlayerRole.player);
 		//let current = _.remove(this.state.spectators, {uid: this.userState.getUid()})[0];
@@ -77,6 +68,8 @@ export class RoomPlayersComponent implements OnInit, OnChanges {
 	}
 
 	makeSpectator(): void {
+		if (this.isSpectator())
+			return;
 		this.pointingApi.switchToSpectator();
 		this.userState.setLastRole(PlayerRole.spectator);
 		//let current = _.remove(this.state.players, {uid: this.userState.getUid()})[0];
