@@ -9,6 +9,7 @@ import { By } from '@angular/platform-browser';
 import { CirclesToRhumbusesSpinnerModule } from 'angular-epic-spinners';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { Component } from '@angular/core';
+import { noop } from 'rxjs';
 
 @Component({
 	template: `<room-players [state]="state"></room-players>`,
@@ -30,7 +31,7 @@ describe('RoomPlayersComponent', () => {
 			declarations: [TestWrapperComponent, RoomPlayersComponent, ShadePipe],
 			providers: [
 				{provide: PointingApiService, useValue: pointingApiMock},
-				{provide: UserStateService, useValue: {getUid: () => 'my_id'}}
+				{provide: UserStateService, useValue: {getUid: () => 'my_id', setLastRole: noop}}
 			]
 		}).compileComponents();
 	}));
@@ -67,13 +68,13 @@ describe('RoomPlayersComponent', () => {
 	});
 
 	it('should make player', () => {
-		fixture.debugElement.query(By.css('.btn-primary')).nativeElement.click();
+		fixture.debugElement.query(By.css('.fa-user')).nativeElement.click();
 		fixture.detectChanges();
 		expect(pointingApiMock.switchToPlayer).toHaveBeenCalled();
 	});
 
 	it('should make spectator', () => {
-		fixture.debugElement.query(By.css('.btn-info')).nativeElement.click();
+		fixture.debugElement.query(By.css('.fa-eye')).nativeElement.click();
 		fixture.detectChanges();
 		expect(pointingApiMock.switchToSpectator).toHaveBeenCalled();
 	});

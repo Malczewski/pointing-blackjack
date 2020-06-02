@@ -29,7 +29,7 @@ describe('HomeComponent', () => {
 	});
 
 	it('should navigate to page on click', () => {
-		fixture.debugElement.queryAll(By.css('.door'))[2].nativeElement.click();
+		fixture.debugElement.queryAll(By.css('.door .name'))[2].nativeElement.click();
 		expect(routerMock.navigate).toHaveBeenCalledWith(['/space', Planets[2]]);
 	});
 });

@@ -46,17 +46,6 @@ export class RoomPlayersComponent implements OnInit, OnChanges {
 		}
 	}
 
-	private processPlayers(current: Player[], updated: Player[]): void {
-		let updateMap: {[uid: string]: Player} = {};
-		_.each(updated, update => updateMap[update.uid] = update);
-		_.remove(current, player => !updateMap[player.uid]);
-		_.each(current, player => {
-			_.extend(player, updateMap[player.uid]);
-			delete updateMap[player.uid];
-		});
-		[].push.apply(current, _.values(updateMap));
-	}
-
 	private highlightPlayer(uid: string): void {
 		if (this.highlightedPlayers[uid])
 			clearTimeout(this.highlightedPlayers[uid]);
