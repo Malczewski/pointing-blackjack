@@ -1,3 +1,5 @@
+import { UserState } from '@app/common/user-state.service';
+
 export enum RetroType {
 	startStop = 'startStop',
 	goodImprove = 'goodImprove'
@@ -10,7 +12,7 @@ export class RetroConfig {
 	//transparentMode: boolean;
 }
 
-export class RetroPlayer {
+export class RetroPlayer implements UserState {
 	uid: string;
 	name: string;
 }
@@ -23,15 +25,16 @@ export enum MessageType {
 
 export enum MessageSubtype {
 	start = 'start',
+	achievement = 'achievement',
 	slowdown = 'slowdown'
 }
 
 export class RetroMessage {
-	id: string;
+	uid: string;
 	type: MessageType;
-	subtype: MessageSubtype;
+	subtype?: MessageSubtype;
 	message: string;
-	visible: boolean;
+	visible?: boolean;
 	authorUid: string;
 	authorName: string;
 }
@@ -43,9 +46,10 @@ export class RetroState {
 	}
 
 	sessionId: string;
+	startDate: string;
 	config: RetroConfig;
 	viewMode: boolean;
-	players: RetroPlayer;
+	players: RetroPlayer[];
 	messages: RetroMessage[];
 
 	lastMessageUpdate?: string;
