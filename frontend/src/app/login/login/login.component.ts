@@ -4,7 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { UserStateService } from '../../common/user-state.service';
 
 @Component({
-	selector: 'app-login',
+	selector: 'login',
 	template: `
 		<div class="login-container">
 			<form role="form" (ngSubmit)="onSubmit()">
