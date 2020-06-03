@@ -1,1 +1,19 @@
-<p>retro-settings works!</p>
+<mat-accordion>
+	<mat-expansion-panel>
+		<mat-expansion-panel-header>
+			<mat-panel-title>
+				Settings
+			</mat-panel-title>
+		</mat-expansion-panel-header>
+
+		<mat-form-field>
+			<mat-select placeholder="Type" [(ngModel)]="state.config.type" name="type">
+				<mat-option *ngFor="let item of typeOptions" [value]="item.value">
+					{{item.text}}
+				</mat-option>
+			</mat-select>
+		</mat-form-field>
+		<mat-slide-toggle [(ngModel)]="state.config.slowdowns">Slowdowns lane</mat-slide-toggle>
+		<mat-slide-toggle [(ngModel)]="state.config.achievements">Achievements lane</mat-slide-toggle>
+	</mat-expansion-panel>
+</mat-accordion>

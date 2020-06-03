@@ -7,7 +7,7 @@ import { PointingUtils } from '@pointing/pointing-utils.service';
 import { UserStateService } from '@app/common/user-state.service';
 
 @Component({
-	selector: 'app-room',
+	selector: 'room',
 	templateUrl: './room.component.html',
 	styleUrls: ['./room.component.scss']
 })

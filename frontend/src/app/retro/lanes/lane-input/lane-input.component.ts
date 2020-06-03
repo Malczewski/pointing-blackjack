@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-	selector: 'app-lane-input',
+	selector: 'lane-input',
 	templateUrl: './lane-input.component.html',
 	styleUrls: ['./lane-input.component.scss']
 })

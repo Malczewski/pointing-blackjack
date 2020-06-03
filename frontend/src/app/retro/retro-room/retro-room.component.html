@@ -1,6 +1,6 @@
-<div class="left-panel">
-	<retro-settings state="state"></retro-settings>
-	<retro-controls state="state"></retro-controls>
-	<retro-players state="state"></retro-players>
+<div class="left-panel" *ngIf="loaded">
+	<retro-settings [state]="state"></retro-settings>
+	<retro-controls [state]="state"></retro-controls>
+	<retro-players [state]="state" class="flex-fill"></retro-players>
 </div>
-<retro-lanes state="state"></retro-lanes>
+<retro-lanes [state]="state" *ngIf="loaded"></retro-lanes>

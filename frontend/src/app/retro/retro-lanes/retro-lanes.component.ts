@@ -1,11 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { RetroState } from '@app/retro/retro-state.class';
 
 @Component({
-	selector: 'app-retro-lanes',
+	selector: 'retro-lanes',
 	templateUrl: './retro-lanes.component.html',
 	styleUrls: ['./retro-lanes.component.scss']
 })
 export class RetroLanesComponent implements OnInit {
+	@Input() state: RetroState;
 
 	constructor() { }
 

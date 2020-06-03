@@ -1,1 +1,7 @@
-<p>retro-home works!</p>
+<div class="rooms">
+	<div class="rooms-header">Choose your destination</div>
+	<div class="room"
+		*ngFor="let room of rooms">
+		<span class="name metal linear clickable" (click)="enterRoom(room.id)">{{room.id}}</span>
+	</div>
+</div>

@@ -17,7 +17,7 @@ export class RetroApiService {
 	private state: RetroState;
 
 	constructor(
-		private retroSocket: RetroSocket,
+		//private retroSocket: RetroSocket,
 		private userState: UserStateService
 	) {
 		this.eventStream = new Subject();

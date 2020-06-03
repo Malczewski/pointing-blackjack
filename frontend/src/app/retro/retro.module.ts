@@ -16,6 +16,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { RetroLanesComponent } from './retro-lanes/retro-lanes.component';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatSelectModule} from '@angular/material/select';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 
 
@@ -28,7 +34,8 @@ import { RetroLanesComponent } from './retro-lanes/retro-lanes.component';
 		RetroPlayersComponent, 
 		LaneComponent, 
 		LaneMessageComponent, 
-		LaneInputComponent, RetroLanesComponent],
+		LaneInputComponent, 
+		RetroLanesComponent],
 	imports: [
 		CommonModule,
 		TrinityRingsSpinnerModule,
@@ -38,6 +45,12 @@ import { RetroLanesComponent } from './retro-lanes/retro-lanes.component';
 		BrowserModule,
 		BrowserAnimationsModule,
 		NgScrollbarModule,
+		MatExpansionModule,
+		MatSelectModule,
+		MatSlideToggleModule,
+		MatButtonToggleModule,
+		MatTooltipModule,
+		MatCheckboxModule,
 	]
 })
 export class RetroModule { }

@@ -1,0 +1,25 @@
+* { // temp
+	border: 1px solid red;
+}
+
+$left-width: 20%;
+
+.left-panel {
+	position: absolute;
+	left: 0;
+	width: $left-width;
+	top: 0;
+	bottom: 0;
+
+	display: flex;
+	flex-direction: column;
+
+}
+
+retro-lanes {
+	position: absolute;
+	left: $left-width;
+	right: 0;
+	top: 0;
+	bottom: 0;
+}
