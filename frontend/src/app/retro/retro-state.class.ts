@@ -33,7 +33,7 @@ export class RetroMessage {
 	uid: string;
 	type: MessageType;
 	subtype?: MessageSubtype;
-	message: string;
+	text: string;
 	visible?: boolean;
 	authorUid: string;
 	authorName: string;

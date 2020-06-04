@@ -1,5 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { RetroState } from '@app/retro/retro-state.class';
+import { Component, OnInit, Input, Predicate } from '@angular/core';
+import { RetroState, RetroMessage } from '@app/retro/retro-state.class';
+import { LaneDefinition } from '@app/retro/lanes/lane-definitions.class';
+
+
 
 @Component({
 	selector: 'lane',
@@ -7,11 +10,14 @@ import { RetroState } from '@app/retro/retro-state.class';
 	styleUrls: ['./lane.component.scss']
 })
 export class LaneComponent implements OnInit {
-	@Input() state: RetroState;
+	@Input() laneConfig: LaneDefinition;
+	@Input() messages: RetroMessage[];
 
 	constructor() { }
 
 	ngOnInit(): void {
 	}
+
+
 
 }

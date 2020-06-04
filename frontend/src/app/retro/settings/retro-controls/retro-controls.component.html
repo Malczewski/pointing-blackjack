@@ -6,11 +6,11 @@
 			</mat-panel-title>
 		</mat-expansion-panel-header>
 
-		<mat-button-toggle-group [(ngModel)]="state.viewMode">
-			<mat-button-toggle value="false">
+		<mat-button-toggle-group [(ngModel)]="state.viewMode" (ngModelChange)="changeMode()">
+			<mat-button-toggle [value]="false">
 				Write
 			</mat-button-toggle>
-			<mat-button-toggle value="true" >
+			<mat-button-toggle [value]="true" >
 				Read
 			</mat-button-toggle>
 		</mat-button-toggle-group>

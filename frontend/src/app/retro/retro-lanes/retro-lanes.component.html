@@ -1,1 +1,6 @@
-<p>retro-lanes works!</p>
+<div class="d-flex flex-row">
+	<lane *ngFor="let lane of lanes"
+		[laneConfig]="lane"
+		[messages]="getLaneMessages(lane)">
+	</lane>
+</div>

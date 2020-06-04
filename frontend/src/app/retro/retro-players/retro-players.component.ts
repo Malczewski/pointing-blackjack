@@ -1,11 +1,20 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { RetroState, RetroPlayer } from '@app/retro/retro-state.class';
 import { UserStateService } from '@app/common/user-state.service';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
 @Component({
 	selector: 'retro-players',
 	templateUrl: './retro-players.component.html',
-	styleUrls: ['./retro-players.component.scss']
+	styleUrls: ['./retro-players.component.scss'],
+	animations: [
+		trigger('highlight', [
+			state('none', style({'text-shadow': 'none'})),
+			state('active', style({'text-shadow': '0 0 5px #00FF00'})),
+			transition('none => active', animate('0.2s')),
+			transition('active => none', animate('0.5s')),
+		]),
+	],
 })
 export class RetroPlayersComponent implements OnInit, OnChanges {
 	@Input() state: RetroState;

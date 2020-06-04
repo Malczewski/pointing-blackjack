@@ -36,18 +36,18 @@ export class RetroApiService {
 				{uid: '3', name: 'i am cool hacker and will hack this app! tremble, you mortals! HAHAHA'},
 			],
 			messages: [
-				{uid: '1', type: MessageType.good, authorUid: '1', authorName: 'dummy player', message: 'Hello world!'},
-				{uid: '2', type: MessageType.bad, authorUid: '2', authorName: 'heisenberg', message: 'Hey there'},
+				{uid: '1', type: MessageType.good, authorUid: '1', authorName: 'dummy player', text: 'Hello world!'},
+				{uid: '2', type: MessageType.bad, authorUid: '2', authorName: 'heisenberg', text: 'Hey there'},
 				{uid: '3', type: MessageType.good, subtype: MessageSubtype.start, authorUid: '1', authorName: 'dummy player', 
-					message: 'Long long time ago there was a very long night with long sunset and this was very very very bad so blabla'},
+					text: 'Long long time ago there was a very long night with long sunset and this was very very very bad so blabla'},
 				{uid: '4', type: MessageType.bad, subtype: MessageSubtype.slowdown, authorUid: '3', 
-					authorName: 'i am cool hacker and will hack this app! tremble, you mortals! HAHAHA', message: 'just saying'},
-				{uid: '5', type: MessageType.good, authorUid: '2', authorName: 'heisenberg', message: 'Shut up!'},
-				{uid: '6', type: MessageType.bad, subtype: MessageSubtype.slowdown, authorUid: '1', authorName: 'dummy player', message: '*cmon* _guys_ ~wtf?~'},
+					authorName: 'i am cool hacker and will hack this app! tremble, you mortals! HAHAHA', text: 'just saying'},
+				{uid: '5', type: MessageType.good, authorUid: '2', authorName: 'heisenberg', text: 'Shut up!'},
+				{uid: '6', type: MessageType.bad, subtype: MessageSubtype.slowdown, authorUid: '1', authorName: 'dummy player', text: '*cmon* _guys_ ~wtf?~'},
 				{uid: '7', type: MessageType.bad, authorUid: '3', 
-					authorName: 'i am cool hacker and will hack this app! tremble, you mortals! HAHAHA', message: 'dummy'},
+					authorName: 'i am cool hacker and will hack this app! tremble, you mortals! HAHAHA', text: 'dummy'},
 				{uid: '8', type: MessageType.good, subtype: MessageSubtype.achievement, authorUid: '1', authorName: 'dummy player', 
-					message: 'close this world'},
+					text: 'close this world'},
 			]
 		});
 	}

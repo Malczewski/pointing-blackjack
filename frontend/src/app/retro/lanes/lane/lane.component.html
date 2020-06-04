@@ -1,1 +1,6 @@
-<p>lane works!</p>
+<div class="d-flex flex-column">
+	<span>{{laneConfig.name}}</span>
+	<div *ngFor="let message of messages">
+		{{message.text}}
+	</div>
+</div>
