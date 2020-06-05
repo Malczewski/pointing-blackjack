@@ -1,5 +1,5 @@
 import { Predicate } from '@angular/core';
-import { RetroMessage, MessageType, MessageSubtype, RetroConfig, RetroType } from '@app/retro/retro-state.class';
+import { RetroMessage, MessageType, MessageSubtype, RetroConfig } from '@app/retro/retro-state.class';
 import * as _ from 'lodash';
 
 export interface LaneDefinition {
@@ -7,6 +7,8 @@ export interface LaneDefinition {
 	tooltip: string;
 	messagePlaceholder: string;
 	filter: Predicate<RetroMessage>;
+	type: MessageType;
+	subType?: MessageSubtype;
 }
 
 export enum LaneDefinitionType {
@@ -21,10 +23,10 @@ export enum LaneDefinitionType {
 }
 
 export enum LaneFilter {
-	CONTINUE = 'CONTINUE',
+	GOOD = 'GOOD',
 	START = 'START',
 	ACHIEVEMENT = 'ACHIEVEMENT',
-	STOP = 'STOP',
+	BAD = 'BAD',
 	SLOWDOWN = 'SLOWDOWN',
 	ACTION = 'ACTION'
 }
@@ -35,52 +37,63 @@ export class LaneDefinitions {
 		START: {
 			name: 'Start doing',
 			tooltip: '',
-			messagePlaceholder: 'Start TBD'
+			messagePlaceholder: 'Start TBD',
+			type: MessageType.good,
+			subType: MessageSubtype.start,
 		},
 		STOP: {
 			name: 'Stop doing',
 			tooltip: '',
-			messagePlaceholder: 'Stop TBD'
+			messagePlaceholder: 'Stop TBD',
+			type: MessageType.bad,
 		},
 		CONTINUE: {
 			name: 'Continue doing',
 			tooltip: '',
-			messagePlaceholder: 'Continue TBD'
+			messagePlaceholder: 'Continue TBD',
+			type: MessageType.good,
 		},
 		GOOD: {
 			name: 'What was good',
 			tooltip: '',
-			messagePlaceholder: 'Good TBD'
+			messagePlaceholder: 'Good TBD',
+			type: MessageType.good,
 		},
 		IMPROVE: {
 			name: 'What can be improved',
 			tooltip: '',
-			messagePlaceholder: 'Improve TBD'
+			messagePlaceholder: 'Improve TBD',
+			type: MessageType.bad,
 		},
 		SLOWDOWNS: {
 			name: 'What slows me down',
 			tooltip: '',
-			messagePlaceholder: 'Slowdowns TBD'
+			messagePlaceholder: 'Slowdowns TBD',
+			type: MessageType.bad,
+			subType: MessageSubtype.slowdown,
 		},
 		ACHIEVEMENTS: {
 			name: 'Team achievements',
 			tooltip: '',
-			messagePlaceholder: 'Achievement TBD'
+			messagePlaceholder: 'Achievement TBD',
+			type: MessageType.good,
+			subType: MessageSubtype.achievement,
 		},
 		ACTION: {
 			name: 'Action items',
 			tooltip: '',
-			messagePlaceholder: 'Actions TBD'
+			messagePlaceholder: 'Actions TBD',
+			type: MessageType.action,
 		},
 	};
 
 	private static getLaneFilters(type: LaneDefinitionType, config: RetroConfig): LaneFilter[] {
 		switch (type) {
 			case LaneDefinitionType.START: return [LaneFilter.START];
-			case LaneDefinitionType.STOP: return [LaneFilter.STOP].concat(config.slowdowns ? [] : [LaneFilter.SLOWDOWN]);
-			case LaneDefinitionType.CONTINUE: return [LaneFilter.CONTINUE].concat(config.achievements ? [] : [LaneFilter.ACHIEVEMENT]);
-			case LaneDefinitionType.GOOD: return [LaneFilter.CONTINUE, LaneFilter.START].concat(config.achievements ? [] : [LaneFilter.ACHIEVEMENT]);
-			case LaneDefinitionType.IMPROVE: return [LaneFilter.STOP].concat(config.slowdowns ? [] : [LaneFilter.SLOWDOWN]);
+			case LaneDefinitionType.STOP: return [LaneFilter.BAD].concat(config.slowdowns ? [] : [LaneFilter.SLOWDOWN]);
+			case LaneDefinitionType.CONTINUE: return [LaneFilter.GOOD].concat(config.achievements ? [] : [LaneFilter.ACHIEVEMENT]);
+			case LaneDefinitionType.GOOD: return [LaneFilter.GOOD, LaneFilter.START].concat(config.achievements ? [] : [LaneFilter.ACHIEVEMENT]);
+			case LaneDefinitionType.IMPROVE: return [LaneFilter.BAD].concat(config.slowdowns ? [] : [LaneFilter.SLOWDOWN]);
 			case LaneDefinitionType.SLOWDOWNS: return [LaneFilter.SLOWDOWN];
 			case LaneDefinitionType.ACHIEVEMENTS: return [LaneFilter.ACHIEVEMENT];
 			case LaneDefinitionType.ACTION: return [LaneFilter.ACTION]; 
@@ -98,10 +111,10 @@ export class LaneDefinitions {
 
 export class LanePredicates {
 	private static mapping: {[key in keyof typeof LaneFilter]: [MessageType, MessageSubtype]} = {
-		CONTINUE: [MessageType.good, null],
+		GOOD: [MessageType.good, null],
 		START: [MessageType.good, MessageSubtype.start],
 		ACHIEVEMENT: [MessageType.good, MessageSubtype.achievement],
-		STOP: [MessageType.bad, null],
+		BAD: [MessageType.bad, null],
 		SLOWDOWN: [MessageType.bad, MessageSubtype.slowdown],
 		ACTION: [MessageType.action, null],
 	};

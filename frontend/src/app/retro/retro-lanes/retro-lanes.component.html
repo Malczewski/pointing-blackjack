@@ -1,6 +1,7 @@
 <div class="d-flex flex-row">
 	<lane *ngFor="let lane of lanes"
 		[laneConfig]="lane"
+		[style.width]="(100 / lanes.length) + '%'"
 		[messages]="getLaneMessages(lane)">
 	</lane>
 </div>

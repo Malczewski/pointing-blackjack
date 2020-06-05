@@ -1,6 +1,14 @@
 <div class="d-flex flex-column">
 	<span>{{laneConfig.name}}</span>
-	<div *ngFor="let message of messages">
-		{{message.text}}
+	<div *ngFor="let message of messages" [innerHTML]="message.text">
+	</div>
+	<div class="d-flex flex-column">
+		<mat-form-field>
+			<mat-label>{{laneConfig.name}}</mat-label>
+			<textarea matInput [placeholder]="laneConfig.messagePlaceholder" [(ngModel)]="newMessage.text"></textarea>
+		</mat-form-field>
+		<button mat-icon-button (click)="addMessage()" [disabled]="!newMessage.text.trim().length">
+			<mat-icon>add_circle</mat-icon>
+		</button>
 	</div>
 </div>

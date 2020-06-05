@@ -22,6 +22,9 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatInputModule} from '@angular/material/input';
+import {MatButtonModule} from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
 
 
 
@@ -51,6 +54,9 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 		MatButtonToggleModule,
 		MatTooltipModule,
 		MatCheckboxModule,
+		MatInputModule,
+		MatButtonModule,
+		MatIconModule,
 	]
 })
 export class RetroModule { }
