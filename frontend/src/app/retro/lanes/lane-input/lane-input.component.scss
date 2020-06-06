@@ -1,0 +1,18 @@
+:host {
+	position: relative;
+}
+
+::ng-deep {
+	.force-auto-width .mat-form-field-infix {
+		width: auto;
+	}
+}
+button {
+	margin: 10px 0;
+	padding: 0;
+	min-width: 30px;
+	width: 30px;
+}
+resizeable-textarea {
+	margin-left: 5px;
+} 

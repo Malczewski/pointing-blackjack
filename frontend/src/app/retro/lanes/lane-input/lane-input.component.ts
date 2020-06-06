@@ -37,6 +37,8 @@ export class LaneInputComponent implements OnInit {
 	}
 
 	addMessage = (): void => {
+		if (!this.newMessage.text.trim())
+			return;
 		this.retroApi.saveMessage(this.newMessage);
 		this.resetNewMessage();
 	}

@@ -1,0 +1,45 @@
+
+.textarea-container {
+	display: grid;
+	margin-bottom: 10px;
+	> * {
+		grid-column: 1;
+		grid-row: 1;
+	}
+	.autosize-text {
+		white-space: pre-line;
+		z-index: -1;
+		overflow: hidden;
+		visibility: hidden;
+		word-wrap: break-word;
+
+		padding: 0.4375em 0;
+		border-top: 0.84375em solid transparent;
+	}
+	textarea {
+		resize: none;
+		height: 100%;
+		line-height: 1.5;
+		padding: 0;
+		margin: 0;
+	}
+}
+
+::ng-deep {
+	mat-form-field.force-height {
+		.mat-form-field-wrapper {
+			height: 100%;
+			padding: 0;
+			.mat-form-field-flex {
+				height: 100%;
+
+				.mat-form-field-infix {
+					height: 100%;
+				}
+			}
+			.mat-form-field-underline {
+				bottom: 0;
+			}
+		}
+	}
+}

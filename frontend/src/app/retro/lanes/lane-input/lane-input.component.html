@@ -1,9 +1,15 @@
-<div class="d-flex flex-column">
-	<mat-form-field>
-		<mat-label>{{laneConfig.name}}</mat-label>
-		<textarea matInput [placeholder]="laneConfig.messagePlaceholder" [(ngModel)]="newMessage.text"></textarea>
-	</mat-form-field>
-	<button mat-icon-button (click)="addMessage()" [disabled]="!newMessage.text.trim().length">
-		<mat-icon>add_circle</mat-icon>
+<div class="d-flex flex-row">
+	<resizeable-textarea
+		class="flex-fill force-auto-width"
+		[label]="laneConfig.name"
+		[placeholder]="laneConfig.messagePlaceholder"
+		[(ngModel)]="newMessage.text"
+		(save)="addMessage()"
+		(cancel)="newMessage.text = ''">
+	</resizeable-textarea>
+	<button mat-button
+		(click)="addMessage()" 
+		[disabled]="!newMessage.text.trim().length">
+		<mat-icon>add</mat-icon>
 	</button>
 </div>

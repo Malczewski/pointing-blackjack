@@ -37,7 +37,7 @@ export class LaneDefinitions {
 		START: {
 			name: 'Start doing',
 			tooltip: '',
-			messagePlaceholder: 'Start TBD',
+			messagePlaceholder: 'Start TBD\nhello',
 			type: MessageType.bad,
 			subType: MessageSubtype.start,
 		},

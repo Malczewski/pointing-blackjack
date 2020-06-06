@@ -26,7 +26,8 @@ import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatCardModule} from '@angular/material/card';
-import { MarkdownModule } from 'ngx-markdown';
+import { MarkdownModule, MarkedOptions } from 'ngx-markdown';
+import { ResizeableTextareaComponent } from './lanes/resizeable-textarea/resizeable-textarea.component';
 
 
 @NgModule({
@@ -39,7 +40,7 @@ import { MarkdownModule } from 'ngx-markdown';
 		LaneComponent, 
 		LaneMessageComponent, 
 		LaneInputComponent, 
-		RetroLanesComponent],
+		RetroLanesComponent, ResizeableTextareaComponent],
 	imports: [
 		CommonModule,
 		TrinityRingsSpinnerModule,
@@ -59,7 +60,15 @@ import { MarkdownModule } from 'ngx-markdown';
 		MatButtonModule,
 		MatIconModule,
 		MatCardModule,
-		MarkdownModule.forRoot(),
+		MarkdownModule.forRoot({
+			markedOptions: {
+				provide: MarkedOptions,
+				useValue: {
+					gfm: true,
+					breaks: true,
+				},
+			}
+		}),
 	]
 })
 export class RetroModule { }

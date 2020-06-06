@@ -1,0 +1,12 @@
+<div class="textarea-container">
+	<mat-form-field class="force-height">
+		<mat-label>{{label}}</mat-label>
+		<textarea matInput 
+			(blur)="onBlur($event)"
+			(keydown)="keydownTrigger($event)"
+			[placeholder]="placeholder" 
+			[(ngModel)]="text"
+			(ngModelChange)="propagateChange($event)"></textarea>
+	</mat-form-field>
+	<div contenteditable="false" class="autosize-text">{{text}}<br/></div>
+</div>

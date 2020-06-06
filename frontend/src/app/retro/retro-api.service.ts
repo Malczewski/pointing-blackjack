@@ -111,7 +111,7 @@ export class RetroApiService {
 
 	deleteMessage(messageUid: string): void {
 		//this.retroSocket.emit('message:delete', messageUid);
-		this.state.messages = _.remove(this.state.messages, msg => msg.uid === messageUid);
+		this.state.messages = _.remove(this.state.messages, msg => msg.uid !== messageUid);
 		this.fireChange();
 	}
 

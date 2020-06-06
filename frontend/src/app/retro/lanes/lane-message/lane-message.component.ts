@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { RetroMessage, MessageType } from '@app/retro/retro-state.class';
 import { UserStateService } from '@app/common/user-state.service';
 import { RetroApiService } from '@app/retro/retro-api.service';
@@ -15,12 +15,15 @@ export class LaneMessageComponent implements OnInit {
 	@Input() viewMode: boolean;
 
 	randomMessage: string;
-
+	
+	tempMessage: string;
 	editing: boolean;
 
 	constructor(
 		private userState: UserStateService,
-		private retroApi: RetroApiService) { }
+		private retroApi: RetroApiService,
+		private element: ElementRef<HTMLElement>,
+	) { }
 
 	ngOnInit(): void {
 		let words: string[][] = [
@@ -64,5 +67,25 @@ export class LaneMessageComponent implements OnInit {
 			return;
 		this.retroApi.showMessage(this.message.uid);
 	}
+
+	enterEdit = (): void => {
+		this.editing = true;
+		this.tempMessage = this.message.text;
+		setTimeout(() => {
+			let input = this.element.nativeElement.querySelector('textarea') as HTMLElement;
+			input.focus();
+		});
+	}
+
+	updateMessage = (): void => {
+		if (!!this.tempMessage.trim()) {
+			this.message.text = this.tempMessage;
+			this.retroApi.saveMessage(this.message);
+		} else {
+			this.retroApi.deleteMessage(this.message.uid);
+		}
+		this.editing = false;
+	}
+
 
 }
