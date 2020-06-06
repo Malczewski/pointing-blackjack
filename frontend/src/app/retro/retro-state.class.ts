@@ -34,9 +34,10 @@ export class RetroMessage {
 	type: MessageType;
 	subtype?: MessageSubtype;
 	text: string;
-	visible?: boolean;
+	opened?: boolean;
 	authorUid: string;
 	authorName: string;
+	likes?: string[];
 }
 
 export class RetroState {
@@ -54,10 +55,6 @@ export class RetroState {
 
 	lastMessageUpdate?: string;
 	lastPlayerUpdate?: string;
-
-	isMessageVisible(message: RetroMessage): boolean {
-		return message.visible && this.viewMode /*  ||this.config.transparentMode*/;
-	}
 
 	isViewMode(): boolean {
 		return this.viewMode/*  || this.config.transparentMode */;

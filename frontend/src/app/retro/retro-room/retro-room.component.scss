@@ -1,7 +1,3 @@
-* { // temp
-	border: 1px solid red;
-}
-
 $left-width: 20%;
 
 .left-panel {
@@ -14,6 +10,11 @@ $left-width: 20%;
 	display: flex;
 	flex-direction: column;
 
+	padding: 10px;
+
+	>* {
+		margin-bottom: 10px;
+	}
 }
 
 retro-lanes {
@@ -22,4 +23,5 @@ retro-lanes {
 	right: 0;
 	top: 0;
 	bottom: 0;
+	padding: 10px;
 }

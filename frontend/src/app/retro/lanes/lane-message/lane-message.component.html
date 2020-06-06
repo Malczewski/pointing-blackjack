@@ -1,1 +1,46 @@
-<p>lane-message works!</p>
+<div class="message-container" [class.view-mode]="viewMode">
+	<ng-container *ngIf="!editing" [ngSwitch]="message.opened || isMyMessage()">
+		<div *ngSwitchCase="true" class="visible-message">
+			<markdown [data]="message.text"></markdown>
+			<div class="message-footer d-flex flex-row justify-content-between">
+				<div class="actions d-flex flex-nowrap align-self-center">
+					<mat-icon *ngIf="message.opened"
+						[inline]="true" 
+						[class.clickable]="!isMyMessage()"
+						(click)="like()">
+						thumb_up
+					</mat-icon>
+					<mat-icon *ngIf="message.opened"
+						[inline]="true" 
+						class="clickable"
+						(click)="createAction()">
+						assignment_turned_in
+					</mat-icon>
+				</div>
+				<div class="author align-self-center" [class.text-primary]="isMyMessage()">{{message.authorName}}</div>
+			</div>
+			<div class="overlay" *ngIf="!message.opened">
+				<mat-icon [inline]="true" 
+					[class.clickable]="viewMode"
+					(click)="showMessage()">visibility</mat-icon>
+			</div>
+			<div class="edit-indicator"></div>
+		</div>
+		<div *ngSwitchDefault class="message-hidden d-flex flex-column">
+			<div class="bullshit-message haha">{{randomMessage}}</div>
+			<div class="message-footer d-flex flex-row justify-content-end">
+				<div class="author align-self-center" [class.text-primary]="isMyMessage()">{{message.authorName}}</div>
+			</div>
+			<div class="overlay">
+				<mat-icon [inline]="true"
+					[class.clickable]="viewMode"
+					(click)="showMessage()">
+					visibility_off
+				</mat-icon>
+			</div>
+		</div>
+	</ng-container>
+	<div *ngIf="editing">
+		<textarea matInput placeholder="TODO" [(ngModel)]="message.text"></textarea>
+	</div>
+</div>

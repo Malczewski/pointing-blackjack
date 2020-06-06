@@ -1,7 +1,16 @@
-<div class="d-flex flex-row">
-	<lane *ngFor="let lane of lanes"
-		[laneConfig]="lane"
-		[style.width]="(100 / lanes.length) + '%'"
-		[messages]="getLaneMessages(lane)">
-	</lane>
+<div class="d-flex flex-column">
+	<div class="lane-headers d-flex flex-row">
+		<span *ngFor="let lane of lanes"
+			[style.width]="(100 / lanes.length) + '%'">
+			{{lane.name}}
+		</span>
+	</div>
+	<div class="content d-flex flex-row">
+		<lane *ngFor="let lane of lanes"
+			[laneConfig]="lane"
+			[style.width]="(100 / lanes.length) + '%'"
+			[messages]="getLaneMessages(lane)"
+			[viewMode]="viewMode">
+		</lane>
+	</div>
 </div>

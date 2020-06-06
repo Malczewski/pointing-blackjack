@@ -33,12 +33,12 @@ export class RetroApiService {
 			players: [
 				{uid: '1', name: 'dummy player'},
 				{uid: '2', name: 'heisenberg'},
-				{uid: '3', name: 'i am cool hacker and will hack this app! tremble, you mortals! HAHAHA'},
+				{uid: '3', name: 'i am cool hacker and will hack this app! tremble, you mortals! HAHAHAaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'},
 			],
 			messages: [
 				{uid: '1', type: MessageType.good, authorUid: '1', authorName: 'dummy player', text: 'Hello world!'},
 				{uid: '2', type: MessageType.bad, authorUid: '2', authorName: 'heisenberg', text: 'Hey there'},
-				{uid: '3', type: MessageType.good, subtype: MessageSubtype.start, authorUid: '1', authorName: 'dummy player', 
+				{uid: '3', type: MessageType.bad, subtype: MessageSubtype.start, authorUid: '1', authorName: 'dummy player', 
 					text: 'Long long time ago there was a very long night with long sunset and this was very very very bad so blabla'},
 				{uid: '4', type: MessageType.bad, subtype: MessageSubtype.slowdown, authorUid: '3', 
 					authorName: 'i am cool hacker and will hack this app! tremble, you mortals! HAHAHA', text: 'just saying'},
@@ -94,7 +94,7 @@ export class RetroApiService {
 
 	showMessage(messageUid: string): void {
 		//this.retroSocket.emit('message:show', messageUid);
-		_.find(this.state.messages, msg => msg.uid === messageUid).visible = true;
+		_.find(this.state.messages, msg => msg.uid === messageUid).opened = true;
 		this.fireChange();
 	}
 
@@ -112,6 +112,19 @@ export class RetroApiService {
 	deleteMessage(messageUid: string): void {
 		//this.retroSocket.emit('message:delete', messageUid);
 		this.state.messages = _.remove(this.state.messages, msg => msg.uid === messageUid);
+		this.fireChange();
+	}
+
+	likeMessage(messageUid: string): void {
+		//this.retroSocket.emit('message:delete', messageUid);
+		let message = _.find(this.state.messages, msg => msg.uid === messageUid);
+		if (!message)
+			return;
+		message.likes = message.likes || [];
+		let playerUid = this.userState.getUid();
+		if (_.has(message.likes, playerUid))
+			message.likes.splice(message.likes.indexOf(playerUid), 1);
+		else message.likes.push(playerUid); 
 		this.fireChange();
 	}
 }

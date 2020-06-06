@@ -58,3 +58,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 *::-webkit-scrollbar-thumb {
 	background: #666; 
 }
+
+markdown>p {
+	margin-bottom: 5px;
+}

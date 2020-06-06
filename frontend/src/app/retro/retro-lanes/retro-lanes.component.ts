@@ -14,6 +14,7 @@ export class RetroLanesComponent implements OnInit, OnChanges {
 	private lastState: Pick<RetroState, 'config' | 'viewMode'>;
 
 	lanes: LaneDefinition[];
+	viewMode: boolean;
 
 	constructor() { }
 
@@ -45,7 +46,7 @@ export class RetroLanesComponent implements OnInit, OnChanges {
 		if (this.state.isViewMode())
 			types.push(LaneDefinitionType.ACTION);
 		this.lanes = _.map(types, type => LaneDefinitions.getDefinition(type, this.state.config));
-
+		this.viewMode = this.state.isViewMode();
 		this.lastState = _.cloneDeep(_.pick(this.state, 'config', 'viewMode'));
 	}
 

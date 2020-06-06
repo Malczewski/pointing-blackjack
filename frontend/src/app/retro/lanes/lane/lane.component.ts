@@ -16,37 +16,15 @@ import { UserStateService } from '@app/common/user-state.service';
 export class LaneComponent implements OnInit {
 	@Input() laneConfig: LaneDefinition;
 	@Input() messages: RetroMessage[];
-
-	newMessage: RetroMessage;
+	@Input() viewMode: boolean;
 
 	constructor(
-		private retroApi: RetroApiService,
-		private userStateService: UserStateService,
+		//private retroApi: RetroApiService,
+		//private userStateService: UserStateService,
 		) { }
 
 	ngOnInit(): void {
-		this.resetNewMessage();
 	}
-
-	private resetNewMessage(): void {
-		this.newMessage = {
-			uid: RandomUtils.generateUID(),
-			authorName: this.userStateService.getUser().name,
-			authorUid: this.userStateService.getUid(),
-			type: this.laneConfig.type,
-			subtype: this.laneConfig.subType,
-			visible: false,
-			text: ''
-		};
-	}
-
-	addMessage = (): void => {
-		this.newMessage.text = this.newMessage.text.replace('\n', '<br/>');
-		this.retroApi.saveMessage(this.newMessage);
-		this.resetNewMessage();
-	}
-		
-
 
 
 }

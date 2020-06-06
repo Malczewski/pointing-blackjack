@@ -38,7 +38,7 @@ export class LaneDefinitions {
 			name: 'Start doing',
 			tooltip: '',
 			messagePlaceholder: 'Start TBD',
-			type: MessageType.good,
+			type: MessageType.bad,
 			subType: MessageSubtype.start,
 		},
 		STOP: {
@@ -92,8 +92,8 @@ export class LaneDefinitions {
 			case LaneDefinitionType.START: return [LaneFilter.START];
 			case LaneDefinitionType.STOP: return [LaneFilter.BAD].concat(config.slowdowns ? [] : [LaneFilter.SLOWDOWN]);
 			case LaneDefinitionType.CONTINUE: return [LaneFilter.GOOD].concat(config.achievements ? [] : [LaneFilter.ACHIEVEMENT]);
-			case LaneDefinitionType.GOOD: return [LaneFilter.GOOD, LaneFilter.START].concat(config.achievements ? [] : [LaneFilter.ACHIEVEMENT]);
-			case LaneDefinitionType.IMPROVE: return [LaneFilter.BAD].concat(config.slowdowns ? [] : [LaneFilter.SLOWDOWN]);
+			case LaneDefinitionType.GOOD: return [LaneFilter.GOOD].concat(config.achievements ? [] : [LaneFilter.ACHIEVEMENT]);
+			case LaneDefinitionType.IMPROVE: return [LaneFilter.BAD, LaneFilter.START].concat(config.slowdowns ? [] : [LaneFilter.SLOWDOWN]);
 			case LaneDefinitionType.SLOWDOWNS: return [LaneFilter.SLOWDOWN];
 			case LaneDefinitionType.ACHIEVEMENTS: return [LaneFilter.ACHIEVEMENT];
 			case LaneDefinitionType.ACTION: return [LaneFilter.ACTION]; 
@@ -112,7 +112,7 @@ export class LaneDefinitions {
 export class LanePredicates {
 	private static mapping: {[key in keyof typeof LaneFilter]: [MessageType, MessageSubtype]} = {
 		GOOD: [MessageType.good, null],
-		START: [MessageType.good, MessageSubtype.start],
+		START: [MessageType.bad, MessageSubtype.start],
 		ACHIEVEMENT: [MessageType.good, MessageSubtype.achievement],
 		BAD: [MessageType.bad, null],
 		SLOWDOWN: [MessageType.bad, MessageSubtype.slowdown],
