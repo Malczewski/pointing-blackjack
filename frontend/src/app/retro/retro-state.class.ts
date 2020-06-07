@@ -2,7 +2,8 @@ import { UserState } from '@app/common/user-state.service';
 
 export enum RetroType {
 	startStop = 'startStop',
-	goodImprove = 'goodImprove'
+	goodImprove = 'goodImprove',
+	llll = 'llll'
 }
 
 export class RetroConfig {

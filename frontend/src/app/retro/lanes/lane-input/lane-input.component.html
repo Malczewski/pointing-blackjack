@@ -10,6 +10,7 @@
 	</resizeable-textarea>
 	<button mat-button
 		(click)="addMessage()" 
+		matTooltip="Submit"
 		[disabled]="!newMessage.text.trim().length">
 		<i class="fa fa-plus"></i>
 	</button>

@@ -37,52 +37,66 @@ export class LaneDefinitions {
 		START: {
 			name: 'Start doing',
 			inputLabel: 'Start doing',
-			messagePlaceholder: 'Start TBD\nhello',
+			messagePlaceholder: `Activities that may:
+ - improve processes
+ - reduce waste
+ - have a positive impact on the way the team operates`,
 			type: MessageType.evil,
 			subType: MessageSubtype.start,
 		},
 		STOP: {
 			name: 'Stop doing',
 			inputLabel: 'Stop doing',
-			messagePlaceholder: 'Stop TBD',
+			messagePlaceholder: `Activities that:
+ - are inefficient
+ - waste time or resources
+ - have a negative impact on the way people feel or the way things work`,
 			type: MessageType.evil,
 		},
 		CONTINUE: {
 			name: 'Continue doing',
 			inputLabel: 'Continue doing',
-			messagePlaceholder: 'Continue TBD',
+			messagePlaceholder: `Activities the team has tried and were successful but are not yet part of common practice.
+Once the activities are part of the way things are done, add them to procedure manuals and checklists and remove from this list.`,
 			type: MessageType.good,
 		},
 		GOOD: {
-			name: 'What was good',
-			inputLabel: 'What was good',
-			messagePlaceholder: 'Good TBD',
+			name: 'What went well',
+			inputLabel: 'What went well?',
+			messagePlaceholder: `What were you pleased with?
+What produced good outcomes?
+What tools and techniques worked well?
+What things should we continue to do?
+Any praise or thanks you want to give to team members?`,
 			type: MessageType.good,
 		},
 		IMPROVE: {
 			name: 'What can be improved',
-			inputLabel: 'What can be improved',
-			messagePlaceholder: 'Improve TBD',
+			inputLabel: 'What could’ve gone better?',
+			messagePlaceholder: `What went wrong?
+What is not delivering value?
+What areas do you see for improvement?
+What didn’t go as expected?`,
 			type: MessageType.evil,
 		},
 		SLOWDOWNS: {
 			name: 'What slows me down',
 			inputLabel: 'What slows me down',
-			messagePlaceholder: 'Slowdowns TBD',
+			messagePlaceholder: `Identify aspects of the project that slowed you down.`,
 			type: MessageType.evil,
 			subType: MessageSubtype.slowdown,
 		},
 		ACHIEVEMENTS: {
 			name: 'Team achievements',
 			inputLabel: 'Team achievements',
-			messagePlaceholder: 'Achievement TBD',
+			messagePlaceholder: `Call out significant events: releases, victories, discoveries, moments of great teamwork, or anything else that had an impact on your work`,
 			type: MessageType.good,
 			subType: MessageSubtype.achievement,
 		},
 		ACTION: {
 			name: 'Action items',
 			inputLabel: 'Action items',
-			messagePlaceholder: 'Actions TBD',
+			messagePlaceholder: 'Add new action item or create one from any previous item',
 			type: MessageType.action,
 		},
 	};

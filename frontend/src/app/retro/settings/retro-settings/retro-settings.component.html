@@ -8,17 +8,25 @@
 
 		<mat-form-field>
 			<mat-select placeholder="Type" [(ngModel)]="state.config.type" (ngModelChange)="changeConfig('type')" name="type">
-				<mat-option *ngFor="let item of typeOptions" [value]="item.value">
+				<mat-option *ngFor="let item of typeOptions" [value]="item.value"
+					[matTooltip]="item.tooltip"
+					matTooltipClass="multiline-tooltip"
+					matTooltipShowDelay="300"
+					[disabled]="item.disabled">
 					{{item.text}}
 				</mat-option>
 			</mat-select>
 		</mat-form-field>
 		<mat-slide-toggle [(ngModel)]="state.config.slowdowns" 
-			(ngModelChange)="changeConfig('slowdowns')">
+			(ngModelChange)="changeConfig('slowdowns')"
+			matTooltip="Show a column for things which slow people down">
 			Slowdowns lane
 		</mat-slide-toggle>
 		<mat-slide-toggle [(ngModel)]="state.config.achievements" 
-			(ngModelChange)="changeConfig('achievements')">
+			(ngModelChange)="changeConfig('achievements')"
+			matTooltip="Show a column for significant events: releases, victories, discoveries, moments of great teamwork, or anything else that had an impact on the work.
+			Recommended to use this once in several months"
+			matTooltipClass="multiline-tooltip">
 			Achievements lane
 		</mat-slide-toggle>
 	</mat-expansion-panel>

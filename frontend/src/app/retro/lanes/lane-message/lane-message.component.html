@@ -16,7 +16,7 @@
 						(click)="toggleLike()">
 					</i>
 					<i class="fa fa-check-square-o clickable"
-						matTooltip="Convert to Action Item"
+						matTooltip="Create an Action Item"
 						(click)="createAction()">
 					</i>
 				</div>
@@ -25,7 +25,10 @@
 					{{message.authorName}}
 				</div>
 			</div>
-			<div class="overlay hidden-mask" *ngIf="!message.opened">
+			<div class="overlay hidden-mask" 
+				*ngIf="!message.opened"
+				[matTooltip]="viewMode ? 'Show' : ''"
+				matTooltipShowDelay="500">
 				<i class="fa fa-eye"
 					[class.clickable]="viewMode"
 					(click)="showMessage()"></i>
@@ -33,7 +36,8 @@
 			<div class="overlay edit-indicator"
 				*ngIf="isMyMessage()"
 				(click)="enterEdit()"
-				matTooltip="Click to edit">
+				matTooltip="Click to edit"
+				matTooltipShowDelay="500">
 				<!-- <i [inline]="true" class="text-right">create</i> -->
 			</div>
 		</div>
@@ -45,7 +49,9 @@
 					{{message.authorName}}
 				</div>
 			</div>
-			<div class="overlay hidden-mask">
+			<div class="overlay hidden-mask"
+				[matTooltip]="viewMode ? 'Show' : ''"
+				matTooltipShowDelay="500">
 				<i class="fa fa-eye-slash"
 					[class.clickable]="viewMode"
 					(click)="showMessage()">

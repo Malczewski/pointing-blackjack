@@ -3,5 +3,5 @@
 		[message]="message"
 		[viewMode]="viewMode">
 	</lane-message>
-	<lane-input *ngIf="!viewMode" [laneConfig]="laneConfig"></lane-input>
+	<lane-input *ngIf="!viewMode || isActionLane()" [laneConfig]="laneConfig"></lane-input>
 </div>

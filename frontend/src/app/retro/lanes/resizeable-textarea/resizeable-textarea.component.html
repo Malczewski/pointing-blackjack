@@ -6,9 +6,9 @@
 			(blur)="onBlur()"
 			(focus)="onFocus()"
 			(keydown)="keydownTrigger($event)"
-			[placeholder]="placeholder" 
+			[placeholder]="focused && placeholder || ''" 
 			[(ngModel)]="text"
 			(ngModelChange)="propagateChange($event)"></textarea>
 	</mat-form-field>
-	<div contenteditable="false" class="autosize-text">{{text}}<br/></div>
+	<div contenteditable="false" class="autosize-text">{{text || (focused && placeholder)}}<br/></div>
 </div>

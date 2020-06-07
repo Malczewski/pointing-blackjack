@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { LaneDefinition } from '@app/retro/lanes/lane-definitions.class';
 import { RandomUtils } from '@app/common/random-utils.class';
-import { RetroMessage } from '@app/retro/retro-state.class';
+import { RetroMessage, MessageType } from '@app/retro/retro-state.class';
 import { RetroApiService } from '@app/retro/retro-api.service';
 import { UserStateService } from '@app/common/user-state.service';
 
@@ -31,7 +31,7 @@ export class LaneInputComponent implements OnInit {
 			authorUid: this.userStateService.getUid(),
 			type: this.laneConfig.type,
 			subtype: this.laneConfig.subType,
-			opened: false,
+			opened: this.laneConfig.type === MessageType.action,
 			text: ''
 		};
 	}
