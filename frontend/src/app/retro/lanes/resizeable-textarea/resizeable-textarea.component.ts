@@ -16,6 +16,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 export class ResizeableTextareaComponent implements OnInit, ControlValueAccessor {
 
 	@Input() label: string;
+	@Input() hint: string;
 	@Input() placeholder: string;
 	@Output() blurHandler = new EventEmitter();
 	@Output() save = new EventEmitter();
@@ -23,6 +24,8 @@ export class ResizeableTextareaComponent implements OnInit, ControlValueAccessor
 
 	text: string;
 	propagateChange = (value: string) => {};
+
+	focused: boolean;
 	
 	constructor() { }
 
@@ -50,8 +53,12 @@ export class ResizeableTextareaComponent implements OnInit, ControlValueAccessor
 		}
 	}
 
-	onBlur = ($event): void => {
-		console.log($event);
+	onBlur = (): void => {
+		this.focused = false;
 		this.blurHandler.emit(null);
+	}
+
+	onFocus = (): void => {
+		this.focused = true;
 	}
 }

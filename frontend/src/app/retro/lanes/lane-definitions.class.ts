@@ -4,9 +4,9 @@ import * as _ from 'lodash';
 
 export interface LaneDefinition {
 	name: string;
-	tooltip: string;
+	inputLabel: string;
 	messagePlaceholder: string;
-	filter: Predicate<RetroMessage>;
+	filters: LaneFilter[];
 	type: MessageType;
 	subType?: MessageSubtype;
 }
@@ -33,55 +33,55 @@ export enum LaneFilter {
 
 
 export class LaneDefinitions {
-	private static definitions: {[key in keyof typeof LaneDefinitionType]: Omit<LaneDefinition, 'filter'>} = {
+	private static definitions: {[key in keyof typeof LaneDefinitionType]: Omit<LaneDefinition, 'filters'>} = {
 		START: {
 			name: 'Start doing',
-			tooltip: '',
+			inputLabel: 'Start doing',
 			messagePlaceholder: 'Start TBD\nhello',
-			type: MessageType.bad,
+			type: MessageType.evil,
 			subType: MessageSubtype.start,
 		},
 		STOP: {
 			name: 'Stop doing',
-			tooltip: '',
+			inputLabel: 'Stop doing',
 			messagePlaceholder: 'Stop TBD',
-			type: MessageType.bad,
+			type: MessageType.evil,
 		},
 		CONTINUE: {
 			name: 'Continue doing',
-			tooltip: '',
+			inputLabel: 'Continue doing',
 			messagePlaceholder: 'Continue TBD',
 			type: MessageType.good,
 		},
 		GOOD: {
 			name: 'What was good',
-			tooltip: '',
+			inputLabel: 'What was good',
 			messagePlaceholder: 'Good TBD',
 			type: MessageType.good,
 		},
 		IMPROVE: {
 			name: 'What can be improved',
-			tooltip: '',
+			inputLabel: 'What can be improved',
 			messagePlaceholder: 'Improve TBD',
-			type: MessageType.bad,
+			type: MessageType.evil,
 		},
 		SLOWDOWNS: {
 			name: 'What slows me down',
-			tooltip: '',
+			inputLabel: 'What slows me down',
 			messagePlaceholder: 'Slowdowns TBD',
-			type: MessageType.bad,
+			type: MessageType.evil,
 			subType: MessageSubtype.slowdown,
 		},
 		ACHIEVEMENTS: {
 			name: 'Team achievements',
-			tooltip: '',
+			inputLabel: 'Team achievements',
 			messagePlaceholder: 'Achievement TBD',
 			type: MessageType.good,
 			subType: MessageSubtype.achievement,
 		},
 		ACTION: {
 			name: 'Action items',
-			tooltip: '',
+			inputLabel: 'Action items',
 			messagePlaceholder: 'Actions TBD',
 			type: MessageType.action,
 		},
@@ -100,8 +100,8 @@ export class LaneDefinitions {
 		}
 	}
 
-	private static getFilter(type: LaneDefinitionType, config: RetroConfig): {filter: Predicate<RetroMessage>} {
-		return {filter: LanePredicates.getPredicate(LaneDefinitions.getLaneFilters(type, config))};
+	private static getFilter(type: LaneDefinitionType, config: RetroConfig): {filters: LaneFilter[]} {
+		return {filters: LaneDefinitions.getLaneFilters(type, config)};
 	}
 
 	static getDefinition(type: LaneDefinitionType, config: RetroConfig): LaneDefinition {
@@ -112,17 +112,18 @@ export class LaneDefinitions {
 export class LanePredicates {
 	private static mapping: {[key in keyof typeof LaneFilter]: [MessageType, MessageSubtype]} = {
 		GOOD: [MessageType.good, null],
-		START: [MessageType.bad, MessageSubtype.start],
+		START: [MessageType.evil, MessageSubtype.start],
 		ACHIEVEMENT: [MessageType.good, MessageSubtype.achievement],
-		BAD: [MessageType.bad, null],
-		SLOWDOWN: [MessageType.bad, MessageSubtype.slowdown],
+		BAD: [MessageType.evil, null],
+		SLOWDOWN: [MessageType.evil, MessageSubtype.slowdown],
 		ACTION: [MessageType.action, null],
 	};
 
-	static getPredicate(filters: LaneFilter[]): Predicate<RetroMessage> {
-		let types = _.map(filters, filter => this.mapping[filter]);
-		return (message) => _.some(types, typeDef => 
-			this.matches(message.type, typeDef[0]) && this.matches(message.subtype, typeDef[1]));
+	static matchFilters(message: RetroMessage, filters: LaneFilter[]): boolean {
+		return _.some(filters, filter => {
+			let typeDef = this.mapping[filter];
+			return this.matches(message.type, typeDef[0]) && this.matches(message.subtype, typeDef[1]);
+		});
 	}
 
 	private static matches<T>(value1: T, value2: T): boolean {

@@ -45,10 +45,14 @@ export class LaneMessageComponent implements OnInit {
 		return this.message.authorUid === this.userState.getUid();
 	}
 
-	like = (): void => {
+	toggleLike = (): void => {
 		if (this.isMyMessage())
 			return;
 		this.retroApi.likeMessage(this.message.uid);
+	}
+
+	isLiked = (): boolean => {
+		return _.includes(this.message.likes, this.userState.getUid());
 	}
 
 	createAction = (): void => {
@@ -85,6 +89,10 @@ export class LaneMessageComponent implements OnInit {
 			this.retroApi.deleteMessage(this.message.uid);
 		}
 		this.editing = false;
+	}
+
+	isActionItem = (): boolean => {
+		return this.message.type === MessageType.action;
 	}
 
 

@@ -24,7 +24,7 @@
 		}
 	}
 
-	.message-container:not(.view-mode):hover .my-message.masked {
+	.message-container.editable:hover {
 		markdown>* {
 			background-color: #f6f6f6;
 		}
@@ -33,12 +33,16 @@
 
 .message-footer {
 	font-size: 14px;
+	position: relative;
 
 	.actions {
 		font-size: 16px;
 
-		mat-icon {
-			margin-right: 5px;
+		i.fa {
+			margin-right: 10px;
+			padding-right: 3px;
+			font-size: 18px;
+			width: 20px;
 		}
 	}
 }
@@ -51,9 +55,10 @@
 
 .author {
 	text-align: right;
-	max-width: 70%;
+	padding-right: 2px;
 	overflow: hidden;
 	text-overflow: ellipsis;
+	color: #a0a0a0;
 }
 
 .overlay {
@@ -68,16 +73,18 @@
 	background-color: #efefef;
 	opacity: 0.5;
 
-	mat-icon {
+	i.fa {
 		font-size: 32px;
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		width: 100%;
+		height: 100%;
 
 		color: #aaa;
 	}
 
-	&:hover mat-icon.clickable {
+	&:hover i.fa.clickable {
 		color: inherit;
 	}
 }
@@ -85,7 +92,7 @@
 .edit-indicator {
 	display: none;
 
-	/* mat-icon {
+	/* i.fa {
 		padding: 9px 24px;
 		color: #8a8a8a;
 		font-size: 24px;
@@ -99,7 +106,7 @@
 .my-message .hidden-mask {
 	display: flex;
 }
-.message-container:not(.view-mode) .my-message.masked:hover {
+.message-container.editable:hover {
 	.edit-indicator {
 		display: flex;
 		cursor: text;

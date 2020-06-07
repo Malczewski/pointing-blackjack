@@ -1,5 +1,9 @@
 $left-width: 20%;
 
+* {
+	color: #343a40
+}
+
 .left-panel {
 	position: absolute;
 	left: 0;
@@ -11,10 +15,6 @@ $left-width: 20%;
 	flex-direction: column;
 
 	padding: 10px;
-
-	>* {
-		margin-bottom: 10px;
-	}
 }
 
 retro-lanes {
@@ -24,4 +24,5 @@ retro-lanes {
 	top: 0;
 	bottom: 0;
 	padding: 10px;
+	padding-bottom: 0;
 }

@@ -19,7 +19,7 @@ export class RetroPlayer implements UserState {
 
 export enum MessageType {
 	good = 'good',
-	bad = 'bad',
+	evil = 'evil',
 	action = 'action'
 }
 

@@ -1,53 +1,60 @@
-<div class="message-container" [class.view-mode]="viewMode">
+<div class="message-container" [class.editable]="isMyMessage() && (!viewMode || isActionItem())">
 	<ng-container *ngIf="!editing" [ngSwitch]="message.opened || isMyMessage()">
 		<div *ngSwitchCase="true" [class.my-message]="isMyMessage()"
 			[ngClass]="{'my-message': isMyMessage(), masked: !message.opened}">
 			<markdown [data]="message.text"></markdown>
 			<div class="message-footer d-flex flex-row justify-content-between">
-				<div class="actions d-flex flex-nowrap align-self-center">
-					<mat-icon *ngIf="message.opened && viewMode"
-						[inline]="true" 
+				<div class="actions d-flex flex-nowrap align-self-center"
+					*ngIf="message.opened && viewMode && !isActionItem()">
+					<i class="fa fa-thumbs-o-up"
+						[hidden]="isMyMessage() && !message.likes?.length"
+						[matBadge]="message.likes?.length || ''"
+						matBadgeSize="small"
+						[ngClass]="{'fa-thumbs-up': isLiked() || isMyMessage()}"
+						[matTooltip]="isLiked() ? 'Cancel Vote' : 'Vote'"
 						[class.clickable]="!isMyMessage()"
-						(click)="like()">
-						thumb_up
-					</mat-icon>
-					<mat-icon *ngIf="message.opened && viewMode"
-						[inline]="true" 
-						class="clickable"
+						(click)="toggleLike()">
+					</i>
+					<i class="fa fa-check-square-o clickable"
+						matTooltip="Convert to Action Item"
 						(click)="createAction()">
-						assignment_turned_in
-					</mat-icon>
+					</i>
 				</div>
-				<div class="author align-self-center" [class.text-primary]="isMyMessage()">{{message.authorName}}</div>
+				<div class="author flex-fill align-self-center font-italic" 
+					[class.mat-text-primary]="isMyMessage()">
+					{{message.authorName}}
+				</div>
 			</div>
 			<div class="overlay hidden-mask" *ngIf="!message.opened">
-				<mat-icon [inline]="true" 
+				<i class="fa fa-eye"
 					[class.clickable]="viewMode"
-					(click)="showMessage()">visibility</mat-icon>
+					(click)="showMessage()"></i>
 			</div>
 			<div class="overlay edit-indicator"
 				*ngIf="isMyMessage()"
 				(click)="enterEdit()"
 				matTooltip="Click to edit">
-				<!-- <mat-icon [inline]="true" class="text-right">create</mat-icon> -->
+				<!-- <i [inline]="true" class="text-right">create</i> -->
 			</div>
 		</div>
 		<div *ngSwitchDefault class="d-flex flex-column">
 			<markdown class="bullshit-message haha" [data]="randomMessage"></markdown>
 			<div class="message-footer d-flex flex-row justify-content-end">
-				<div class="author align-self-center" [class.text-primary]="isMyMessage()">{{message.authorName}}</div>
+				<div class="author align-self-center font-italic" 
+					[class.mat-text-primary]="isMyMessage()">
+					{{message.authorName}}
+				</div>
 			</div>
 			<div class="overlay hidden-mask">
-				<mat-icon [inline]="true"
+				<i class="fa fa-eye-slash"
 					[class.clickable]="viewMode"
 					(click)="showMessage()">
-					visibility_off
-				</mat-icon>
+				</i>
 			</div>
 		</div>
 	</ng-container>
 	<resizeable-textarea *ngIf="editing"
-		label="Ctrl + Enter to Save. Clear text to Delete"
+		hint="Ctrl + Enter to Save. Clear text to Delete"
 		[(ngModel)]="tempMessage"
 		(blurHandler)="updateMessage()"
 		(save)="updateMessage()"

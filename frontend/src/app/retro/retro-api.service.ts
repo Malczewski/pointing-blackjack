@@ -34,17 +34,31 @@ export class RetroApiService {
 				{uid: '1', name: 'dummy player'},
 				{uid: '2', name: 'heisenberg'},
 				{uid: '3', name: 'i am cool hacker and will hack this app! tremble, you mortals! HAHAHAaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'},
+				{uid: '4', name: 'heisenberg'},
+				{uid: '5', name: 'heisenberg'},
+				{uid: '6', name: 'heisenberg'},
+				{uid: '7', name: 'heisenberg'},
+				{uid: '8', name: 'heisenberg'},
+				{uid: '9', name: 'heisenberg'},
+				{uid: '10', name: 'heisenberg'},
+				{uid: '11', name: 'heisenberg'},
+				{uid: '12', name: 'heisenberg'},
+				{uid: '13', name: 'heisenberg'},
+				{uid: '14', name: 'heisenberg'},
+				{uid: '15', name: 'heisenberg'},
+				{uid: '16', name: 'heisenberg'},
+				{uid: '17', name: 'heisenberg'},
 			],
 			messages: [
-				{uid: '1', type: MessageType.good, authorUid: '1', authorName: 'dummy player', text: 'Hello world!'},
-				{uid: '2', type: MessageType.bad, authorUid: '2', authorName: 'heisenberg', text: 'Hey there'},
-				{uid: '3', type: MessageType.bad, subtype: MessageSubtype.start, authorUid: '1', authorName: 'dummy player', 
+				{uid: '1', type: MessageType.good, authorUid: '1', authorName: 'dummy playeRL', text: 'Hello world!'},
+				{uid: '2', type: MessageType.evil, authorUid: '2', authorName: 'heisenbergI', text: 'Hey there'},
+				{uid: '3', type: MessageType.evil, subtype: MessageSubtype.start, authorUid: '1', authorName: 'dummy player', 
 					text: 'Long long time ago there was a very long night with long sunset and this was very very very bad so blabla'},
-				{uid: '4', type: MessageType.bad, subtype: MessageSubtype.slowdown, authorUid: '3', 
-					authorName: 'i am cool hacker and will hack this app! tremble, you mortals! HAHAHA', text: 'just saying'},
+				{uid: '4', type: MessageType.evil, subtype: MessageSubtype.slowdown, authorUid: '3', 
+					authorName: 'i am cool hacker and will hack this app! tremble, you mortals! HAHAHAaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', text: 'just saying'},
 				{uid: '5', type: MessageType.good, authorUid: '2', authorName: 'heisenberg', text: 'Shut up!'},
-				{uid: '6', type: MessageType.bad, subtype: MessageSubtype.slowdown, authorUid: '1', authorName: 'dummy player', text: '*cmon* _guys_ ~wtf?~'},
-				{uid: '7', type: MessageType.bad, authorUid: '3', 
+				{uid: '6', type: MessageType.evil, subtype: MessageSubtype.slowdown, authorUid: '1', authorName: 'dummy player', text: '*cmon* _guys_ ~wtf?~'},
+				{uid: '7', type: MessageType.evil, authorUid: '3', 
 					authorName: 'i am cool hacker and will hack this app! tremble, you mortals! HAHAHA', text: 'dummy'},
 				{uid: '8', type: MessageType.good, subtype: MessageSubtype.achievement, authorUid: '1', authorName: 'dummy player', 
 					text: 'close this world'},
@@ -122,7 +136,7 @@ export class RetroApiService {
 			return;
 		message.likes = message.likes || [];
 		let playerUid = this.userState.getUid();
-		if (_.has(message.likes, playerUid))
+		if (_.includes(message.likes, playerUid))
 			message.likes.splice(message.likes.indexOf(playerUid), 1);
 		else message.likes.push(playerUid); 
 		this.fireChange();

@@ -35,6 +35,7 @@
 		"ngx-clipboard": "^13.0.0",
 		"ngx-cookie-service": "^3.0.3",
 		"ngx-markdown": "^9.1.1",
+		"ngx-perfect-scrollbar": "^9.0.0",
 		"ngx-pipes": "^2.7.3",
 		"ngx-scrollbar": "^7.2.3",
 		"ngx-socket-io": "^3.0.1",

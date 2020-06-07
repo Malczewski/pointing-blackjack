@@ -1,16 +1,33 @@
-<div class="d-flex flex-column">
+<div class="h-100 position-relative">
 	<div class="lane-headers d-flex flex-row">
 		<span *ngFor="let lane of lanes"
+			class="p-l-8 p-r-8"
 			[style.width]="(100 / lanes.length) + '%'">
 			{{lane.name}}
+			<mat-divider></mat-divider>
 		</span>
 	</div>
 	<div class="content d-flex flex-row">
-		<lane *ngFor="let lane of lanes"
-			[laneConfig]="lane"
-			[style.width]="(100 / lanes.length) + '%'"
-			[messages]="getLaneMessages(lane)"
-			[viewMode]="viewMode">
-		</lane>
+		<div *ngFor="let lane of lanes"
+			class="h-100"
+			[style.width]="(100 / lanes.length) + '%'">
+			<perfect-scrollbar
+				[scrollIndicators]="true"
+				[config]="{suppressScrollX: true}"
+				class="w-100 with-shadow">
+				<lane class="w-100"
+					[laneConfig]="lane"
+					[messages]="getLaneMessages(lane)"
+					[viewMode]="viewMode">
+				</lane>
+			</perfect-scrollbar>
+		</div>
+	</div>
+	<div class="lane-footers d-flex flex-row">
+		<span *ngFor="let lane of lanes"
+			class="p-l-8 p-r-8"
+			[style.width]="(100 / lanes.length) + '%'">
+			<mat-divider></mat-divider>
+		</span>
 	</div>
 </div>

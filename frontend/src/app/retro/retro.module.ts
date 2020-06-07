@@ -14,7 +14,7 @@ import { NgPipesModule } from 'ngx-pipes';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgScrollbarModule } from 'ngx-scrollbar';
+import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { RetroLanesComponent } from './retro-lanes/retro-lanes.component';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatSelectModule} from '@angular/material/select';
@@ -24,8 +24,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
-import {MatIconModule} from '@angular/material/icon';
-import {MatCardModule} from '@angular/material/card';
+import {MatBadgeModule} from '@angular/material/badge';
+import {MatDividerModule} from '@angular/material/divider';
 import { MarkdownModule, MarkedOptions } from 'ngx-markdown';
 import { ResizeableTextareaComponent } from './lanes/resizeable-textarea/resizeable-textarea.component';
 
@@ -49,7 +49,6 @@ import { ResizeableTextareaComponent } from './lanes/resizeable-textarea/resizea
 		FormsModule,
 		BrowserModule,
 		BrowserAnimationsModule,
-		NgScrollbarModule,
 		MatExpansionModule,
 		MatSelectModule,
 		MatSlideToggleModule,
@@ -58,8 +57,9 @@ import { ResizeableTextareaComponent } from './lanes/resizeable-textarea/resizea
 		MatCheckboxModule,
 		MatInputModule,
 		MatButtonModule,
-		MatIconModule,
-		MatCardModule,
+		MatBadgeModule,
+		MatDividerModule,
+		PerfectScrollbarModule,
 		MarkdownModule.forRoot({
 			markedOptions: {
 				provide: MarkedOptions,
