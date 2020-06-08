@@ -38,5 +38,6 @@ export class RetroGlobalState {
 	deleteRoom(room: string): void {
 		delete this.states[room];
 		delete this.deleteTimers[room];
+		console.log(`Room ${room} deleted`);
 	}
 }

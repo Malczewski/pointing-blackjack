@@ -140,8 +140,8 @@ export class Retro {
 		if (socket.player) {
 			this.globalState.removePlayer(socket.player);
 			if (socket.room) {
-				this.globalState.checkRoom(socket.room as string);
 				this.refreshRoom(socket.room);
+				setTimeout(() => this.globalState.checkRoom(socket.room as string), 5000);
 			}
 		}
 	}
