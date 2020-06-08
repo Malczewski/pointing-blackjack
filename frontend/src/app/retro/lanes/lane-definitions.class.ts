@@ -81,7 +81,7 @@ What didn’t go as expected?`,
 		},
 		SLOWDOWNS: {
 			name: 'What slows me down',
-			inputLabel: 'What slows me down',
+			inputLabel: 'What slows me down?',
 			messagePlaceholder: `Identify aspects of the project that slowed you down.`,
 			type: MessageType.evil,
 			subType: MessageSubtype.slowdown,

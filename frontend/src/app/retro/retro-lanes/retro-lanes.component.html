@@ -1,11 +1,12 @@
 <div class="h-100 position-relative">
 	<div class="lane-headers d-flex flex-row">
-		<span *ngFor="let lane of lanes"
+		<div *ngFor="let lane of lanes"
 			class="p-l-8 p-r-8"
-			[style.width]="(100 / lanes.length) + '%'">
-			{{lane.name}}
+			[style.width]="(100 / lanes.length) + '%'"
+			[matTooltip]="lane.inputLabel">
+			<span class="d-block text-nowrap">{{lane.name}}</span>
 			<mat-divider></mat-divider>
-		</span>
+		</div>
 	</div>
 	<div class="content d-flex flex-row">
 		<div *ngFor="let lane of lanes"

@@ -8,6 +8,12 @@
 	right: 0;
 	top:  0;
 	height: 30px;
+
+	.text-nowrap {
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+	}
 }
 
 .content {
