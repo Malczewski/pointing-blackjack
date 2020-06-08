@@ -148,6 +148,8 @@ export class Retro {
 	
 	private async refreshRoom(room: string, lastPlayer?: RetroPlayer | null, lastMessageUid?: string) {
 		let state = this.globalState.getRoom(room);
+		if (lastPlayer)
+			state.ensurePlayer(lastPlayer);
 		state.lastPlayerUpdate = lastPlayer?.uid;
 		state.lastMessageUpdate = lastMessageUid;
 		console.log(`refresh: ${room}\n`);

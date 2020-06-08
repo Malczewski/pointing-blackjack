@@ -42,6 +42,11 @@ export class RetroRoomState {
 		_.remove(this.players, { uid: player.uid });
 	}
 
+	ensurePlayer(player: RetroPlayer) {
+		if (!_.find(this.players, { uid: player.uid }))
+			this.addPlayer(player);
+	}
+
 	addPlayer(player: RetroPlayer) {
 		this.players.push(player);
 	}

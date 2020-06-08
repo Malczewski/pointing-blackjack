@@ -134,6 +134,8 @@ export class Pointing {
 	
 	private async refreshRoom(room: string, lastPlayer: PointingPlayer | null) {
 		let state = this.globalState.getRoom(room);
+		if (lastPlayer)
+			state.ensurePlayer(lastPlayer);
 		state.lastChangeUid = lastPlayer?.uid;
 		console.log(`refresh: ${room}\n` + JSON.stringify(state));
 		this.pointingSocket.in(room).emit("refresh", state);

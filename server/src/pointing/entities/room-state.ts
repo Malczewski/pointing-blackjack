@@ -28,6 +28,11 @@ export class PointingRoomState {
 		this.spectators.push(player);
 	}
 
+	ensurePlayer(player: PointingPlayer) {
+		if (!_.find(this.players, { uid: player.uid }) && !_.find(this.spectators, { uid: player.uid }))
+			this.addPlayer(player);
+	}
+
 	setVote(player: PointingPlayer, vote: Vote) {
 		let existing = _.find(this.players, { uid: player.uid });
 		if (existing) existing.vote = vote;
