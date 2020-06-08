@@ -1,9 +1,9 @@
-import { RoomState } from "./room-state";
+import { PointingRoomState } from "./room-state";
 import * as _ from "lodash";
-import { Player } from "./player";
+import { PointingPlayer } from "./player";
 
-export class GlobalState {
-	private states: { [roomId: string]: RoomState };
+export class PointingGlobalState {
+	private states: { [roomId: string]: PointingRoomState };
 
 	constructor() {
 		this.states = {};
@@ -17,12 +17,12 @@ export class GlobalState {
 		}
 	}
 
-	removePlayer(player: Player) {
+	removePlayer(player: PointingPlayer) {
 		_.each(this.states, (state) => state.removePlayer(player));
 	}
 
-	getRoom(room: string): RoomState {
-		if (!this.states[room]) this.states[room] = new RoomState(room);
+	getRoom(room: string): PointingRoomState {
+		if (!this.states[room]) this.states[room] = new PointingRoomState(room);
 		return this.states[room];
 	}
 }

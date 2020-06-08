@@ -4,7 +4,7 @@ export enum VoteState {
 }
 export type Vote = number | VoteState | null;
 
-export class Player {
+export class PointingPlayer {
 	uid: string;
 	name: string;
 	vote?: Vote;
