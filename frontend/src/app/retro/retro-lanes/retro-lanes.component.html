@@ -18,7 +18,8 @@
 				<lane class="w-100"
 					[laneConfig]="lane"
 					[messages]="getLaneMessages(lane)"
-					[viewMode]="viewMode">
+					[viewMode]="viewMode"
+					[lastMessageUpdate]="state.lastMessageUpdate">
 				</lane>
 			</perfect-scrollbar>
 		</div>
