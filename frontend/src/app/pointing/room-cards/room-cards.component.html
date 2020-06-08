@@ -2,6 +2,7 @@
 	class="vote-card"
 	[hidden]="isCardHidden(card)">
 	<div class="card-button btn" 
+		matRipple
 		[ngClass]="{'selected': isMyVote(card)}"
 		[style.background-color]="cardColors[card] | shade: 0.2"
 		[style.border-color]="cardColors[card] | shade: -0.4"

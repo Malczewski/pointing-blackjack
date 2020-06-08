@@ -18,6 +18,8 @@ import { FormsModule } from '@angular/forms';
 import { HomeComponent } from '@pointing/home/home.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatButtonModule } from '@angular/material/button';
+import { MatRippleModule } from '@angular/material/core';
 
 @NgModule({
 	declarations: [
@@ -42,6 +44,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 		FormsModule,
 		BrowserModule,
 		BrowserAnimationsModule,
+		MatButtonModule,
+		MatRippleModule,
 	],
 	providers: [
 		PointingSocket,
