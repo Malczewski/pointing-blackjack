@@ -28,6 +28,8 @@ import {MatBadgeModule} from '@angular/material/badge';
 import {MatDividerModule} from '@angular/material/divider';
 import { MarkdownModule, MarkedOptions } from 'ngx-markdown';
 import { ResizeableTextareaComponent } from './lanes/resizeable-textarea/resizeable-textarea.component';
+import { RetroTimelineComponent } from './retro-timeline/retro-timeline.component';
+import { ClipboardModule } from 'ngx-clipboard';
 
 
 @NgModule({
@@ -40,7 +42,9 @@ import { ResizeableTextareaComponent } from './lanes/resizeable-textarea/resizea
 		LaneComponent, 
 		LaneMessageComponent, 
 		LaneInputComponent, 
-		RetroLanesComponent, ResizeableTextareaComponent],
+		RetroLanesComponent, 
+		ResizeableTextareaComponent, 
+		RetroTimelineComponent],
 	imports: [
 		CommonModule,
 		TrinityRingsSpinnerModule,
@@ -60,6 +64,7 @@ import { ResizeableTextareaComponent } from './lanes/resizeable-textarea/resizea
 		MatBadgeModule,
 		MatDividerModule,
 		PerfectScrollbarModule,
+		ClipboardModule,
 		MarkdownModule.forRoot({
 			markedOptions: {
 				provide: MarkedOptions,

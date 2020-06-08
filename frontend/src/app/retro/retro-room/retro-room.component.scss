@@ -1,14 +1,23 @@
 $left-width: 20%;
+$header-height: 0; //44px;
 
 * {
 	color: #343a40
+}
+
+.room-header {
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	height: $header-height;
 }
 
 .left-panel {
 	position: absolute;
 	left: 0;
 	width: $left-width;
-	top: 0;
+	top: $header-height;
 	bottom: 0;
 
 	display: flex;
@@ -21,7 +30,7 @@ retro-lanes {
 	position: absolute;
 	left: $left-width;
 	right: 0;
-	top: 0;
+	top: $header-height;
 	bottom: 0;
 	padding: 10px;
 	padding-bottom: 0;

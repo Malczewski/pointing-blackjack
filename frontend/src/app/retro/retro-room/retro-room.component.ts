@@ -15,6 +15,8 @@ export class RetroRoomComponent implements OnInit {
 	state: RetroState;
 	loaded: boolean;
 
+	roomUrl: string;
+
 	constructor(
 		private retroApi: RetroApiService,
 		private route: ActivatedRoute,
@@ -23,6 +25,7 @@ export class RetroRoomComponent implements OnInit {
 	ngOnInit(): void {
 		this.roomId = this.route.snapshot.paramMap.get('id');
 		this.loaded = false;
+		this.roomUrl = location.href;
 
 		this.retroApi.getStateObserver().subscribe(state => {
 			this.state = RetroState.of(state);
