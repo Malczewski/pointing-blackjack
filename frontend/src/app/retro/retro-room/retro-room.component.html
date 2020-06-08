@@ -4,3 +4,10 @@
 	<retro-players [state]="state" class="flex-fill overflow-hidden"></retro-players>
 </div>
 <retro-lanes [state]="state" *ngIf="loaded"></retro-lanes>
+<div *ngIf="!loaded" class="w-100 h-100 d-flex justify-content-center align-items-center">
+	<app-trinity-rings-spinner
+		[animationDuration]="1000"
+		[size]="200"
+		color="#3f51b5"
+	></app-trinity-rings-spinner>
+</div>
