@@ -1,23 +1,24 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, CanDeactivate } from '@angular/router';
 import { Observable } from 'rxjs';
-import { RoomComponent } from '@pointing/room/room.component';
-import { AppSocket } from '@app/common/sockets/app-socket';
+import { RetroSocket } from '@app/retro/retro-socket.service';
+import { RetroRoomComponent } from '@app/retro/retro-room/retro-room.component';
 
 @Injectable({
 	providedIn: 'root'
 })
-export class DisconnectHookGuard implements CanDeactivate<RoomComponent> {
+export class RetroDisconnectHookGuard implements CanDeactivate<RetroRoomComponent> {
 
-	constructor(private appSocket: AppSocket) { }
+	constructor(private retroSocket: RetroSocket) { }
 
 	canDeactivate(
-		component: RoomComponent,
+		component: RetroRoomComponent,
 		currentRoute: ActivatedRouteSnapshot,
 		currentState: RouterStateSnapshot,
 		nextState: RouterStateSnapshot
 	): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-		this.appSocket.disconnect();
+		this.retroSocket.disconnect();
 		return true;
 	}
+	
 }

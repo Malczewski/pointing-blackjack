@@ -4,7 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { UserStateService } from '../../common/user-state.service';
 
 @Component({
-	selector: 'app-login',
+	selector: 'login',
 	template: `
 		<div class="login-container">
 			<form role="form" (ngSubmit)="onSubmit()">
@@ -49,10 +49,12 @@ export class LoginComponent implements OnInit {
 		private router: Router) { }
 
 	ngOnInit() {
+		/* istanbul ignore next */
 		this.returnUrl = this.route.snapshot?.queryParams?.returnUrl || '/';
 	}
 
 	onSubmit() {
+		/* istanbul ignore else */
 		if (!_.isEmpty(this.userName)) {
 			this.userStateService.login(this.userName);
 			if (/heisenberg/i.test(this.userName)) {

@@ -11,7 +11,7 @@
 			[ngSwitch]="isShowVotes()" 
 			[ngClass]="{ 'odd': i %2 == 1 } "
 			[style.background-color]="getDifferenceColor(user.vote)">
-			<div *ngSwitchCase="true">
+			<div *ngSwitchCase="true" class="vote-container">
 				<div *ngIf="user.vote !== null" class="vote-number" [style.background-color]="getVoteColor(user.vote)">
 					<i *ngIf="isMyUser(user)"
 						title="Less points"
@@ -26,7 +26,7 @@
 						(click)="changeVote(1)"></i>
 				</div>
 			</div>
-			<div *ngSwitchCase="false">
+			<div *ngSwitchCase="false" class="vote-container">
 				<div *ngIf="isVoted(user.vote)" class="vote-ready"></div>
 				<div *ngIf="isWait(user.vote)" class="vote-wait">
 					<app-circles-to-rhumbuses-spinner
@@ -42,11 +42,17 @@
 </div>
 <div class="bottom-list">
 	<div class="actions btn-group btn-group-toggle">
-		<button class="btn btn-info" (click)="makePlayer()" [class.active]="isPlayer()">
-			I'm Player <i class="fa fa-user"></i>
+		<button class="btn btn-info" 
+			(click)="makePlayer()" 
+			[class.active]="isPlayer()"
+			matRipple>
+			Player <i class="fa fa-user"></i>
 		</button>
-		<button class="btn btn-info" (click)="makeSpectator()" [class.active]="isSpectator()">
-			I'm Spectator <i class="fa fa-eye"></i>
+		<button class="btn btn-info"
+			(click)="makeSpectator()"
+			[class.active]="isSpectator()"
+			matRipple>
+			Spectator <i class="fa fa-eye"></i>
 		</button>
 	</div>
 	<div class="players-list spectators">

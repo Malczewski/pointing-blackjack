@@ -1,0 +1,10 @@
+<perfect-scrollbar
+	[scrollIndicators]="true"
+	[config]="{suppressScrollX: true}">
+	<div *ngFor="let user of state.players; let i = index"
+		class="user-name" 
+		[ngClass]="{ 'odd': i %2 == 1, 'mat-text-primary': isMyUser(user) } " 
+		[@highlight]="!!highlightedPlayers[user.uid] ? 'active' : 'none'">
+		{{user.name}}
+	</div>
+</perfect-scrollbar>

@@ -5,7 +5,7 @@ import { Pages } from './common/pages.class';
 import { version } from '../../../package.json';
 
 @Component({
-	selector: 'app-root',
+	selector: 'pointing-root',
 	templateUrl: './app.component.html',
 	styleUrls: ['./app.component.scss']
 })

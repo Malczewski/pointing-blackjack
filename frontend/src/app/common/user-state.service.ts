@@ -6,6 +6,7 @@ import { SessionStorageService } from '@app/common/storage/session-storage.servi
 import { environment } from 'src/environments/environment';
 import { LocalStorageService } from '@app/common/storage/local-storage.service';
 import { PlayerRole } from '@pointing/room-state.class';
+import { RandomUtils } from '@app/common/random-utils.class';
 
 export interface UserState {
 	uid: string;
@@ -42,7 +43,7 @@ export class UserStateService {
 
 	login(name: string): void {
 		this.user = {
-			uid: this.generateUID(),
+			uid: RandomUtils.generateUID(),
 			name
 		};
 		this.getStorage().put(Property.UID, this.user.uid);
@@ -59,12 +60,12 @@ export class UserStateService {
 		return environment.useSession ? this.sessionStorage : this.localStorage;
 	}
 
-	private generateUID(): string {
-		return Math.random().toString(36).substring(2) + Date.now().toString(36);
-	}
-
 	getUid(): string {
 		return this.user.uid;
+	}
+
+	getName(): string {
+		return this.user.name;
 	}
 
 	setLastRole(role: PlayerRole): void {

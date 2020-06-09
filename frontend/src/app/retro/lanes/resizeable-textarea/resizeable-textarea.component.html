@@ -1,0 +1,14 @@
+<div class="textarea-container">
+	<mat-form-field class="force-height">
+		<mat-label *ngIf="!(focused && hint)">{{label}}</mat-label>
+		<mat-label *ngIf="focused && hint">{{hint}}</mat-label>
+		<textarea matInput 
+			(blur)="onBlur()"
+			(focus)="onFocus()"
+			(keydown)="keydownTrigger($event)"
+			[placeholder]="focused && placeholder || ''" 
+			[(ngModel)]="text"
+			(ngModelChange)="propagateChange($event)"></textarea>
+	</mat-form-field>
+	<div contenteditable="false" class="autosize-text">{{text || (focused && placeholder)}}<br/></div>
+</div>

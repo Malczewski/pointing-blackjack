@@ -1,18 +1,18 @@
 import { TestBed } from '@angular/core/testing';
 
-import { AppSocket } from '@app/common/sockets/app-socket';
-import { DisconnectHookGuard } from '@pointing/disconnect-hook.guard';
+import { RetroDisconnectHookGuard } from './retro-disconnect-hook.guard';
+import { RetroSocket } from '@app/retro/retro-socket.service';
 
-describe('DisconnectGuardGuard', () => {
-	let guard: DisconnectHookGuard;
-	let appSocketMock: AppSocket;
+describe('RetroDisconnectHookGuard', () => {
+	let guard: RetroDisconnectHookGuard;
+	let appSocketMock: RetroSocket;
 
 	beforeEach(() => {
 		appSocketMock = jasmine.createSpyObj(['disconnect']);
 		TestBed.configureTestingModule({
-			providers: [{provide: AppSocket, useValue: appSocketMock}]
+			providers: [{provide: RetroSocket, useValue: appSocketMock}]
 		});
-		guard = TestBed.inject(DisconnectHookGuard);
+		guard = TestBed.inject(RetroDisconnectHookGuard);
 	});
 
 	it('should be created', () => {

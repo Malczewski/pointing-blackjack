@@ -1,0 +1,117 @@
+:host {
+	position: relative;
+}
+.message-container {
+	/* box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 
+		0px 1px 1px 0px rgba(0, 0, 0, 0.14), 
+		0px 1px 3px 0px rgba(0, 0, 0, 0.12); */
+	box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 
+		0px 2px 2px 0px rgba(0, 0, 0, 0.14), 
+		0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+	padding: 10px 20px 5px 20px;
+	border-radius: 4px;
+}
+
+::ng-deep {
+	markdown>p {
+		word-break: break-word;
+		margin-bottom: 0;
+		padding-bottom: 1rem;
+	
+		&:last-child {
+			margin-bottom: 5px;
+			padding-bottom:0;
+		}
+	}
+
+	.message-container.editable:hover {
+		markdown>* {
+			background-color: #f6f6f6;
+		}
+	}
+}
+
+.message-footer {
+	font-size: 14px;
+	position: relative;
+
+	.actions {
+		font-size: 16px;
+
+		i.fa {
+			margin-right: 10px;
+			padding-right: 3px;
+			font-size: 18px;
+			width: 20px;
+		}
+	}
+}
+
+.bullshit-message {
+	filter: blur(5px);
+	-webkit-filter: blur(5px);
+	margin-bottom: 5px;
+}
+
+.author {
+	text-align: right;
+	padding-right: 2px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	color: #a0a0a0;
+}
+
+.overlay {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	left: 0;
+	top: 0;
+}
+
+.hidden-mask {
+	background-color: #efefef;
+	opacity: 0.5;
+
+	i.fa {
+		font-size: 32px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 100%;
+		height: 100%;
+
+		color: #aaa;
+	}
+
+	&:hover i.fa.clickable {
+		color: inherit;
+	}
+}
+
+.edit-indicator {
+	display: none;
+
+	/* i.fa {
+		padding: 9px 24px;
+		color: #8a8a8a;
+		font-size: 24px;
+		text-shadow: 
+			-6px 3px 2px #f6f6f6, 
+			-3px 6px 2px #f6f6f6, 
+			6px -3px 2px #f6f6f6, 
+			3px -6px 2px #f6f6f6;
+	} */
+}
+.my-message .hidden-mask {
+	display: flex;
+}
+.message-container.editable:hover {
+	.edit-indicator {
+		display: flex;
+		cursor: text;
+	}
+	.hidden-mask {
+		display: none;
+	}
+}

@@ -28,7 +28,7 @@
 			"projectType": "application",
 			"root": "",
 			"sourceRoot": "src",
-			"prefix": "app",
+			"prefix": "",
 			"architect": {
 				"build": {
 					"builder": "@angular-devkit/build-angular:browser",
@@ -44,7 +44,9 @@
 							"node_modules/font-awesome/css/font-awesome.css",
 							"src/styles.scss"
 						],
-						"scripts": []
+						"scripts": [
+							"node_modules/marked/lib/marked.js"
+						]
 					},
 					"configurations": {
 						"production": {
