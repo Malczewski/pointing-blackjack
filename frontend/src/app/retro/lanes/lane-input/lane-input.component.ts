@@ -27,7 +27,7 @@ export class LaneInputComponent implements OnInit {
 	private resetNewMessage(): void {
 		this.newMessage = {
 			uid: RandomUtils.generateUID(),
-			authorName: this.userStateService.getUser().name,
+			authorName: this.userStateService.getName(),
 			authorUid: this.userStateService.getUid(),
 			type: this.laneConfig.type,
 			subtype: this.laneConfig.subType,

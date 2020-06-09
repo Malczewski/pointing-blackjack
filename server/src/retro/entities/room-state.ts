@@ -75,7 +75,7 @@ export class RetroRoomState {
 	}
 
 	deleteMessage(messageUid: string): void {
-		this.messages = _.remove(this.messages, msg => msg.uid !== messageUid);
+		_.remove(this.messages, {uid: messageUid});
 	}
 
 	toggleLike(messageUid: string, playerUid: string): void {
@@ -84,7 +84,7 @@ export class RetroRoomState {
 			return;
 		message.likes = message.likes || [];
 		if (_.includes(message.likes, playerUid)) {
-			message.likes = _.remove(message.likes, playerUid);
+			_.remove(message.likes, like => like === playerUid);
 		} else message.likes.push(playerUid); 
 	}
 

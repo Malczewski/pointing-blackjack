@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { RetroState } from '@app/retro/retro-state.class';
 import { RetroApiService } from '@app/retro/retro-api.service';
 import { ActivatedRoute } from '@angular/router';
-import { UserStateService } from '@app/common/user-state.service';
 
 @Component({
 	selector: 'retro-room',
@@ -19,8 +18,7 @@ export class RetroRoomComponent implements OnInit {
 
 	constructor(
 		private retroApi: RetroApiService,
-		private route: ActivatedRoute,
-		private userState: UserStateService) { }
+		private route: ActivatedRoute) { }
 
 	ngOnInit(): void {
 		this.roomId = this.route.snapshot.paramMap.get('id');

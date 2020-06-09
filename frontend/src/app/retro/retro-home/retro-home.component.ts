@@ -17,9 +17,7 @@ export class RetroHomeComponent implements OnInit {
 
 	constructor(private router: Router) { }
 
-	ngOnInit(): void {
-		this.rooms = [{id: 'test'}, {id: 'test2'}];
-	}
+	ngOnInit(): void {}
 
 	enterRoom(id: string): void {
 		this.router.navigate(Pages.retro(id));

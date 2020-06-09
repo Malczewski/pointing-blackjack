@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef, OnChanges, SimpleChanges } from '@angular/core';
 import { RetroMessage, MessageType } from '@app/retro/retro-state.class';
 import { UserStateService } from '@app/common/user-state.service';
 import { RetroApiService } from '@app/retro/retro-api.service';
@@ -26,6 +26,10 @@ export class LaneMessageComponent implements OnInit {
 	) { }
 
 	ngOnInit(): void {
+		this.initBullshitMessage();
+	}
+
+	private initBullshitMessage(): void {
 		let words: string[][] = [
 			['a', 'ut', 'sit', 'amet', 'dolor', 'tempor', 'eiusmod', 'deserunt', 'cupidatat', 'adipiscing',
 				'consectetur', 'consequuntur', 'reprehenderit', 'excepteur sint', 'lorem sed ipsum'],
@@ -46,6 +50,7 @@ export class LaneMessageComponent implements OnInit {
 	}
 
 	toggleLike = (): void => {
+		/* istanbul ignore if */
 		if (this.isMyMessage())
 			return;
 		this.retroApi.likeMessage(this.message.uid);
@@ -58,7 +63,7 @@ export class LaneMessageComponent implements OnInit {
 	createAction = (): void => {
 		this.retroApi.saveMessage({
 			uid: RandomUtils.generateUID(),
-			authorName: this.userState.getUser().name,
+			authorName: this.userState.getName(),
 			authorUid: this.userState.getUid(),
 			type: MessageType.action,
 			opened: true,
@@ -67,6 +72,7 @@ export class LaneMessageComponent implements OnInit {
 	}
 
 	showMessage = (): void => {
+		/* istanbul ignore if */
 		if (!this.viewMode)
 			return;
 		this.retroApi.showMessage(this.message.uid);
@@ -77,7 +83,8 @@ export class LaneMessageComponent implements OnInit {
 		this.tempMessage = this.message.text;
 		setTimeout(() => {
 			let input = this.element.nativeElement.querySelector('textarea') as HTMLElement;
-			input.focus();
+			/* istanbul ignore next */ 
+			input?.focus();
 		});
 	}
 

@@ -64,6 +64,10 @@ export class UserStateService {
 		return this.user.uid;
 	}
 
+	getName(): string {
+		return this.user.name;
+	}
+
 	setLastRole(role: PlayerRole): void {
 		this.getStorage().put(Property.ROLE, role);
 	}

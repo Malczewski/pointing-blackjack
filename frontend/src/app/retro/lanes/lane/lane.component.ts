@@ -43,7 +43,8 @@ export class LaneComponent implements OnInit, OnChanges {
 	ngOnChanges(changes: SimpleChanges): void {
 		if (changes.messages.currentValue !== changes.messages.previousValue) {
 			this.currentMessages = _.map(changes.messages.currentValue, updatedMessage => {
-				let existing = _.find(this.currentMessages, msg => msg.uid === updatedMessage.uid);
+				let existing = _.find(this.currentMessages, 
+					msg => msg.uid === updatedMessage.uid && msg.text === updatedMessage.text);
 				if (existing) {
 					_.extend(existing, updatedMessage);
 					return existing;

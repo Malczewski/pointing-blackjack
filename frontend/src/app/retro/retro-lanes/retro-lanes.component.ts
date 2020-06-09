@@ -23,6 +23,7 @@ export class RetroLanesComponent implements OnInit, OnChanges {
 	}
 
 	ngOnChanges(changes: SimpleChanges): void {
+		/* istanbul ignore else */
 		if (changes.state.currentValue !== changes.state.previousValue) {
 			let currentState = changes.state.currentValue as RetroState;
 			if (!this.lastState 

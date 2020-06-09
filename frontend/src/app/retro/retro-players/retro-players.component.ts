@@ -28,6 +28,7 @@ export class RetroPlayersComponent implements OnInit, OnChanges {
 	}
 	
 	ngOnChanges(changes: SimpleChanges): void {
+		/* istanbul ignore else */
 		if (changes.state.currentValue !== changes.state.previousValue) {
 			if (this.state.lastPlayerUpdate)
 				this.highlightPlayer(this.state.lastPlayerUpdate);
