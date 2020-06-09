@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RetroState } from '@app/retro/retro-state.class';
 import { RetroApiService } from '@app/retro/retro-api.service';
 import { ActivatedRoute } from '@angular/router';
+import { RetroHistoryService } from '@app/retro/retro-history.service';
 
 @Component({
 	selector: 'retro-room',
@@ -18,7 +19,8 @@ export class RetroRoomComponent implements OnInit {
 
 	constructor(
 		private retroApi: RetroApiService,
-		private route: ActivatedRoute) { }
+		private route: ActivatedRoute,
+		private retroHistory: RetroHistoryService) { }
 
 	ngOnInit(): void {
 		this.roomId = this.route.snapshot.paramMap.get('id');
@@ -27,6 +29,7 @@ export class RetroRoomComponent implements OnInit {
 
 		this.retroApi.getStateObserver().subscribe(state => {
 			this.state = RetroState.of(state);
+			this.retroHistory.saveSession(state);
 			this.loaded = true;
 		});
 		this.retroApi.joinRoom(this.roomId);

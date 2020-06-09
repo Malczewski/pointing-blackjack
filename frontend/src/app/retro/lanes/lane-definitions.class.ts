@@ -96,7 +96,7 @@ What didn’t go as expected?`,
 		ACTION: {
 			name: 'Action items',
 			inputLabel: 'Action items',
-			messagePlaceholder: 'Add new action item or create one from any previous item',
+			messagePlaceholder: 'A single, clearly defined task that must be done.',
 			type: MessageType.action,
 		},
 	};
