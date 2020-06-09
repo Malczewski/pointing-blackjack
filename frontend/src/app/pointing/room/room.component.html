@@ -32,7 +32,8 @@
 			[state]="roomState">
 		</room-results>
 		<div *ngSwitchCase="'progress'" class="room-progress-center">
-			<hangman-progress [progress]="getProgress()"></hangman-progress>
+			<!-- <hangman-progress [progress]="getProgress()"></hangman-progress> -->
+			<shuttle-progress class="flex-fill"></shuttle-progress>
 			<span class="progress-text">Vote in progress...</span>
 		</div>
 		<div class="loading"
@@ -46,8 +47,10 @@
 	</div>
 </div>
 <div class="room-progress">
-	<hangman-progress [progress]="getProgress()"
-		[hidden]="!showMiniProgress()"></hangman-progress>
+	<!-- <hangman-progress [progress]="getProgress()"
+		[hidden]="!showMiniProgress()"></hangman-progress> -->
+	<shuttle-progress [progress]="getProgress()"
+		[hidden]="!showMiniProgress()"></shuttle-progress>
 </div>
 <div class="room-log">
 	<room-log [state]="roomState"></room-log>
