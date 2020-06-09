@@ -60,6 +60,7 @@ export class RoomPlayersComponent implements OnInit, OnChanges {
 	}
 
 	makePlayer(): void {
+		/* istanbul ignore if */
 		if (this.isPlayer())
 			return;
 		this.pointingApi.switchToPlayer();
@@ -69,6 +70,7 @@ export class RoomPlayersComponent implements OnInit, OnChanges {
 	}
 
 	makeSpectator(): void {
+		/* istanbul ignore if */
 		if (this.isSpectator())
 			return;
 		this.pointingApi.switchToSpectator();

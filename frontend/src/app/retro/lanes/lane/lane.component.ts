@@ -1,10 +1,7 @@
-import { Component, OnInit, Input, Predicate, OnChanges, SimpleChanges } from '@angular/core';
-import { RetroState, RetroMessage, MessageType } from '@app/retro/retro-state.class';
+import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { RetroMessage, MessageType } from '@app/retro/retro-state.class';
 import { LaneDefinition } from '@app/retro/lanes/lane-definitions.class';
 import * as _ from 'lodash';
-import { RetroApiService } from '@app/retro/retro-api.service';
-import { RandomUtils } from '@app/common/random-utils.class';
-import { UserStateService } from '@app/common/user-state.service';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 
 
@@ -31,17 +28,14 @@ export class LaneComponent implements OnInit, OnChanges {
 	currentMessages: RetroMessage[];
 	highlightedMessages: {[uid: string]: any} = {};
 
-	constructor(
-		//private retroApi: RetroApiService,
-		//private userStateService: UserStateService,
-		) { }
+	constructor() { }
 
 	ngOnInit(): void {
 		this.currentMessages = this.messages;
 	}
 
 	ngOnChanges(changes: SimpleChanges): void {
-		if (changes.messages.currentValue !== changes.messages.previousValue) {
+		if (changes.messages && changes.messages.currentValue !== changes.messages.previousValue) {
 			this.currentMessages = _.map(changes.messages.currentValue, updatedMessage => {
 				let existing = _.find(this.currentMessages, 
 					msg => msg.uid === updatedMessage.uid && msg.text === updatedMessage.text);
