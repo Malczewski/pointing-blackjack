@@ -1,16 +1,25 @@
 /* istanbul ignore file */
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { RoomState, Vote } from '@pointing/room-state.class';
+import { RoomState, Vote, PlayerRole } from '@pointing/room-state.class';
 import { PointingSocket } from '@pointing/pointing-socket';
 import { UserStateService } from '@app/common/user-state.service';
 
 @Injectable()
 export class PointingApiService {
+	readonly ROLE = 'pb-role';
 
 	constructor(
 		private pointingSocket: PointingSocket,
 		private userState: UserStateService) {
+	}
+	
+	private setLastRole(role: PlayerRole): void {
+		this.userState.getStorage().put(this.ROLE, role);
+	}
+
+	private getLastRole(): PlayerRole {
+		return this.userState.getStorage().get(this.ROLE) as PlayerRole;
 	}
 
 	getStateObserver(): Observable<RoomState> {
@@ -22,7 +31,7 @@ export class PointingApiService {
 		this.pointingSocket.emit('join', {
 			uid: this.userState.getUid(),
 			name: this.userState.getUser().name,
-			role: this.userState.getLastRole(),
+			role: this.getLastRole(),
 			room: roomId
 		});
 		this.pointingSocket.removeAllListeners('reconnect');
@@ -42,11 +51,13 @@ export class PointingApiService {
 	}
 
 	public switchToSpectator(): void {
-		this.pointingSocket.emit('role', 'spectator');
+		this.pointingSocket.emit('role', PlayerRole.spectator);
+		this.setLastRole(PlayerRole.spectator);
 	}
 
 	public switchToPlayer(): void {
-		this.pointingSocket.emit('role', 'player');
+		this.pointingSocket.emit('role', PlayerRole.player);
+		this.setLastRole(PlayerRole.player);
 	}
 
 }

@@ -1,6 +1,7 @@
 /* istanbul ignore file */
 import { Injectable } from '@angular/core';
 import { IStorage } from '@app/common/storage/storage.interface';
+import { Property } from '@app/common/storage/property.enum';
 
 @Injectable({
 	providedIn: 'root'
@@ -16,6 +17,7 @@ export class SessionStorageService implements IStorage {
 		sessionStorage.setItem(key, value);
 	}
 	clear() {
-		sessionStorage.clear();
+		sessionStorage.removeItem(Property.UID);
+		sessionStorage.removeItem(Property.NAME);
 	}
 }

@@ -64,7 +64,6 @@ export class RoomPlayersComponent implements OnInit, OnChanges {
 		if (this.isPlayer())
 			return;
 		this.pointingApi.switchToPlayer();
-		this.userState.setLastRole(PlayerRole.player);
 		//let current = _.remove(this.state.spectators, {uid: this.userState.getUid()})[0];
 		//this.state.players.push(current);
 	}
@@ -74,7 +73,6 @@ export class RoomPlayersComponent implements OnInit, OnChanges {
 		if (this.isSpectator())
 			return;
 		this.pointingApi.switchToSpectator();
-		this.userState.setLastRole(PlayerRole.spectator);
 		//let current = _.remove(this.state.players, {uid: this.userState.getUid()})[0];
 		//this.state.spectators.push(current);
 	}

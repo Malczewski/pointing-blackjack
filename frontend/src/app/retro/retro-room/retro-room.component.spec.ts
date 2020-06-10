@@ -7,6 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 import { UserStateService } from '@app/common/user-state.service';
 import { RetroState } from '@app/retro/retro-state.class';
 import { Observable } from 'rxjs';
+import { RetroHistoryService } from '@app/retro/retro-history.service';
 
 describe('RetroRoomComponent', () => {
 	let component: RetroRoomComponent;
@@ -32,6 +33,7 @@ describe('RetroRoomComponent', () => {
 			providers: [
 				{provide: ActivatedRoute, useValue: {snapshot: {paramMap: {get: () => 'earth'}}}},
 				{provide: RetroApiService, useValue: apiMock},
+				{provide: RetroHistoryService, useValue: jasmine.createSpyObj(['saveSession'])},
 			]
 		}).compileComponents();
 	}));

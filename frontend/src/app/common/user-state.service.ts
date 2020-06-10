@@ -56,7 +56,7 @@ export class UserStateService {
 		delete this.user;
 	}
 
-	private getStorage(): IStorage {
+	getStorage(): IStorage {
 		return environment.useSession ? this.sessionStorage : this.localStorage;
 	}
 
@@ -66,13 +66,5 @@ export class UserStateService {
 
 	getName(): string {
 		return this.user.name;
-	}
-
-	setLastRole(role: PlayerRole): void {
-		this.getStorage().put(Property.ROLE, role);
-	}
-
-	getLastRole(): PlayerRole {
-		return this.getStorage().get(Property.ROLE) as PlayerRole;
 	}
 }
