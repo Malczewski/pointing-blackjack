@@ -1,0 +1,25 @@
+<mat-accordion>
+	<mat-expansion-panel [expanded]="true">
+		<mat-expansion-panel-header collapsedHeight="48px" expandedHeight="48px">
+			<mat-panel-title>
+				Controls
+			</mat-panel-title>
+		</mat-expansion-panel-header>
+
+		<mat-button-toggle-group class="mode-selector" [(ngModel)]="state.viewMode" (ngModelChange)="changeMode()">
+			<mat-button-toggle [value]="false">
+				Write
+			</mat-button-toggle>
+			<mat-button-toggle [value]="true" >
+				Read
+			</mat-button-toggle>
+		</mat-button-toggle-group>
+		
+		<button mat-icon-button
+			class="pull-right"
+			(click)="exportSession()" 
+			matTooltip="Export this session in JSON format. Session import will be ready soon...">
+			<i class="fa fa-download"></i>
+		</button>
+	</mat-expansion-panel>
+</mat-accordion>

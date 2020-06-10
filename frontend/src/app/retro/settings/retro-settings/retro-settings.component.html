@@ -1,0 +1,37 @@
+<mat-accordion>
+	<mat-expansion-panel>
+		<mat-expansion-panel-header collapsedHeight="48px" expandedHeight="48px">
+			<mat-panel-title>
+				Settings
+			</mat-panel-title>
+		</mat-expansion-panel-header>
+
+		<mat-form-field>
+			<mat-select class="type-selector" placeholder="Type" 
+				[(ngModel)]="state.config.type" 
+				(ngModelChange)="changeConfig('type')" name="type">
+				<mat-option *ngFor="let item of typeOptions" [value]="item.value"
+					[matTooltip]="item.tooltip"
+					matTooltipClass="multiline-tooltip"
+					matTooltipShowDelay="300"
+					[disabled]="item.disabled">
+					{{item.text}}
+				</mat-option>
+			</mat-select>
+		</mat-form-field>
+		<mat-slide-toggle [(ngModel)]="state.config.slowdowns" 
+			(ngModelChange)="changeConfig('slowdowns')"
+			class="slowdown-toggle"
+			matTooltip="Show a column for things which slow people down">
+			Slowdowns lane
+		</mat-slide-toggle>
+		<mat-slide-toggle [(ngModel)]="state.config.achievements" 
+			(ngModelChange)="changeConfig('achievements')"
+			class="achievement-toggle"
+			matTooltip="Show a column for significant events: releases, victories, discoveries, moments of great teamwork, or anything else that had an impact on the work.
+			Recommended to use this once in several months"
+			matTooltipClass="multiline-tooltip">
+			Achievements lane
+		</mat-slide-toggle>
+	</mat-expansion-panel>
+</mat-accordion>

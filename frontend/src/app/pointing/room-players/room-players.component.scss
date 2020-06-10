@@ -43,6 +43,10 @@
 		justify-content: center;
 		background-color: #fcfdfe;
 
+		.vote-container {
+			width: 64px;
+		}
+
 		.vote-ready, .vote-number {
 			width: 32px;
 			height: 32px;

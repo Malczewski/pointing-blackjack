@@ -39,7 +39,8 @@ export class RoomPlayersComponent implements OnInit, OnChanges {
 	}
 	
 	ngOnChanges(changes: SimpleChanges): void {
-		if (changes.state.currentValue !== changes.state.previousValue) {
+		/* istanbul ignore else */
+		if (changes.state.currentValue !== changes.state.previousValue) { 
 			if (this.state.lastChangeUid)
 				this.highlightPlayer(this.state.lastChangeUid);
 			this.recalculateDifferences();
@@ -59,19 +60,19 @@ export class RoomPlayersComponent implements OnInit, OnChanges {
 	}
 
 	makePlayer(): void {
+		/* istanbul ignore if */
 		if (this.isPlayer())
 			return;
 		this.pointingApi.switchToPlayer();
-		this.userState.setLastRole(PlayerRole.player);
 		//let current = _.remove(this.state.spectators, {uid: this.userState.getUid()})[0];
 		//this.state.players.push(current);
 	}
 
 	makeSpectator(): void {
+		/* istanbul ignore if */
 		if (this.isSpectator())
 			return;
 		this.pointingApi.switchToSpectator();
-		this.userState.setLastRole(PlayerRole.spectator);
 		//let current = _.remove(this.state.players, {uid: this.userState.getUid()})[0];
 		//this.state.spectators.push(current);
 	}

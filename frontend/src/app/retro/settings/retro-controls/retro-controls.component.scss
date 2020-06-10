@@ -1,0 +1,15 @@
+:host {
+	::ng-deep {
+		.mat-button-toggle-label-content {
+			line-height: 32px !important;
+		}
+	}
+}
+
+.fa-download {
+	font-size: 17px;
+	color: #aaa;
+	&:hover {
+		color: #343a40;
+	}
+}

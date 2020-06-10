@@ -58,6 +58,7 @@ describe('UserStateService', () => {
 		expect(service.isLoggedIn()).toBeTruthy();
 		expect(service.getUser()).toEqual({name: 'some-name', uid: 'some-id'});
 		expect(service.getUid()).toBe('some-id');
+		expect(service.getName()).toBe('some-name');
 	});
 
 	it('should fail login if no data in storage', () => {

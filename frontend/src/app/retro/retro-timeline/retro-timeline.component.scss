@@ -1,0 +1,106 @@
+$primary-color: #3f51b5;
+.events-container {
+	width: 100%;
+	height: 100%;
+
+	.events-grid {
+		padding: 32px 16px 16px 16px;
+		position: relative;
+
+		.events-line {
+			span {
+				position: absolute;
+				top: 8px;
+				width: 100%;
+				left: 0;
+				font-size: 24px;
+				text-align: center;
+			}
+			.line {
+				position: absolute;
+				left: calc(50% - 2px);
+				right: calc(50% - 2px);
+				top: 40px;
+				bottom: 16px;
+				background-color: $primary-color;
+			}
+			//border: 2px solid #3f51b5;
+		}
+
+		.time-event {
+			text-align: right;
+			justify-content: flex-end;
+
+			.event-year {
+				order: 3;
+				align-self: center;
+
+				width: 200px;
+				text-align: center;
+				margin-right: -100px;
+				position: relative;
+
+				button {
+					border-color: $primary-color;
+					background-color: #fff;
+				}
+
+				.connection {
+					width: 50%;
+					background-color: $primary-color;
+					position: absolute;
+					left: 0;
+					top: calc(50% - 1px);
+					height: 2px;
+				}
+			}
+
+			.card-container {
+				order: 2;
+				max-width: 400px;
+				white-space: normal;
+
+				box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 
+					0px 2px 2px 0px rgba(0, 0, 0, 0.14), 
+					0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+				
+				padding: 0 10px;
+
+				span {
+					padding: 0 10px
+				}
+
+				.image-box {
+					margin-bottom: 10px;
+					height: auto;
+					max-width: 400px;
+					overflow: hidden;
+					
+					img {
+						object-fit: contain;
+						width: 100%;
+						height: 100%;
+					}
+				}
+			}
+		}
+
+		.time-event.odd {
+			align-self: flex-end;
+			text-align: left;
+			justify-content: flex-start;
+
+			.event-year {
+				order: 1;
+
+				margin-right: 0;
+				margin-left: -100px;
+
+				.connection {
+					left: auto;
+					right: 0;
+				}
+			}
+		}
+	}
+}

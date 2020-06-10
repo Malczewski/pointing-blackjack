@@ -1,0 +1,17 @@
+<div class="d-flex flex-row">
+	<resizeable-textarea
+		class="flex-fill force-auto-width"
+		[label]="laneConfig.inputLabel"
+		hint="Ctrl + Enter to Submit. Markdown supported"
+		[placeholder]="laneConfig.messagePlaceholder"
+		[(ngModel)]="newMessage.text"
+		(save)="addMessage()"
+		(cancel)="newMessage.text = ''">
+	</resizeable-textarea>
+	<button mat-button
+		(click)="addMessage()" 
+		matTooltip="Submit"
+		[disabled]="!newMessage.text.trim().length">
+		<i class="fa fa-plus"></i>
+	</button>
+</div>

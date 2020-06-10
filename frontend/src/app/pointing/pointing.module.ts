@@ -13,11 +13,13 @@ import { HangmanProgressComponent } from '@pointing/hangman-progress/hangman-pro
 import { ComplicationIndicatorComponent } from '@pointing/complication-indicator/complication-indicator.component';
 import { ShadePipe } from '@app/common/shade.pipe';
 import { NgPipesModule } from 'ngx-pipes';
-import { AppSocket } from '@app/common/sockets/app-socket';
+import { PointingSocket } from '@pointing/pointing-socket';
 import { FormsModule } from '@angular/forms';
 import { HomeComponent } from '@pointing/home/home.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatButtonModule } from '@angular/material/button';
+import { MatRippleModule } from '@angular/material/core';
 
 @NgModule({
 	declarations: [
@@ -42,9 +44,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 		FormsModule,
 		BrowserModule,
 		BrowserAnimationsModule,
+		MatButtonModule,
+		MatRippleModule,
 	],
 	providers: [
-		AppSocket,
+		PointingSocket,
 		PointingApiService,
 	]
 })

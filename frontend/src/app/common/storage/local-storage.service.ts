@@ -1,6 +1,7 @@
 /* istanbul ignore file */
 import { Injectable } from '@angular/core';
 import { IStorage } from '@app/common/storage/storage.interface';
+import { Property } from '@app/common/storage/property.enum';
 @Injectable({
 	providedIn: 'root'
 })
@@ -15,6 +16,7 @@ export class LocalStorageService implements IStorage {
 		localStorage.setItem(key, value);
 	}
 	clear() {
-		localStorage.clear();
+		localStorage.removeItem(Property.UID);
+		localStorage.removeItem(Property.NAME);
 	}
 }

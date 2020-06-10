@@ -1,0 +1,31 @@
+<div class="events-container">
+	<div class="events-grid d-flex flex-column w-100">
+		<div class="events-line">
+			<span>Year</span>
+			<div class="line"></div>
+		</div>
+		<div *ngFor="let timeEvent of timeEvents; let i = index"
+			class="time-event w-50 d-flex flex-row m-b-16"
+			[ngClass]="{'odd': i%2 === 1}">
+			<div class="event-year">
+				<div class="connection"></div>
+				<button mat-stroked-button 
+					(click)="selectYear(timeEvent.id)" 
+					class="year-label">
+					{{timeEvent.name || timeEvent.id}}
+				</button>
+			</div>
+			<button mat-stroked-button 
+				(click)="selectYear(timeEvent.id)"
+				class="card-container d-flex flex-column">
+				<div>{{timeEvent.text}}</div>
+				<div *ngIf="timeEvent.img" 
+					class="flex-fill image-box">
+					<img [src]="'assets/events/' + timeEvent.img" />
+				</div>
+					<!-- [style.background-image]="'url(assets/events/' + timeEvent.img + ')'">
+				</div> -->
+			</button>
+		</div>
+	</div>
+</div>
