@@ -20,9 +20,11 @@
 				class="card-container d-flex flex-column">
 				<div>{{timeEvent.text}}</div>
 				<div *ngIf="timeEvent.img" 
-					class="flex-fill image-box"
-					[style.background-image]="'url(assets/events/' + timeEvent.img + ')'">
+					class="flex-fill image-box">
+					<img [src]="'assets/events/' + timeEvent.img" />
 				</div>
+					<!-- [style.background-image]="'url(assets/events/' + timeEvent.img + ')'">
+				</div> -->
 			</button>
 		</div>
 	</div>
