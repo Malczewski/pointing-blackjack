@@ -38,24 +38,28 @@ export class PointingApiService {
 		this.pointingSocket.on('reconnect', () => this.joinRoom(roomId));
 	}
 
-	public vote(vote: Vote): void {
+	ping(): void {
+		this.pointingSocket.emit('room:ping');
+	}
+
+	vote(vote: Vote): void {
 		this.pointingSocket.emit('vote', vote);
 	}
 
-	public reset(): void {
+	reset(): void {
 		this.pointingSocket.emit('reset');
 	}
 
-	public show(): void {
+	show(): void {
 		this.pointingSocket.emit('show');
 	}
 
-	public switchToSpectator(): void {
+	switchToSpectator(): void {
 		this.pointingSocket.emit('role', PlayerRole.spectator);
 		this.setLastRole(PlayerRole.spectator);
 	}
 
-	public switchToPlayer(): void {
+	switchToPlayer(): void {
 		this.pointingSocket.emit('role', PlayerRole.player);
 		this.setLastRole(PlayerRole.player);
 	}
