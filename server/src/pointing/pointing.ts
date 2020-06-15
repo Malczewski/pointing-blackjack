@@ -25,7 +25,7 @@ export class Pointing {
 
 	start() {
 		this.pointingSocket = socketio(this.server, {
-			pingInterval: 5000,
+			pingInterval: 15000,
 			path: "/pointing",
 		});
 
@@ -39,6 +39,10 @@ export class Pointing {
 			socket.on("role", (role: PlayerRole) => this.changeRole(socket, role));
 		
 			socket.on("disconnect", () => this.disconnect(socket));
+			socket.on("room:ping", () => {
+				let player = socket.player;
+				console.log(`Ping ${player?.name}`);
+			});
 		});
 	}
 

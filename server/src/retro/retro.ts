@@ -31,7 +31,7 @@ export class Retro {
 
 	start() {
 		this.retroSocket = socketio(this.server, {
-			pingInterval: 5000,
+			pingInterval: 15000,
 			path: "/retro",
 		});
 
@@ -47,6 +47,10 @@ export class Retro {
 			socket.on('message:like', messageUid => this.likeMessage(socket, messageUid));
 		
 			socket.on("disconnect", () => this.disconnect(socket));
+			socket.on("room:ping", () => {
+				let player = socket.player;
+				console.log(`Ping ${player?.name}`);
+			});
 		});
 	}
 
