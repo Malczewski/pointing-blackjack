@@ -38,6 +38,8 @@ export class RoomComponent implements OnInit {
 			this.loaded = true;
 		});
 		this.pointingApi.joinRoom(this.roomId);
+
+		setInterval(() => this.pointingApi.ping(), 60000);
 		/* this.roomState = {
 			id: 'blabla',
 			name: 'bleble name',
