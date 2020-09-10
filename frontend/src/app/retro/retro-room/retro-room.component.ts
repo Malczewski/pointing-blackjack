@@ -34,6 +34,7 @@ export class RetroRoomComponent implements OnInit {
 			this.loaded = true;
 		});
 		this.retroApi.joinRoom(this.roomId);
+		setInterval(() => this.retroApi.ping(), 60000);
 	}
 
 }

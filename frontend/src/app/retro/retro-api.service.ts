@@ -96,6 +96,10 @@ export class RetroApiService {
 		// this.state.config[property] = value;
 		// this.fireChange();
 	}
+	
+	ping(): void {
+		this.retroSocket.emit('room:ping');
+	}
 
 	viewMode(): void {
 		this.retroSocket.emit('view-mode', true);
