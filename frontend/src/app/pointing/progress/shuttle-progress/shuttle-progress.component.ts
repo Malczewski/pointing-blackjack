@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
 import { ProgressAnimation } from '@pointing/progress/progress-animation.class';
 
 @Component({
@@ -6,6 +6,7 @@ import { ProgressAnimation } from '@pointing/progress/progress-animation.class';
 	templateUrl: './shuttle-progress.component.html',
 	styleUrls: ['./shuttle-progress.component.scss'],
 	animations: [ProgressAnimation.defaultAnimation()],
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ShuttleProgressComponent implements OnInit {
 

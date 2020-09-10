@@ -1,7 +1,7 @@
 import { trigger, state, style, transition, animate, keyframes, AnimationTriggerMetadata } from '@angular/animations';
 
 export class ProgressAnimation {
-	static defaultAnimation(): AnimationTriggerMetadata {
+	static defaultAnimation(highlight?: boolean): AnimationTriggerMetadata {
 		return trigger('showHide', [
 			// ...
 			state('hide', style({
@@ -11,8 +11,8 @@ export class ProgressAnimation {
 				opacity: 1
 			})),
 			transition('hide => show', animate('0.7s ease-in-out', keyframes([
-				style({fill: '#000000', opacity: 0, offset: 0 }),
-				style({fill: '#000000', opacity: 1, offset: 1 })
+				style({fill: highlight ? '#000000' : '', opacity: 0, offset: 0 }),
+				style({fill: highlight ? '#000000' : '', opacity: 1, offset: 1 })
 			]))),
 			
 			transition('show => hide', animate('0.5s ease-in-out', keyframes([
