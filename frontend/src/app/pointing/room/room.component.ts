@@ -13,11 +13,15 @@ import { UserStateService } from '@app/common/user-state.service';
 })
 export class RoomComponent implements OnInit {
 
+	readonly PROGRESS_INDICATORS = ['hangman', 'shuttle'];
+
 	roomUrl: string;
 	private roomId: string;
 	roomState: RoomState;
 	private loaded: boolean;
 	//private originalState: RoomState;
+
+	progressIndicator: string;
 
 	constructor(
 		private pointingApi: PointingApiService,
@@ -38,6 +42,9 @@ export class RoomComponent implements OnInit {
 			this.loaded = true;
 		});
 		this.pointingApi.joinRoom(this.roomId);
+
+		let progressIndicatorIndex = (this.roomId.length * 31 + new Date().getDate()) % this.PROGRESS_INDICATORS.length;
+		this.progressIndicator = this.PROGRESS_INDICATORS[progressIndicatorIndex];
 
 		setInterval(() => this.pointingApi.ping(), 60000);
 		/* this.roomState = {

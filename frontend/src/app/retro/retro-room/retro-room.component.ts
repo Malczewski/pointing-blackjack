@@ -29,7 +29,8 @@ export class RetroRoomComponent implements OnInit {
 
 		this.retroApi.getStateObserver().subscribe(state => {
 			this.state = RetroState.of(state);
-			this.retroHistory.saveSession(state);
+			if (state.viewMode)
+				this.retroHistory.saveSession(state);
 			this.loaded = true;
 		});
 		this.retroApi.joinRoom(this.roomId);
