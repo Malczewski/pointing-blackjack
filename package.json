@@ -1,11 +1,11 @@
 {
 	"name": "pointing-blackjack",
-	"version": "0.2.1",
+	"version": "0.2.2",
 	"description": "Pointing Poker with blackjack and hookers",
 	"main": "dist/server.js",
 	"dependencies": {
 		"express": "^4.17.1",
-		"lodash": "^4.17.15",
+		"lodash": "^4.17.19",
 		"moment": "^2.26.0",
 		"socket.io": "^2.3.0",
 		"ws": "^7.2.3"

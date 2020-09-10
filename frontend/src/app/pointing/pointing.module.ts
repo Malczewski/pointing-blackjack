@@ -9,7 +9,7 @@ import { RoomPlayersComponent } from '@pointing/room-players/room-players.compon
 import { RoomCardsComponent } from '@pointing/room-cards/room-cards.component';
 import { RoomResultsComponent } from '@pointing/room-results/room-results.component';
 import { RoomLogComponent } from '@pointing/room-log/room-log.component';
-import { HangmanProgressComponent } from '@pointing/hangman-progress/hangman-progress.component';
+import { HangmanProgressComponent } from '@pointing/progress/hangman-progress/hangman-progress.component';
 import { ComplicationIndicatorComponent } from '@pointing/complication-indicator/complication-indicator.component';
 import { ShadePipe } from '@app/common/shade.pipe';
 import { NgPipesModule } from 'ngx-pipes';
@@ -20,6 +20,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
 import { MatRippleModule } from '@angular/material/core';
+import { ShuttleProgressComponent } from './progress/shuttle-progress/shuttle-progress.component';
 
 @NgModule({
 	declarations: [
@@ -31,7 +32,8 @@ import { MatRippleModule } from '@angular/material/core';
 		RoomLogComponent,
 		HangmanProgressComponent,
 		ComplicationIndicatorComponent,
-		ShadePipe
+		ShadePipe,
+		ShuttleProgressComponent,
 	],
 	imports: [
 		CommonModule,
