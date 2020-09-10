@@ -148,4 +148,8 @@ export class RetroApiService {
 		// else message.likes.push(playerUid); 
 		// this.fireChange();
 	}
+
+	overrideSession(state: RetroState): void {
+		this.retroSocket.emit('state:set', state);
+	}
 }

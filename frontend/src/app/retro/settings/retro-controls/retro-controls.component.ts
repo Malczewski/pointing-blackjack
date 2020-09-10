@@ -30,4 +30,8 @@ export class RetroControlsComponent implements OnInit {
 		this.retroExport.exportSession(this.state);
 	}
 
+	importSession = (): void => {
+		this.retroExport.importSession();
+	}
+
 }

@@ -47,7 +47,7 @@ export class RetroHistoryService {
 		return session;
 	}
 
-	private getSessions(): {[sessionId: string]: RetroSession} {
+	getSessions(): {[sessionId: string]: RetroSession} {
 		try {
 			let json = this.userState.getStorage().get(this.RETRO_SESSIONS);
 			return json ? JSON.parse(json) : {};

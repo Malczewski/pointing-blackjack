@@ -15,10 +15,17 @@
 			</mat-button-toggle>
 		</mat-button-toggle-group>
 		
-		<button mat-icon-button
-			(click)="exportSession()" 
-			matTooltip="Export this session in JSON format. Session import will be ready soon...">
-			<i class="fa fa-download"></i>
-		</button>
+		<div class="pt-2">
+			<button mat-button (click)="exportSession()"
+				class="p-0"
+				matTooltip="Export this session in JSON format">
+				Export
+			</button>
+			<button mat-button (click)="importSession()"
+				class="p-0"
+				matTooltip="Import existing file into current session">
+				Import
+			</button>
+		</div>
 	</mat-expansion-panel>
 </mat-accordion>

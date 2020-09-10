@@ -1,0 +1,25 @@
+<div mat-dialog-content>
+	<p>Choose a session from your local storage, or import file</p>
+	<mat-table [dataSource]="historyItems" class="mat-elevation-z8">
+
+		<ng-container matColumnDef="date">
+			<mat-header-cell *matHeaderCellDef> Date </mat-header-cell>
+			<mat-cell *matCellDef="let state"> {{state.startDate}} </mat-cell>
+		</ng-container>
+
+		<!-- Name Column -->
+		<ng-container matColumnDef="messages">
+			<mat-header-cell *matHeaderCellDef> Messages </mat-header-cell>
+			<mat-cell *matCellDef="let state"> {{state.messages.length}} </mat-cell>
+		</ng-container>
+
+		<mat-header-row *matHeaderRowDef="['date', 'messages']"></mat-header-row>
+		<mat-row  *matRowDef="let state; columns: ['date', 'messages'];" 
+			(click)="selectedState = state"
+			[class.selected]="selectedState === state"></mat-row>
+	</mat-table>
+</div>
+<div mat-dialog-actions>
+	<button mat-button (click)="cancel()">Cancel</button>
+	<button mat-button (click)="import()" [disabled]="!selectedState">Import</button>
+</div>
