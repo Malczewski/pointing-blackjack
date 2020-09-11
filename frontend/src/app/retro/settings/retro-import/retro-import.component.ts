@@ -19,7 +19,7 @@ export class RetroImportComponent implements OnInit {
 		private retroHistory: RetroHistoryService) { }
 
 	ngOnInit(): void {
-		this.historyItems = _.sortBy(_.values(this.retroHistory.getSessions()), 'startDate');
+		this.historyItems = _.sortBy(_.values(this.retroHistory.getSessions()), 'startDate').reverse();
 	}
 
 	import(): void {

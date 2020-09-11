@@ -16,8 +16,7 @@
 		"build-dev": "cd server && npx tsc && cd ../frontend && npx ng build",
 		"build-prod": "cd server && npx tsc && cd ../frontend && npx ng build --prod",
 		"test": "cd frontend && npx ng lint && npx ng test --watch=false --no-progress --browsers=ChromeHeadlessNoSandbox --code-coverage",
-		"buildStart": "cd server && npx tsc && cd .. && node dist/server.js",
-		"start": "node dist/server.js",
+		"start": "cd server && npx tsc && cd .. && node dist/server.js",
 		"postinstall": "cd server && npm install && cd ../frontend && npm install"
 	},
 	"engines": {

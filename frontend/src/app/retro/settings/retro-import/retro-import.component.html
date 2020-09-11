@@ -1,10 +1,10 @@
 <div mat-dialog-content>
 	<p>Choose a session from your local storage, or import file</p>
-	<mat-table [dataSource]="historyItems" class="mat-elevation-z8">
+	<mat-table [dataSource]="historyItems" class="mat-elevation-z8 mb-3">
 
 		<ng-container matColumnDef="date">
 			<mat-header-cell *matHeaderCellDef> Date </mat-header-cell>
-			<mat-cell *matCellDef="let state"> {{state.startDate}} </mat-cell>
+			<mat-cell *matCellDef="let state"> {{state.startDate | date:'MMM d, y, h:mm a'}} </mat-cell>
 		</ng-container>
 
 		<!-- Name Column -->
@@ -14,8 +14,10 @@
 		</ng-container>
 
 		<mat-header-row *matHeaderRowDef="['date', 'messages']"></mat-header-row>
-		<mat-row  *matRowDef="let state; columns: ['date', 'messages'];" 
+		<mat-row *matRowDef="let state; columns: ['date', 'messages'];" 
 			(click)="selectedState = state"
+			(dblclick)="import()"
+			class="clickable"
 			[class.selected]="selectedState === state"></mat-row>
 	</mat-table>
 </div>

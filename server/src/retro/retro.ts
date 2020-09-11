@@ -5,6 +5,7 @@ import { RetroGlobalState } from './entities/global-state';
 import { RetroMessage } from './entities/message';
 import { RetroConfig, RetroRoomState } from './entities/room-state';
 import { RandomUtils } from '../utils/random-utils';
+import moment = require('moment');
 
 interface RetroSocket extends socketio.Socket {
 	player: RetroPlayer;
@@ -91,6 +92,10 @@ export class Retro {
 		if (room) {
 			let roomState = this.globalState.getRoom(room);
 			roomState.setViewMode(viewMode);
+			if (!viewMode && Math.abs(moment(roomState.startDate).diff(moment(), 'hour')) >= 24) {
+				roomState.startDate = moment().format();
+				roomState.sessionId = RandomUtils.generateUID();
+			}
 			this.refreshRoom(room, player);
 		}
 	}
