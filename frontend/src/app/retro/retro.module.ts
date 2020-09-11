@@ -33,6 +33,8 @@ import { ClipboardModule } from 'ngx-clipboard';
 import { RetroImportComponent } from './settings/retro-import/retro-import.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import {MatTableModule} from '@angular/material/table';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
 	declarations: [
@@ -66,7 +68,9 @@ import {MatTableModule} from '@angular/material/table';
 		MatBadgeModule,
 		MatDividerModule,
 		MatTableModule,
+		MatPaginatorModule,
 		MatDialogModule,
+		MatSnackBarModule,
 		PerfectScrollbarModule,
 		ClipboardModule,
 		MarkdownModule.forRoot({

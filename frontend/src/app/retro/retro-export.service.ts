@@ -1,3 +1,4 @@
+/* istanbul ignore file */ 
 import { Injectable, Component } from '@angular/core';
 import { RetroSession, RetroHistoryService } from '@app/retro/retro-history.service';
 import { RetroState } from '@app/retro/retro-state.class';
@@ -14,7 +15,7 @@ export class RetroExportService {
 		private retroHistory: RetroHistoryService,
 		private retroApi: RetroApiService,
 		private dialog: MatDialog) { }
-
+ 
 	exportSession(state: RetroState): void {
 		let session = this.retroHistory.convertToSession(state);
 		let name = `Retrospective_${state.startDate}`;
