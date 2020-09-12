@@ -30,7 +30,11 @@ import { MarkdownModule, MarkedOptions } from 'ngx-markdown';
 import { ResizeableTextareaComponent } from './lanes/resizeable-textarea/resizeable-textarea.component';
 import { RetroTimelineComponent } from './retro-timeline/retro-timeline.component';
 import { ClipboardModule } from 'ngx-clipboard';
-
+import { RetroImportComponent } from './settings/retro-import/retro-import.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import {MatTableModule} from '@angular/material/table';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
 	declarations: [
@@ -44,7 +48,7 @@ import { ClipboardModule } from 'ngx-clipboard';
 		LaneInputComponent, 
 		RetroLanesComponent, 
 		ResizeableTextareaComponent, 
-		RetroTimelineComponent],
+		RetroTimelineComponent, RetroImportComponent],
 	imports: [
 		CommonModule,
 		TrinityRingsSpinnerModule,
@@ -63,6 +67,10 @@ import { ClipboardModule } from 'ngx-clipboard';
 		MatButtonModule,
 		MatBadgeModule,
 		MatDividerModule,
+		MatTableModule,
+		MatPaginatorModule,
+		MatDialogModule,
+		MatSnackBarModule,
 		PerfectScrollbarModule,
 		ClipboardModule,
 		MarkdownModule.forRoot({
