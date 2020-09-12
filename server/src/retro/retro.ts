@@ -3,7 +3,9 @@ import * as socketio from "socket.io";
 import { RetroPlayer } from './entities/player';
 import { RetroGlobalState } from './entities/global-state';
 import { RetroMessage } from './entities/message';
-import { RetroConfig } from './entities/room-state';
+import { RetroConfig, RetroRoomState } from './entities/room-state';
+import { RandomUtils } from '../utils/random-utils';
+import moment = require('moment');
 
 interface RetroSocket extends socketio.Socket {
 	player: RetroPlayer;
@@ -51,6 +53,7 @@ export class Retro {
 				let player = socket.player;
 				console.log(`Ping ${player?.name}`);
 			});
+			socket.on('state:set', state => this.importState(socket, state));
 		});
 	}
 
@@ -89,6 +92,10 @@ export class Retro {
 		if (room) {
 			let roomState = this.globalState.getRoom(room);
 			roomState.setViewMode(viewMode);
+			if (!viewMode && Math.abs(moment(roomState.startDate).diff(moment(), 'hour')) >= 24) {
+				roomState.startDate = moment().format();
+				roomState.sessionId = RandomUtils.generateUID();
+			}
 			this.refreshRoom(room, player);
 		}
 	}
@@ -148,6 +155,25 @@ export class Retro {
 				setTimeout(() => this.globalState.checkRoom(socket.room as string), 5000);
 			}
 		}
+	}
+
+	private importState(socket: RetroSocket, newState: RetroRoomState) {
+		console.log(`import: ${JSON.stringify(socket.player)}, room: ${socket.room}`);
+		let room = socket.room;
+		if (room) {
+			let roomState = this.globalState.getRoom(room);
+			roomState.sessionId = newState.sessionId;
+			roomState.startDate = newState.startDate;
+			roomState.config = newState.config;
+			roomState.viewMode = true;
+			roomState.messages = newState.messages;
+			roomState.messages.forEach(message => {
+				message.uid = RandomUtils.generateUID();
+				message.opened = true;
+			});
+			this.refreshRoom(room, socket.player);
+		}
+		
 	}
 	
 	private async refreshRoom(room: string, lastPlayer?: RetroPlayer | null, lastMessageUid?: string) {

@@ -46,6 +46,7 @@ export class RoomComponent implements OnInit {
 		let progressIndicatorIndex = (this.roomId.length * 31 + new Date().getDate()) % this.PROGRESS_INDICATORS.length;
 		this.progressIndicator = this.PROGRESS_INDICATORS[progressIndicatorIndex];
 
+		/* istanbul ignore next */
 		setInterval(() => this.pointingApi.ping(), 60000);
 		/* this.roomState = {
 			id: 'blabla',

@@ -15,7 +15,7 @@ describe('RetroControlsComponent', () => {
 
 	beforeEach(async(() => {
 		apiSpy = jasmine.createSpyObj(['viewMode', 'writeMode']);
-		exportSpy = jasmine.createSpyObj(['exportSession']);
+		exportSpy = jasmine.createSpyObj(['exportSession', 'importSession']);
 		TestBed.configureTestingModule({
 			imports: [RetroModule],
 			declarations: [ RetroControlsComponent ],
@@ -55,8 +55,14 @@ describe('RetroControlsComponent', () => {
 	});
 
 	it('export', () => {
-		fixture.debugElement.queryAll(By.css('.fa-download'))[0].nativeElement.click();
+		fixture.debugElement.queryAll(By.css('.export-btn'))[0].nativeElement.click();
 		fixture.detectChanges();
 		expect(exportSpy.exportSession).toHaveBeenCalled();
+	});
+
+	it('import', () => {
+		fixture.debugElement.queryAll(By.css('.import-btn'))[0].nativeElement.click();
+		fixture.detectChanges();
+		expect(exportSpy.importSession).toHaveBeenCalled();
 	});
 });
