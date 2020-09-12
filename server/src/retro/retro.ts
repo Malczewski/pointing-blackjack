@@ -93,7 +93,7 @@ export class Retro {
 			let roomState = this.globalState.getRoom(room);
 			roomState.setViewMode(viewMode);
 			if (!viewMode && Math.abs(moment(roomState.startDate).diff(moment(), 'hour')) >= 24) {
-				roomState.startDate = moment().format();
+				roomState.startDate = moment().toISOString();
 				roomState.sessionId = RandomUtils.generateUID();
 			}
 			this.refreshRoom(room, player);

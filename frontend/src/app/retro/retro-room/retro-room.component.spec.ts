@@ -59,7 +59,7 @@ describe('RetroRoomComponent', () => {
 
 	it('should save session if it is fresh', () => {
 		setState({
-			startDate: moment().add(-4, 'hour').format(),
+			startDate: moment().add(-4, 'hour').toISOString(),
 			viewMode: true
 		} as RetroState);
 		expect(historyMock.saveSession).toHaveBeenCalled();
@@ -67,7 +67,7 @@ describe('RetroRoomComponent', () => {
 
 	it('should not save session if it is old', () => {
 		setState({
-			startDate: moment().add(-30, 'hour').format(),
+			startDate: moment().add(-30, 'hour').toISOString(),
 			viewMode: true
 		} as RetroState);
 		expect(historyMock.saveSession).not.toHaveBeenCalled();
