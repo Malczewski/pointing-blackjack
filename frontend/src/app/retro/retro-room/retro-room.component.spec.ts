@@ -8,11 +8,13 @@ import { UserStateService } from '@app/common/user-state.service';
 import { RetroState } from '@app/retro/retro-state.class';
 import { Observable } from 'rxjs';
 import { RetroHistoryService } from '@app/retro/retro-history.service';
+import * as moment from 'moment';
 
 describe('RetroRoomComponent', () => {
 	let component: RetroRoomComponent;
 	let fixture: ComponentFixture<RetroRoomComponent>;
 	let apiMock: jasmine.SpyObj<RetroApiService>;
+	let historyMock: jasmine.SpyObj<RetroHistoryService>;
 	let setState: (state: RetroState) => void;
 
 	beforeEach(async(() => {
@@ -28,12 +30,13 @@ describe('RetroRoomComponent', () => {
 		apiMock.getStateObserver.and.returnValue({
 			subscribe: (fn) => setState = fn
 		} as Observable<RetroState>);
+		historyMock = jasmine.createSpyObj(['saveSession']);
 		TestBed.configureTestingModule({
 			imports: [RetroModule],
 			providers: [
 				{provide: ActivatedRoute, useValue: {snapshot: {paramMap: {get: () => 'earth'}}}},
 				{provide: RetroApiService, useValue: apiMock},
-				{provide: RetroHistoryService, useValue: jasmine.createSpyObj(['saveSession'])},
+				{provide: RetroHistoryService, useValue: historyMock},
 			]
 		}).compileComponents();
 	}));
@@ -52,5 +55,21 @@ describe('RetroRoomComponent', () => {
 		expect(component.loaded).toBeFalsy();
 		setState({} as RetroState);
 		expect(component.loaded).toBeTruthy();
+	});
+
+	it('should save session if it is fresh', () => {
+		setState({
+			startDate: moment().add(-4, 'hour').format(),
+			viewMode: true
+		} as RetroState);
+		expect(historyMock.saveSession).toHaveBeenCalled();
+	});
+
+	it('should not save session if it is old', () => {
+		setState({
+			startDate: moment().add(-30, 'hour').format(),
+			viewMode: true
+		} as RetroState);
+		expect(historyMock.saveSession).not.toHaveBeenCalled();
 	});
 });

@@ -36,6 +36,7 @@ export class RetroRoomComponent implements OnInit {
 			this.loaded = true;
 		});
 		this.retroApi.joinRoom(this.roomId);
+		/* istanbul ignore next */
 		setInterval(() => this.retroApi.ping(), 60000);
 	}
 

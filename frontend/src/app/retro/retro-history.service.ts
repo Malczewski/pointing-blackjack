@@ -28,9 +28,7 @@ export class RetroHistoryService {
 
 	saveSession(state: RetroState): void {
 		let sessions = this.getSessions();
-		if (!sessions)
-			sessions = {};
-		
+
 		sessions[state.sessionId] = this.convertToSession(state);
 		this.saveSessions(sessions);
 	}
@@ -51,7 +49,7 @@ export class RetroHistoryService {
 		try {
 			let json = this.userState.getStorage().get(this.RETRO_SESSIONS);
 			return json ? JSON.parse(json) : {};
-		} catch (e) {
+		} catch (e) /* istanbul ignore next */ { 
 			console.log(e);
 			return {};
 		}

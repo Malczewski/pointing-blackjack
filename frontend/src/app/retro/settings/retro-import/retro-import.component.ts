@@ -43,15 +43,14 @@ export class RetroImportComponent implements OnInit {
 		this.historyData.paginator = this.paginator;
 	}
 
-	/* istanbul ignore next */ 
 	onFileChanged(event: any) {
 		let file = event.target.files[0];
 		const fileReader = new FileReader();
 		fileReader.readAsText(file, 'UTF-8');
-		fileReader.onload = () => {
+		fileReader.addEventListener('load', (e) => {
 			let session: RetroSession;
 			try {
-				session = JSON.parse(fileReader.result as string);
+				session = JSON.parse(e.target.result as string);
 			} catch (error) {
 				this.snackBar.open(error, 'Error', { duration: 5000});
 				return;
@@ -65,15 +64,19 @@ export class RetroImportComponent implements OnInit {
 			this.selectedState = _.find(this.historyData.data, {sessionId: session.sessionId});
 			let requiredPage = Math.floor(this.historyData.data.indexOf(this.selectedState) / this.paginator.pageSize);
 			this.paginator.firstPage();
+
+			/* istanbul ignore next */
 			while (this.paginator.pageIndex < requiredPage)
 				this.paginator.nextPage();
-		};
+		});
+		
+		/* istanbul ignore next */
 		fileReader.onerror = (error) => {
+			/* istanbul ignore next */
 			this.snackBar.open('' + error, 'Error', { duration: 5000});
 		};
 	}
 
-	/* istanbul ignore next */ 
 	private isValidSession(session: RetroSession): boolean {
 		return !!session && !!session.config && !!session.startDate && !!session.sessionId && !!session.messages;
 	}
