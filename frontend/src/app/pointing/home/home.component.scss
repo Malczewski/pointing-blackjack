@@ -23,9 +23,7 @@
 		margin-bottom: 2vw;
 		//background: radial-gradient(#000000 0%, #000000 80%, #ffffff 100%);
 		.porthole {
-			display: grid;
-			grid-template-columns: 1fr;
-			grid-template-rows: 1fr;
+			position: relative;
 			width: 100%;
 			height: 100%;
 
@@ -39,12 +37,13 @@
 			background-color: black; */
 
 			.planet {
-				grid-column: 1;
-				grid-row: 1;
 				background: black;
 				border-radius: 50%;
-				margin: 1vw;
-
+				left: 1vw;
+				top: 1vw;
+				right: 1vw;
+				bottom: 1vw;
+				position: absolute;
 				img {
 					padding: 7vw;
 					width: 100%;
@@ -52,8 +51,9 @@
 				}
 			}
 			.glass {
-				grid-column: 1;
-				grid-row: 1;
+				position: absolute;
+				left: 0;
+				top: 0;
 				margin: 1vw;
 				width: calc(100% - 2vw);
 				height: calc(100% - 2vw);
@@ -65,17 +65,23 @@
 					inset 0 0 300px rgba(255,255,255,0.4); */
 			}
 	
-			.name {
-				grid-column: 1;
-				grid-row: 1;
-				align-self: end;
-				justify-self: center;
-				//color: #ffffff;
-				font-size: 2vw;
-				text-transform: capitalize;
-				padding: 0 2vw;
-	
-				//text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
+			.room-button {
+				display: flex;
+				position: absolute;
+				width: 100%;
+				bottom: -1vw;
+				align-items: center;
+				justify-content: center;
+				.name {
+					align-self: end;
+					justify-self: center;
+					//color: #ffffff;
+					font-size: 2vw;
+					text-transform: capitalize;
+					padding: 0 3vw;
+		
+					//text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
+				}
 			}
 
 			.porthole-border {

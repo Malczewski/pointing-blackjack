@@ -25,7 +25,6 @@ export class RetroSettingsComponent implements OnInit {
 	}, {
 		value: RetroType.llll,
 		text: '4Ls',
-		disabled: true,
 		tooltip: `Liked – what did the team like about this sprint/iteration/project?
 			Learned – what did the team learn during this sprint/iteration/project?
 			Lacked – what did the team lack during this period?

@@ -36,9 +36,17 @@ export class RetroLanesComponent implements OnInit, OnChanges {
 
 	private initLanes(): void {
 		let types: LaneDefinitionType[];
-		if (this.state.config.type === RetroType.startStop)
-			types = [LaneDefinitionType.START, LaneDefinitionType.STOP, LaneDefinitionType.CONTINUE];
-		else types = [LaneDefinitionType.GOOD, LaneDefinitionType.IMPROVE];
+		switch (this.state.config.type) {
+			case RetroType.startStop: 
+				types = [LaneDefinitionType.START, LaneDefinitionType.STOP, LaneDefinitionType.CONTINUE]; 
+				break;
+			case RetroType.goodImprove: 
+				types = [LaneDefinitionType.GOOD, LaneDefinitionType.IMPROVE]; 
+				break;
+			case RetroType.llll: 
+				types = [LaneDefinitionType.LIKED, LaneDefinitionType.LEARNED, LaneDefinitionType.LACKED, LaneDefinitionType.LONGED_FOR]; 
+				break;
+		}
 
 		if (this.state.config.slowdowns)
 			types.push(LaneDefinitionType.SLOWDOWNS);
