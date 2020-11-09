@@ -9,14 +9,9 @@ import { ProgressAnimation } from '@pointing/progress/progress-animation.class';
 	animations: [ProgressAnimation.defaultAnimation(true)],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class HangmanProgressComponent implements OnInit {
+export class HangmanProgressComponent {
 
 	@Input() progress: number;
-
-	constructor() { }
-
-	ngOnInit(): void {
-	}
 
 	getState(threshold: number): string {
 		return this.progress >= threshold ? 'show' : 'hide';

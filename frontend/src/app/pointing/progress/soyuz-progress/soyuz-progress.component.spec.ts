@@ -1,5 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-/* 
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+
 import { SoyuzProgressComponent } from './soyuz-progress.component';
 
 describe('SoyuzProgressComponent', () => {
@@ -8,6 +9,7 @@ describe('SoyuzProgressComponent', () => {
 
 	beforeEach(async(() => {
 		TestBed.configureTestingModule({
+			imports: [NoopAnimationsModule],
 			declarations: [ SoyuzProgressComponent ]
 		})
 		.compileComponents();
@@ -23,4 +25,3 @@ describe('SoyuzProgressComponent', () => {
 		expect(component).toBeTruthy();
 	});
 });
- */

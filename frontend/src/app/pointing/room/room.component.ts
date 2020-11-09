@@ -13,7 +13,7 @@ import { UserStateService } from '@app/common/user-state.service';
 })
 export class RoomComponent implements OnInit {
 
-	readonly PROGRESS_INDICATORS = ['hangman', 'shuttle'];
+	readonly PROGRESS_INDICATORS = ['hangman', 'soyuz', 'shuttle'];
 
 	roomUrl: string;
 	private roomId: string;

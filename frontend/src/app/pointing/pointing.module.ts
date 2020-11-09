@@ -21,6 +21,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
 import { MatRippleModule } from '@angular/material/core';
 import { ShuttleProgressComponent } from './progress/shuttle-progress/shuttle-progress.component';
+import { SoyuzProgressComponent } from '@pointing/progress/soyuz-progress/soyuz-progress.component';
 
 @NgModule({
 	declarations: [
@@ -34,6 +35,7 @@ import { ShuttleProgressComponent } from './progress/shuttle-progress/shuttle-pr
 		ComplicationIndicatorComponent,
 		ShadePipe,
 		ShuttleProgressComponent,
+		SoyuzProgressComponent,
 	],
 	imports: [
 		CommonModule,
