@@ -19,7 +19,11 @@ export enum LaneDefinitionType {
 	IMPROVE = 'IMPROVE',
 	SLOWDOWNS = 'SLOWDOWNS',
 	ACHIEVEMENTS = 'ACHIEVEMENTS',
-	ACTION = 'ACTION'
+	ACTION = 'ACTION',
+	LIKED = 'LIKED',
+	LEARNED = 'LEARNED',
+	LACKED = 'LACKED',
+	LONGED_FOR = 'LONGED_FOR'
 }
 
 export enum LaneFilter {
@@ -99,6 +103,36 @@ What didn’t go as expected?`,
 			messagePlaceholder: 'A single, clearly defined task that must be done.',
 			type: MessageType.action,
 		},
+		LIKED: {
+			name: 'Liked',
+			inputLabel: 'Liked',
+			messagePlaceholder: `What did the team really enjoy about the iteration? 
+In particular, what went better than expected? 
+Emphasize the positive.`,
+			type: MessageType.good,
+		},
+		LEARNED: {
+			name: 'Learned',
+			inputLabel: 'Learned',
+			messagePlaceholder: `What new things did the team learn during the iteration? 
+These can be technical things (like the importance of unit testing) or nontechnical things (like a new and effective way to keep a key stakeholder informed).`,
+			type: MessageType.good,
+			subType: MessageSubtype.achievement
+		},
+		LACKED: {
+			name: 'Lacked',
+			inputLabel: 'Lacked',
+			messagePlaceholder: `What things could the team have done better during the iteration?`,
+			type: MessageType.evil,
+		},
+		LONGED_FOR: {
+			name: 'Longed for',
+			inputLabel: 'Longed for',
+			messagePlaceholder: `What things did the team desire to have during the iteration that were not available? 
+Again, these can be technical (like the need for a continuous integration server) or nontechnical (like the desire for more face time with the Product Owner).`,
+			type: MessageType.evil,
+			subType: MessageSubtype.start
+		},
 	};
 
 	private static getLaneFilters(type: LaneDefinitionType, config: RetroConfig): LaneFilter[] {
@@ -111,6 +145,10 @@ What didn’t go as expected?`,
 			case LaneDefinitionType.SLOWDOWNS: return [LaneFilter.SLOWDOWN];
 			case LaneDefinitionType.ACHIEVEMENTS: return [LaneFilter.ACHIEVEMENT];
 			case LaneDefinitionType.ACTION: return [LaneFilter.ACTION]; 
+			case LaneDefinitionType.LIKED: return [LaneFilter.GOOD];
+			case LaneDefinitionType.LEARNED: return [LaneFilter.ACHIEVEMENT];
+			case LaneDefinitionType.LACKED: return [LaneFilter.BAD].concat(config.slowdowns ? [] : [LaneFilter.SLOWDOWN]);
+			case LaneDefinitionType.LONGED_FOR: return [LaneFilter.START];
 		}
 	}
 
