@@ -7,6 +7,7 @@ import { PointingApiService } from '@pointing/pointing-api.service';
 import { UserStateService } from '@app/common/user-state.service';
 import { RoomState, Vote, Player, VoteState } from '@pointing/room-state.class';
 import { Observable } from 'rxjs';
+import * as moment from 'moment';
 
 describe('RoomComponent', () => {
 	let component: RoomComponent;
@@ -30,64 +31,93 @@ describe('RoomComponent', () => {
 	}));
 
 	beforeEach(() => {
+		jasmine.clock().install();
+	});
+
+	afterEach(() => {
+		jasmine.clock().uninstall();
+	});
+
+	function init() {
 		fixture = TestBed.createComponent(RoomComponent);
 		component = fixture.componentInstance;
 		fixture.detectChanges();
-	});
-
-	it('should create', () => {
-		expect(component).toBeTruthy();
-	});
-
-	function state(votes: Vote[], spectator?: boolean): RoomState {
-		let players = votes.map((vote, index) => {
-			return { vote, uid: `id-${index}`, name: `player-${index}` };
-		});
-		let spectators = [];
-		if (spectator) {
-			spectators.push({uid: 'my_id', name: 'me'});
-		} else {
-			players[0].uid = 'my_id'; // make 1st player - mine
-		}
-		return {
-			players,
-			spectators,
-			log: []
-		} as RoomState;
 	}
 
-	it('should show proper mode', () => {
-		expect(component.getMode()).toBe('loading');
-		setState(state([5]));
-		expect(component.getMode()).toBe('results');
-		setState(state([], true));
-		expect(component.getMode()).toBe('results');
-		setState(state([undefined, 2], true));
-		expect(component.getMode()).toBe('progress');
-		setState(state([undefined, 5, 3]));
-		expect(component.getMode()).toBe('cards');
+	describe('', () => {
+		beforeEach(() => {
+			init();
+		});
+
+		it('should create', () => {
+			expect(component).toBeTruthy();
+		});
+	
+		function state(votes: Vote[], spectator?: boolean): RoomState {
+			let players = votes.map((vote, index) => {
+				return { vote, uid: `id-${index}`, name: `player-${index}` };
+			});
+			let spectators = [];
+			if (spectator) {
+				spectators.push({uid: 'my_id', name: 'me'});
+			} else {
+				players[0].uid = 'my_id'; // make 1st player - mine
+			}
+			return {
+				players,
+				spectators,
+				log: []
+			} as RoomState;
+		}
+	
+		it('should show proper mode', () => {
+			expect(component.getMode()).toBe('loading');
+			setState(state([5]));
+			expect(component.getMode()).toBe('results');
+			setState(state([], true));
+			expect(component.getMode()).toBe('results');
+			setState(state([undefined, 2], true));
+			expect(component.getMode()).toBe('progress');
+			setState(state([undefined, 5, 3]));
+			expect(component.getMode()).toBe('cards');
+		});
+	
+		it('show mini progress', () => {
+			setState(state([5, 3, null]));
+			expect(component.showMiniProgress()).toBeTruthy();
+			setState(state([5, undefined, VoteState.none]));
+			expect(component.showMiniProgress()).toBeTruthy();
+			setState(state([5, 3, VoteState.wait]));
+			expect(component.showMiniProgress()).toBeTruthy();
+			setState(state([5, 3, undefined], true));
+			expect(component.showMiniProgress()).toBeFalsy();
+			setState(state([5, 3, VoteState.none], true));
+			expect(component.showMiniProgress()).toBeTruthy();
+		});
+	
+		it('reset votes', () => {
+			component.resetVotes();
+			expect(pointingApiMock.reset).toHaveBeenCalled();
+		});
+	
+		it('show votes', () => {
+			component.showVotes();
+			expect(pointingApiMock.show).toHaveBeenCalled();
+		});
+		
 	});
 
-	it('show mini progress', () => {
-		setState(state([5, 3, null]));
-		expect(component.showMiniProgress()).toBeTruthy();
-		setState(state([5, undefined, VoteState.none]));
-		expect(component.showMiniProgress()).toBeTruthy();
-		setState(state([5, 3, VoteState.wait]));
-		expect(component.showMiniProgress()).toBeTruthy();
-		setState(state([5, 3, undefined], true));
-		expect(component.showMiniProgress()).toBeFalsy();
-		setState(state([5, 3, VoteState.none], true));
-		expect(component.showMiniProgress()).toBeTruthy();
+	it('should initialize christmas progress on dec/jan', () => {
+		let today = new Date('2018-12-02');
+		jasmine.clock().mockDate(today);
+		init();
+		expect(component.progressIndicator).toEqual('christmas');
 	});
 
-	it('reset votes', () => {
-		component.resetVotes();
-		expect(pointingApiMock.reset).toHaveBeenCalled();
-	});
-
-	it('show votes', () => {
-		component.showVotes();
-		expect(pointingApiMock.show).toHaveBeenCalled();
+	it('should initialize default progress on other months', () => {
+		let today = new Date('2018-10-02');
+		jasmine.clock().mockDate(today);
+		init();
+		expect(component.progressIndicator).toEqual('soyuz');
 	});
 });

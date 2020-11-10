@@ -5,6 +5,7 @@ import { RoomState } from '@pointing/room-state.class';
 import * as _ from 'lodash';
 import { PointingUtils } from '@pointing/pointing-utils.service';
 import { UserStateService } from '@app/common/user-state.service';
+import * as moment from 'moment';
 
 @Component({
 	selector: 'room',
@@ -14,6 +15,7 @@ import { UserStateService } from '@app/common/user-state.service';
 export class RoomComponent implements OnInit {
 
 	readonly PROGRESS_INDICATORS = ['hangman', 'soyuz', 'shuttle'];
+	readonly HOLIDAY_INDICATORS = ['christmas'];
 
 	roomUrl: string;
 	private roomId: string;
@@ -43,8 +45,9 @@ export class RoomComponent implements OnInit {
 		});
 		this.pointingApi.joinRoom(this.roomId);
 
-		let progressIndicatorIndex = (this.roomId.length * 31 + new Date().getDate()) % this.PROGRESS_INDICATORS.length;
-		this.progressIndicator = this.PROGRESS_INDICATORS[progressIndicatorIndex];
+		let indicators = _.includes([0, 11], moment(new Date()).month()) ? this.HOLIDAY_INDICATORS : this.PROGRESS_INDICATORS;
+		let progressIndicatorIndex = (this.roomId.length * 31 + new Date().getDate()) % indicators.length;
+		this.progressIndicator = indicators[progressIndicatorIndex];
 
 		/* istanbul ignore next */
 		setInterval(() => this.pointingApi.ping(), 60000);
