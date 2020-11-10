@@ -8,6 +8,7 @@
 		<div class="d-block">
 			<mat-form-field>
 				<mat-select class="type-selector" placeholder="Type" 
+					disableOptionCentering 
 					[(ngModel)]="state.config.type" 
 					(ngModelChange)="changeConfig('type')" name="type">
 					<mat-option *ngFor="let item of typeOptions" [value]="item.value"

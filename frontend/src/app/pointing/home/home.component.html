@@ -12,7 +12,9 @@
 				(click)="enterRoom(door.id)"
 				[style.transform]="'rotate(' + door.rotation + 'deg)'"
 				src="assets/planets/porthole.png">
-			<span class="name metal linear clickable" matRipple (click)="enterRoom(door.id)">{{door.name}}</span>
+			<div class="room-button">
+				<span class="name metal linear clickable" matRipple (click)="enterRoom(door.id)">{{door.name}}</span>
+			</div>
 		</div>
 	</div>
 </div>

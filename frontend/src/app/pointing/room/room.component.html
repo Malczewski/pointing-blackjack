@@ -38,6 +38,12 @@
 				<shuttle-progress *ngSwitchCase="'shuttle'" 
 					class="flex-fill" 
 					[progress]="getProgress()"></shuttle-progress>
+				<soyuz-progress *ngSwitchCase="'soyuz'" 
+					class="flex-fill" 
+					[progress]="getProgress()"></soyuz-progress>
+				<christmas *ngSwitchCase="'christmas'" 
+					class="flex-fill" 
+					[progress]="getProgress()"></christmas>
 			</ng-container>
 			<span class="progress-text">Vote in progress...</span>
 		</div>
@@ -57,6 +63,10 @@
 			[hidden]="!showMiniProgress()"></hangman-progress>
 		<shuttle-progress *ngSwitchCase="'shuttle'" [progress]="getProgress()"
 			[hidden]="!showMiniProgress()"></shuttle-progress>
+		<soyuz-progress *ngSwitchCase="'soyuz'" [progress]="getProgress()"
+			[hidden]="!showMiniProgress()"></soyuz-progress>
+		<christmas *ngSwitchCase="'christmas'" [progress]="getProgress()"
+			[hidden]="!showMiniProgress()"></christmas>
 	</ng-container>
 </div>
 <div class="room-log">

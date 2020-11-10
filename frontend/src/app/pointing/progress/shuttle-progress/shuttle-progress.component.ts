@@ -8,14 +8,9 @@ import { ProgressAnimation } from '@pointing/progress/progress-animation.class';
 	animations: [ProgressAnimation.defaultAnimation()],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ShuttleProgressComponent implements OnInit {
+export class ShuttleProgressComponent {
 
 	@Input() progress: number;
-	
-	constructor() { }
-
-	ngOnInit(): void {
-	}
 
 	getState(threshold: number): string {
 		return this.progress >= threshold ? 'show' : 'hide';

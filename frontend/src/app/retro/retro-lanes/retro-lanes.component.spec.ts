@@ -154,4 +154,24 @@ describe('RetroLanesComponent', () => {
 			[3]
 		]);
 	});
+
+	it('llll + slowdowns + achievements', () => {
+		component.state = state(config(RetroType.llll, true, true), false, [
+			goodContinue(1),
+			improveStop(2),
+			slowdown(3),
+			achievement(4),
+			start(5),
+			action(6)
+		]);
+		fixture.detectChanges();
+		expect(getMessageIds()).toEqual([
+			[1],
+			[4],
+			[2],
+			[5],
+			[3],
+			[4]
+		]);
+	});
 });
