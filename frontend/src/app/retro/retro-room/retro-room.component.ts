@@ -3,7 +3,7 @@ import { RetroState } from '@app/retro/retro-state.class';
 import { RetroApiService } from '@app/retro/retro-api.service';
 import { ActivatedRoute } from '@angular/router';
 import { RetroHistoryService } from '@app/retro/retro-history.service';
-import * as moment from 'moment';
+import * as dayjs from 'dayjs';
 
 @Component({
 	selector: 'retro-room',
@@ -30,7 +30,7 @@ export class RetroRoomComponent implements OnInit {
 
 		this.retroApi.getStateObserver().subscribe(state => {
 			this.state = RetroState.of(state);
-			let isSameDay = Math.abs(moment().diff(moment(state.startDate), 'hour')) < 24;
+			let isSameDay = Math.abs(dayjs().diff(dayjs(state.startDate), 'hour')) < 24;
 			if (state.viewMode && isSameDay)
 				this.retroHistory.saveSession(state);
 			this.loaded = true;

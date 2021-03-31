@@ -1,10 +1,10 @@
 import { Component, OnInit, Input, HostBinding } from '@angular/core';
 import { RoomState, Vote, VoteState, Player } from '@pointing/room-state.class';
-import * as _ from 'lodash';
 import { UserStateService } from '@app/common/user-state.service';
 import { PointingConstants } from '@pointing/pointing-constants.class';
 import { PointingUtils } from '@pointing/pointing-utils.service';
 import { PointingApiService } from '@pointing/pointing-api.service';
+import { find } from 'lodash';
 
 
 @Component({
@@ -40,7 +40,7 @@ export class RoomCardsComponent implements OnInit {
 	}
 
 	private getMyPlayer(): Player {
-		return _.find(this.state.players, {uid: this.userState.getUid()});
+		return find(this.state.players, {uid: this.userState.getUid()});
 	}
 
 	isCardHidden(vote: Vote): boolean {

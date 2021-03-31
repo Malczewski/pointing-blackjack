@@ -1,5 +1,5 @@
-import { RoomState, VoteState, Vote } from '@pointing/room-state.class';
-import * as _ from 'lodash';
+import { RoomState, VoteState, Vote, Player } from '@pointing/room-state.class';
+import { every, isUndefined, sumBy, chain } from 'lodash';
 
 export interface IPointingResult {
 	vote: Vote;
@@ -10,26 +10,26 @@ export interface IPointingResult {
 export class PointingUtils {
 
 	static isVotingFinished(state: RoomState): boolean {
-		return _.every(state.players, player => PointingUtils.isVoted(player.vote));
+		return every(state.players, player => PointingUtils.isVoted(player.vote));
 	}
 
 	static isVoted(vote: Vote): boolean {
-		return !_.isUndefined(vote) && vote !== VoteState.wait;
+		return !isUndefined(vote) && vote !== VoteState.wait;
 	}
 
 	static getProgress(state: RoomState): number {
 		if (state.players.length === 0)
 			return 0;
-		return _.sumBy(state.players, player => PointingUtils.isVoted(player.vote) ? 1 : 0) / state.players.length;
+		return sumBy(state.players, player => PointingUtils.isVoted(player.vote) ? 1 : 0) / state.players.length;
 	}
 
 	static getAggregatedResults(roomState: RoomState): IPointingResult[] {
-		let max = 0;
-		return _.chain(roomState.players)
-			.countBy(player => player.vote)
-			.each(count => max = count > max ? count : max)
-			.map((count, key) => ({count, key: key === 'null' ? null : key}))
-			.map(pair => ({
+		let max: number;
+		return chain(roomState.players)
+			.countBy((player: Player) => player.vote)
+			.each((count: number) => max = count > max ? count : max)
+			.map((count: number, key: string) => ({count, key: key === 'null' ? null : key}))
+			.map((pair: {key: string, count: number}) => ({
 				vote: isNaN(parseInt(pair.key, 10)) ? pair.key as VoteState : Number(pair.key), 
 				count: pair.count, 
 				isTop: pair.count === max}))

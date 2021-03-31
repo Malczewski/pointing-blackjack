@@ -4,8 +4,8 @@ import { RetroLanesComponent } from './retro-lanes.component';
 import { Component, Input, NO_ERRORS_SCHEMA } from '@angular/core';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { RetroMessage, RetroState, RetroType, RetroConfig, MessageSubtype, MessageType } from '@app/retro/retro-state.class';
-import * as _ from 'lodash';
 import { By } from '@angular/platform-browser';
+import { each, map } from 'lodash';
 
 @Component({
 	selector: 'lane',
@@ -61,11 +61,11 @@ describe('RetroLanesComponent', () => {
 	}
 
 	function getLanes(): MockLaneComponent[] {
-		return _.map(fixture.debugElement.queryAll(By.directive(MockLaneComponent)), elem => elem.componentInstance);
+		return map(fixture.debugElement.queryAll(By.directive(MockLaneComponent)), elem => elem.componentInstance);
 	}
 
 	function getMessageIds(): number[][] {
-		return _.map(getLanes(), lane => _.map(lane.messages, msg => Number(msg.uid)));
+		return map(getLanes(), lane => map(lane.messages, msg => Number(msg.uid)));
 	}
 
 	it('should create', () => {
@@ -98,7 +98,7 @@ describe('RetroLanesComponent', () => {
 		expect(lanes.length).toBe(3);
 		component.state = state(config(RetroType.startStop), false, [message(1, MessageType.evil)]);
 		fixture.detectChanges();
-		_.each(getLanes(), (lane, index) => expect(lane).toBe(lanes[index]));
+		each(getLanes(), (lane, index) => expect(lane).toBe(lanes[index]));
 		expect(lanes.length).toBe(3);
 	});
 

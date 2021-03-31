@@ -1,12 +1,9 @@
 /* istanbul ignore file */
 import { Injectable } from '@angular/core';
 import { RetroSocket } from '@app/retro/retro-socket.service';
-import { Observable, Subject } from 'rxjs';
-import { RetroState, RetroConfig, RetroType, MessageType, MessageSubtype, RetroMessage } from '@app/retro/retro-state.class';
+import { Observable } from 'rxjs';
+import { RetroState, RetroConfig, RetroMessage } from '@app/retro/retro-state.class';
 import { UserStateService } from '@app/common/user-state.service';
-import * as _ from 'lodash';
-import { RandomUtils } from '@app/common/random-utils.class';
-import * as moment from 'moment';
 
 @Injectable({
 	providedIn: 'root'

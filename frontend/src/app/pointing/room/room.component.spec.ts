@@ -5,9 +5,8 @@ import { PointingModule } from '@pointing/pointing.module';
 import { ActivatedRoute } from '@angular/router';
 import { PointingApiService } from '@pointing/pointing-api.service';
 import { UserStateService } from '@app/common/user-state.service';
-import { RoomState, Vote, Player, VoteState } from '@pointing/room-state.class';
+import { RoomState, Vote, VoteState } from '@pointing/room-state.class';
 import { Observable } from 'rxjs';
-import * as moment from 'moment';
 
 describe('RoomComponent', () => {
 	let component: RoomComponent;

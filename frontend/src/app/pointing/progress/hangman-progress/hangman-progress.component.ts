@@ -1,5 +1,4 @@
-import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
-import * as _ from 'lodash';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { ProgressAnimation } from '@pointing/progress/progress-animation.class';
 
 @Component({

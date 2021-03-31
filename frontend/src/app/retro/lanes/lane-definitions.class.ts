@@ -1,6 +1,5 @@
-import { Predicate } from '@angular/core';
 import { RetroMessage, MessageType, MessageSubtype, RetroConfig } from '@app/retro/retro-state.class';
-import * as _ from 'lodash';
+import { extend, some } from 'lodash';
 
 export interface LaneDefinition {
 	name: string;
@@ -157,7 +156,7 @@ Again, these can be technical (like the need for a continuous integration server
 	}
 
 	static getDefinition(type: LaneDefinitionType, config: RetroConfig): LaneDefinition {
-		return _.extend({}, LaneDefinitions.definitions[type], LaneDefinitions.getFilter(type, config));
+		return extend({}, LaneDefinitions.definitions[type], LaneDefinitions.getFilter(type, config));
 	}
 }
 
@@ -172,7 +171,7 @@ export class LanePredicates {
 	};
 
 	static matchFilters(message: RetroMessage, filters: LaneFilter[]): boolean {
-		return _.some(filters, filter => {
+		return some(filters, filter => {
 			let typeDef = this.mapping[filter];
 			return this.matches(message.type, typeDef[0]) && this.matches(message.subtype, typeDef[1]);
 		});

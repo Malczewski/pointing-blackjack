@@ -7,8 +7,6 @@ import { MessageType } from '@app/retro/retro-state.class';
 import { RetroModule } from '@app/retro/retro.module';
 import { By } from '@angular/platform-browser';
 import { noop } from 'rxjs';
-import { SimpleChange } from '@angular/core';
-import * as _ from 'lodash';
 
 describe('LaneMessageComponent', () => {
 	let component: LaneMessageComponent;

@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Property } from './storage/property.enum';
-import * as _ from 'lodash';
 import { IStorage } from '@app/common/storage/storage.interface';
 import { SessionStorageService } from '@app/common/storage/session-storage.service';
 import { environment } from 'src/environments/environment';
 import { LocalStorageService } from '@app/common/storage/local-storage.service';
-import { PlayerRole } from '@pointing/room-state.class';
 import { RandomUtils } from '@app/common/random-utils.class';
+import { isEmpty } from 'lodash';
 
 export interface UserState {
 	uid: string;
@@ -30,7 +29,7 @@ export class UserStateService {
 			return true;
 		const uid = this.getStorage().get(Property.UID);
 		const name = this.getStorage().get(Property.NAME);
-		const loggedIn = !_.isEmpty(uid) && !_.isEmpty(name);
+		const loggedIn = !isEmpty(uid) && !isEmpty(name);
 		if (loggedIn) {
 			this.user = {uid, name};
 		}
