@@ -17,7 +17,8 @@
 			"@app/*": ["src/app/*"],
 			"@env/*": ["src/environments/*"]
 		},
-		"resolveJsonModule": true
+		"resolveJsonModule": true,
+		"allowSyntheticDefaultImports": true
 	},
 	"angularCompilerOptions": {
 		"fullTemplateTypeCheck": true,

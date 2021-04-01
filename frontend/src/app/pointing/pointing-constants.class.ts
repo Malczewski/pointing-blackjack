@@ -8,11 +8,8 @@ export class PointingConstants {
 		5: '#a15ab4',
 		8: '#b13d90',
 		13: '#bd1c66',
-		wait: '#A3ABBD',
 		none: '#A3ABBD',
 		null: '#ffffff'
 	};
-	static readonly VOTE_VALUES = [1, 2, 3, 5, 8, 13, VoteState.none, VoteState.wait];
-
-	static readonly ALMOST_FINISHED = 0.8;
+	static readonly VOTE_VALUES = [1, 2, 3, 5, 8, 13, VoteState.none];
 }

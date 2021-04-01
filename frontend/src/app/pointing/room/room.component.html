@@ -32,19 +32,11 @@
 			[state]="roomState">
 		</room-results>
 		<div *ngSwitchCase="'progress'" class="room-progress-center">
-			<ng-container [ngSwitch]="progressIndicator">
-				<hangman-progress *ngSwitchCase="'hangman'" 
-					[progress]="getProgress()"></hangman-progress>
-				<shuttle-progress *ngSwitchCase="'shuttle'" 
-					class="flex-fill" 
-					[progress]="getProgress()"></shuttle-progress>
-				<soyuz-progress *ngSwitchCase="'soyuz'" 
-					class="flex-fill" 
-					[progress]="getProgress()"></soyuz-progress>
-				<christmas *ngSwitchCase="'christmas'" 
-					class="flex-fill" 
-					[progress]="getProgress()"></christmas>
-			</ng-container>
+			<progress-indicator
+				class="flex-fill" 
+				[randomSeed]="roomId" 
+				[progress]="getProgress()">
+			</progress-indicator>
 			<span class="progress-text">Vote in progress...</span>
 		</div>
 		<div class="loading"
@@ -58,16 +50,12 @@
 	</div>
 </div>
 <div class="room-progress">
-	<ng-container [ngSwitch]="progressIndicator">
-		<hangman-progress *ngSwitchCase="'hangman'" [progress]="getProgress()"
-			[hidden]="!showMiniProgress()"></hangman-progress>
-		<shuttle-progress *ngSwitchCase="'shuttle'" [progress]="getProgress()"
-			[hidden]="!showMiniProgress()"></shuttle-progress>
-		<soyuz-progress *ngSwitchCase="'soyuz'" [progress]="getProgress()"
-			[hidden]="!showMiniProgress()"></soyuz-progress>
-		<christmas *ngSwitchCase="'christmas'" [progress]="getProgress()"
-			[hidden]="!showMiniProgress()"></christmas>
-	</ng-container>
+	<progress-indicator
+		class="flex-fill" 
+		[hidden]="!showMiniProgress()"
+		[randomSeed]="roomId" 
+		[progress]="getProgress()">
+	</progress-indicator>
 </div>
 <div class="room-log">
 	<room-log [state]="roomState"></room-log>

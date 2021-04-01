@@ -6,6 +6,7 @@ import { RetroState } from '@app/retro/retro-state.class';
 import { By } from '@angular/platform-browser';
 import { RetroModule } from '@app/retro/retro.module';
 import { RetroExportService } from '@app/retro/retro-export.service';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('RetroControlsComponent', () => {
 	let component: RetroControlsComponent;
@@ -17,7 +18,7 @@ describe('RetroControlsComponent', () => {
 		apiSpy = jasmine.createSpyObj(['viewMode', 'writeMode']);
 		exportSpy = jasmine.createSpyObj(['exportSession', 'importSession']);
 		TestBed.configureTestingModule({
-			imports: [RetroModule],
+			imports: [RetroModule, NoopAnimationsModule],
 			declarations: [ RetroControlsComponent ],
 			providers: [
 				{provide: RetroApiService, useValue: apiSpy},

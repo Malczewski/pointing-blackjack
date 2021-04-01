@@ -3,12 +3,12 @@ import { ProgressAnimation } from '@pointing/progress/progress-animation.class';
 import { ProgressBase } from '@pointing/progress/progress-base.interface';
 
 @Component({
-	selector: 'hangman-progress',
-	templateUrl: './hangman-progress.component.html',
-	styleUrls: ['./hangman-progress.component.scss'],
+	selector: 'christmas-progress',
+	templateUrl: './christmas-progress.component.html',
+	styleUrls: ['./christmas-progress.component.scss'],
 	animations: [ProgressAnimation.defaultAnimation(true)],
 })
-export class HangmanProgressComponent implements ProgressBase {
+export class ChristmasProgressComponent implements ProgressBase {
 
 	@Input() progress: number;
 

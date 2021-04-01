@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { RouteConfigLoadEnd, RouteConfigLoadStart, Router } from '@angular/router';
 import { UserStateService } from './common/user-state.service';
 import { Pages } from './common/pages.class';
 import { version } from '../../../package.json';
@@ -12,6 +12,7 @@ import { version } from '../../../package.json';
 export class AppComponent implements OnInit {
 
 	public version: string = version;
+	loading: boolean;
 
 	constructor(
 		private router: Router,
@@ -20,7 +21,17 @@ export class AppComponent implements OnInit {
 
 	}
 
-	ngOnInit(): void {
+	ngOnInit() {
+		/* istanbul ignore next */
+		this.router.events.subscribe({
+			next: event => {
+				if (event instanceof RouteConfigLoadStart) {
+					this.loading = true;
+				} else if (event instanceof RouteConfigLoadEnd) {
+					this.loading = false;
+				}
+			}
+		});
 	}
 
 	getUserName(): string {

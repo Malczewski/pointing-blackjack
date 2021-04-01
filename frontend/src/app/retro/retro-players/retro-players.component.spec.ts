@@ -5,9 +5,9 @@ import { Component } from '@angular/core';
 import { RetroState } from '@app/retro/retro-state.class';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { UserStateService } from '@app/common/user-state.service';
-import * as _ from 'lodash';
 import { By } from '@angular/platform-browser';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+import { map } from 'lodash';
 
 @Component({
 	template: `<retro-players [state]="state"></retro-players>`,
@@ -49,7 +49,7 @@ describe('RetroPlayersComponent', () => {
 
 	function state(...players: string[]): RetroState {
 		return {
-			players: _.map(players, uid => ({uid, name: 'player ' + uid}))
+			players: map(players, uid => ({uid, name: 'player ' + uid}))
 		} as RetroState;
 	} 
 

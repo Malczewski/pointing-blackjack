@@ -1,22 +1,22 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
-import { SoyuzProgressComponent } from './soyuz-progress.component';
+import { ChristmasProgressComponent } from './christmas-progress.component';
 
-describe('SoyuzProgressComponent', () => {
-	let component: SoyuzProgressComponent;
-	let fixture: ComponentFixture<SoyuzProgressComponent>;
+describe('ChristmasProgressComponent', () => {
+	let component: ChristmasProgressComponent;
+	let fixture: ComponentFixture<ChristmasProgressComponent>;
 
 	beforeEach(async(() => {
 		TestBed.configureTestingModule({
 			imports: [NoopAnimationsModule],
-			declarations: [ SoyuzProgressComponent ]
+			declarations: [ ChristmasProgressComponent ]
 		})
 		.compileComponents();
 	}));
 
 	beforeEach(() => {
-		fixture = TestBed.createComponent(SoyuzProgressComponent);
+		fixture = TestBed.createComponent(ChristmasProgressComponent);
 		component = fixture.componentInstance;
 		fixture.detectChanges();
 	});

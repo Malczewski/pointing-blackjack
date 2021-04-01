@@ -1,27 +1,28 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login/login.component';
-
-import { PointingModule } from 'src/app/pointing/pointing.module';
-import { RetroModule } from '@app/retro/retro.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CommonModule } from '@angular/common';
+import { CoreModule } from '@app/common/core.module';
+import { BrowserModule } from '@angular/platform-browser';
+import { ScalingSquaresSpinnerModule } from 'angular-epic-spinners';
 
 @NgModule({
 	declarations: [
-	AppComponent,
-	LoginComponent
+		AppComponent,
+		LoginComponent
 	],
 	imports: [
-	BrowserModule,
-	AppRoutingModule,
-	FormsModule,
-	PointingModule,
-	RetroModule,
-	BrowserAnimationsModule,
+		CommonModule,
+		AppRoutingModule,
+		FormsModule,
+		BrowserModule,
+		BrowserAnimationsModule,
+		CoreModule,
+		ScalingSquaresSpinnerModule,
 	],
 	providers: [
 	],

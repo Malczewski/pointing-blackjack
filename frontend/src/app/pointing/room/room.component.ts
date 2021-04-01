@@ -2,11 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { PointingApiService } from '@pointing/pointing-api.service';
 import { ActivatedRoute } from '@angular/router';
 import { RoomState } from '@pointing/room-state.class';
-import * as _ from 'lodash';
 import { PointingUtils } from '@pointing/pointing-utils.service';
 import { UserStateService } from '@app/common/user-state.service';
-import * as moment from 'moment';
-
+import * as dayjs from 'dayjs';
+import { find, includes } from 'lodash';
 @Component({
 	selector: 'room',
 	templateUrl: './room.component.html',
@@ -14,16 +13,11 @@ import * as moment from 'moment';
 })
 export class RoomComponent implements OnInit {
 
-	readonly PROGRESS_INDICATORS = ['hangman', 'soyuz', 'shuttle'];
-	readonly HOLIDAY_INDICATORS = ['christmas'];
-
 	roomUrl: string;
-	private roomId: string;
+	roomId: string;
 	roomState: RoomState;
 	private loaded: boolean;
 	//private originalState: RoomState;
-
-	progressIndicator: string;
 
 	constructor(
 		private pointingApi: PointingApiService,
@@ -44,10 +38,6 @@ export class RoomComponent implements OnInit {
 			this.loaded = true;
 		});
 		this.pointingApi.joinRoom(this.roomId);
-
-		let indicators = _.includes([0, 11], moment(new Date()).month()) ? this.HOLIDAY_INDICATORS : this.PROGRESS_INDICATORS;
-		let progressIndicatorIndex = (this.roomId.length * 31 + new Date().getDate()) % indicators.length;
-		this.progressIndicator = indicators[progressIndicatorIndex];
 
 		/* istanbul ignore next */
 		setInterval(() => this.pointingApi.ping(), 60000);
@@ -101,7 +91,7 @@ export class RoomComponent implements OnInit {
 	}
 
 	private isSpectator(): boolean {
-		return !!_.find(this.roomState.spectators, {uid: this.userState.getUid()});
+		return !!find(this.roomState.spectators, {uid: this.userState.getUid()});
 	}
 
 	getProgress(): number {

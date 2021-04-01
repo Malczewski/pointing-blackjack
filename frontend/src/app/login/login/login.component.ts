@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import * as _ from 'lodash';
 import { Router, ActivatedRoute } from '@angular/router';
+import { isEmpty } from 'lodash';
 import { UserStateService } from '../../common/user-state.service';
 
 @Component({
@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit {
 
 	onSubmit() {
 		/* istanbul ignore else */
-		if (!_.isEmpty(this.userName)) {
+		if (!isEmpty(this.userName)) {
 			this.userStateService.login(this.userName);
 			if (/heisenberg/i.test(this.userName)) {
 				this.heisenberg = true;

@@ -1,10 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { RoomState, Vote, VoteState, Player } from '@pointing/room-state.class';
-import * as _ from 'lodash';
 import { PointingConstants } from '@pointing/pointing-constants.class';
 import { IPointingResult, PointingUtils } from '@pointing/pointing-utils.service';
 import { UserStateService } from '@app/common/user-state.service';
 import { PointingApiService } from '@pointing/pointing-api.service';
+import { find } from 'lodash';
 
 @Component({
 	selector: 'room-results',
@@ -39,11 +39,11 @@ export class RoomResultsComponent implements OnInit {
 
 	isTopResult(vote: Vote): boolean {
 		let results = this.getAggregatedResults();
-		return _.find(results, {vote}).isTop;
+		return find(results, {vote}).isTop;
 	}
 
 	changeVote(vote: Vote): void {
-		let me = _.find(this.state.players, {uid: this.userState.getUid()});
+		let me = find(this.state.players, {uid: this.userState.getUid()});
 		if (me)
 			this.pointingApi.vote(vote);
 			//me.vote = vote;
@@ -55,7 +55,7 @@ export class RoomResultsComponent implements OnInit {
 	}
 
 	private getMyPlayer(): Player {
-		return _.find(this.state.players, {uid: this.userState.getUid()});
+		return find(this.state.players, {uid: this.userState.getUid()});
 	}
 
 }

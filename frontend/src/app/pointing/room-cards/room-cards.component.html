@@ -1,6 +1,5 @@
 <div *ngFor="let card of cards" 
-	class="vote-card"
-	[hidden]="isCardHidden(card)">
+	class="vote-card">
 	<div class="card-button btn" 
 		matRipple
 		[ngClass]="{'selected': isMyVote(card)}"
@@ -9,15 +8,6 @@
 		(click)="selectCard(card)"
 		[ngSwitch]="card">
 		<div *ngSwitchCase="'none'" class="font-white">?</div>
-		<div *ngSwitchCase="'wait'" class="wait-container">
-			<app-self-building-square-spinner
-				class="wait-spinner"
-				[animationDuration]="6000"
-				[size]="40"
-				[color]="'#ffffff'"
-				></app-self-building-square-spinner>
-			<span class="wait-subtitle">Still thinking...</span>
-		</div>
 		<div *ngSwitchDefault class="number-card">
 			<complication-indicator [complexity]="card"></complication-indicator>
 			<div class="card-value">{{card}}</div>
