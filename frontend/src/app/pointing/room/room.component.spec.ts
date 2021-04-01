@@ -86,8 +86,6 @@ describe('RoomComponent', () => {
 			expect(component.showMiniProgress()).toBeTruthy();
 			setState(state([5, undefined, VoteState.none]));
 			expect(component.showMiniProgress()).toBeTruthy();
-			setState(state([5, 3, VoteState.wait]));
-			expect(component.showMiniProgress()).toBeTruthy();
 			setState(state([5, 3, undefined], true));
 			expect(component.showMiniProgress()).toBeFalsy();
 			setState(state([5, 3, VoteState.none], true));

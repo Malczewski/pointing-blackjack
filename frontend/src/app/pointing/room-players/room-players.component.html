@@ -28,14 +28,6 @@
 			</div>
 			<div *ngSwitchCase="false" class="vote-container">
 				<div *ngIf="isVoted(user.vote)" class="vote-ready"></div>
-				<div *ngIf="isWait(user.vote)" class="vote-wait">
-					<app-circles-to-rhumbuses-spinner
-						[animationDuration]="1200"
-						[circlesNum]="3"
-						[circleSize]="9"
-						[color]="'#A3ABBD'"
-					></app-circles-to-rhumbuses-spinner>
-				</div>
 			</div>
 		</div>
 	</ng-container>

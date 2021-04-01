@@ -14,7 +14,7 @@ export class PointingUtils {
 	}
 
 	static isVoted(vote: Vote): boolean {
-		return !isUndefined(vote) && vote !== VoteState.wait;
+		return !isUndefined(vote);
 	}
 
 	static getProgress(state: RoomState): number {

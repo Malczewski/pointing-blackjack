@@ -44,13 +44,11 @@ export class PointingRoomState {
 	}
 
 	isAllVoted() {
-		return !_.some(
-			this.players, (player) => player.vote === undefined || player.vote === VoteState.wait
-		);
+		return _.every(this.players, (player) => player.vote !== undefined);
 	}
 
 	showVotes() {
-		_.each(this.players, (player) => (player.vote = player.vote && player.vote !== VoteState.wait ? player.vote : null));
+		_.each(this.players, (player) => (player.vote = player.vote ? player.vote : null));
 	}
 
 	addLog(msg: string) {

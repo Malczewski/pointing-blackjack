@@ -97,14 +97,6 @@ describe('RoomPlayersComponent', () => {
 		expect(count('.vote-number')).toBe(3);
 	});
 
-	it('should show placeholders if someone is slow', () => {
-		component.state = state([1, 3, VoteState.wait]);
-		fixture.detectChanges();
-		expect(count('.vote-ready')).toBe(2);
-		expect(count('.vote-wait')).toBe(1);
-		expect(count('.vote-number')).toBe(0);
-	});
-
 	it('should show empty if someone is skipped', () => {
 		component.state = state([1, 3, null]);
 		fixture.detectChanges();

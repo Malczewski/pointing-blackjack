@@ -102,9 +102,6 @@ export class RoomPlayersComponent implements OnInit, OnChanges {
 	isVoted(vote: Vote): boolean {
 		return PointingUtils.isVoted(vote);
 	}
-	isWait(vote: Vote): boolean {
-		return vote === VoteState.wait;
-	}
 	isPlayer(): boolean {
 		return !!find(this.state.players, {uid: this.userState.getUid()});
 	}

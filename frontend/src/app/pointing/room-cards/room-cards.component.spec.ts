@@ -63,27 +63,6 @@ describe('RoomCardsComponent', () => {
 		expect(buttons[5].classes.selected).toBeUndefined();
 	});
 
-	it('should show "wait" if 80+% voted', () => {
-		state.players = [
-			myPlayer,
-			{name: 'p1', uid: '1', vote: 1},
-			{name: 'p2', uid: '2', vote: 5},
-			{name: 'p3', uid: '3'},
-			{name: 'p4', uid: '4'},
-			{name: 'p5', uid: '5'},
-		];
-		fixture.detectChanges();
-		let waitButtonCard = fixture.debugElement.query(By.css('.wait-container')).parent.parent;
-		expect(waitButtonCard.attributes.hidden).toBeDefined();
-
-		state.players.forEach((player, index) => {
-			if (index > 0 && player.vote === undefined) // vote all except first
-				player.vote = 1;
-		});
-		fixture.detectChanges();
-		expect(waitButtonCard.attributes.hidden).toBeUndefined(); // should not be hidden anymore
-	});
-
 	it('has-selection class when i voted', () => {
 		expect(fixture.debugElement.classes['has-selection']).toBeUndefined();
 		myPlayer.vote = 2;

@@ -42,8 +42,4 @@ export class RoomCardsComponent implements OnInit {
 	private getMyPlayer(): Player {
 		return find(this.state.players, {uid: this.userState.getUid()});
 	}
-
-	isCardHidden(vote: Vote): boolean {
-		return vote === VoteState.wait && PointingUtils.getProgress(this.state) <= PointingConstants.ALMOST_FINISHED;
-	}
 }
