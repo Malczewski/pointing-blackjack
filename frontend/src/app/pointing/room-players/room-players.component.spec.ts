@@ -6,7 +6,6 @@ import { ShadePipe } from '@app/common/shade.pipe';
 import { UserStateService } from '@app/common/user-state.service';
 import { Vote, RoomState, VoteState } from '@pointing/room-state.class';
 import { By } from '@angular/platform-browser';
-import { CirclesToRhumbusesSpinnerModule } from 'angular-epic-spinners';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { Component } from '@angular/core';
 import { noop } from 'rxjs';
@@ -27,7 +26,7 @@ describe('RoomPlayersComponent', () => {
 	beforeEach(async(() => {
 		pointingApiMock = jasmine.createSpyObj(['vote', 'switchToPlayer', 'switchToSpectator']);
 		TestBed.configureTestingModule({
-			imports: [CirclesToRhumbusesSpinnerModule, NoopAnimationsModule],
+			imports: [NoopAnimationsModule],
 			declarations: [TestWrapperComponent, RoomPlayersComponent, ShadePipe],
 			providers: [
 				{provide: PointingApiService, useValue: pointingApiMock},

@@ -104,17 +104,4 @@ describe('RoomComponent', () => {
 		
 	});
 
-	it('should initialize christmas progress on dec/jan', () => {
-		let today = new Date('2018-12-02');
-		jasmine.clock().mockDate(today);
-		init();
-		expect(component.progressIndicator).toEqual('christmas');
-	});
-
-	it('should initialize default progress on other months', () => {
-		let today = new Date('2018-10-02');
-		jasmine.clock().mockDate(today);
-		init();
-		expect(component.progressIndicator).toEqual('soyuz');
-	});
 });

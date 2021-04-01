@@ -22,11 +22,14 @@ export class AppComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		this.router.events.subscribe(event => {
-			if (event instanceof RouteConfigLoadStart) {
-				this.loading = true;
-			} else if (event instanceof RouteConfigLoadEnd) {
-				this.loading = false;
+		/* istanbul ignore next */
+		this.router.events.subscribe({
+			next: event => {
+				if (event instanceof RouteConfigLoadStart) {
+					this.loading = true;
+				} else if (event instanceof RouteConfigLoadEnd) {
+					this.loading = false;
+				}
 			}
 		});
 	}

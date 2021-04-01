@@ -13,16 +13,11 @@ import { find, includes } from 'lodash';
 })
 export class RoomComponent implements OnInit {
 
-	readonly PROGRESS_INDICATORS = ['hangman', 'soyuz', 'shuttle'];
-	readonly HOLIDAY_INDICATORS = ['christmas'];
-
 	roomUrl: string;
-	private roomId: string;
+	roomId: string;
 	roomState: RoomState;
 	private loaded: boolean;
 	//private originalState: RoomState;
-
-	progressIndicator: string;
 
 	constructor(
 		private pointingApi: PointingApiService,
@@ -43,10 +38,6 @@ export class RoomComponent implements OnInit {
 			this.loaded = true;
 		});
 		this.pointingApi.joinRoom(this.roomId);
-
-		let indicators = includes([0, 11], dayjs(new Date()).month()) ? this.HOLIDAY_INDICATORS : this.PROGRESS_INDICATORS;
-		let progressIndicatorIndex = (this.roomId.length * 31 + new Date().getDate()) % indicators.length;
-		this.progressIndicator = indicators[progressIndicatorIndex];
 
 		/* istanbul ignore next */
 		setInterval(() => this.pointingApi.ping(), 60000);

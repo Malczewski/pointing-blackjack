@@ -5,6 +5,7 @@ import { RetroApiService } from '@app/retro/retro-api.service';
 import { RetroModule } from '@app/retro/retro.module';
 import { RetroType, RetroState } from '@app/retro/retro-state.class';
 import { By } from '@angular/platform-browser';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('RetroSettingsComponent', () => {
 	let component: RetroSettingsComponent;
@@ -14,7 +15,7 @@ describe('RetroSettingsComponent', () => {
 	beforeEach(async(() => {
 		apiSpy = jasmine.createSpyObj(['setConfig']);
 		TestBed.configureTestingModule({
-			imports: [RetroModule],
+			imports: [RetroModule, NoopAnimationsModule],
 			declarations: [ RetroSettingsComponent ],
 			providers: [{provide: RetroApiService, useValue: apiSpy}]
 		})

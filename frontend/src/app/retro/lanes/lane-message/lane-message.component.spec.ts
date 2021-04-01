@@ -7,6 +7,7 @@ import { MessageType } from '@app/retro/retro-state.class';
 import { RetroModule } from '@app/retro/retro.module';
 import { By } from '@angular/platform-browser';
 import { noop } from 'rxjs';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('LaneMessageComponent', () => {
 	let component: LaneMessageComponent;
@@ -16,7 +17,7 @@ describe('LaneMessageComponent', () => {
 	beforeEach(async(() => {
 		apiMock = jasmine.createSpyObj([ 'likeMessage', 'saveMessage', 'showMessage', 'deleteMessage' ]);
 		TestBed.configureTestingModule({
-			imports: [ RetroModule],
+			imports: [RetroModule, NoopAnimationsModule],
 			declarations: [ LaneMessageComponent ],
 			providers: [
 				{provide: UserStateService, useValue: {getUid: () => 'my_id', getName: noop}},
