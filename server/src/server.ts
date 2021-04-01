@@ -3,8 +3,10 @@ import * as http from "http";
 import * as path from "path";
 import { Pointing } from './pointing/pointing';
 import { Retro } from './retro/retro';
+import * as compression from 'compression';
 
 const app = express();
+app.use(compression());
 app.use(express.static(path.resolve(path.join(__dirname, "/frontend/"))));
 
 app.get("*", (req, res, next) => {
