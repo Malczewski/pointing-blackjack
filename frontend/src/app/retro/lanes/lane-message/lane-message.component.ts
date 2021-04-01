@@ -1,9 +1,9 @@
-import { Component, OnInit, Input, ViewChild, ElementRef, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, ElementRef } from '@angular/core';
 import { RetroMessage, MessageType } from '@app/retro/retro-state.class';
 import { UserStateService } from '@app/common/user-state.service';
 import { RetroApiService } from '@app/retro/retro-api.service';
 import { RandomUtils } from '@app/common/random-utils.class';
-import * as _ from 'lodash';
+import { includes } from 'lodash';
 
 @Component({
 	selector: 'lane-message',
@@ -57,7 +57,7 @@ export class LaneMessageComponent implements OnInit {
 	}
 
 	isLiked = (): boolean => {
-		return _.includes(this.message.likes, this.userState.getUid());
+		return includes(this.message.likes, this.userState.getUid());
 	}
 
 	createAction = (): void => {

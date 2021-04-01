@@ -5,9 +5,8 @@ import { PointingModule } from '@pointing/pointing.module';
 import { ActivatedRoute } from '@angular/router';
 import { PointingApiService } from '@pointing/pointing-api.service';
 import { UserStateService } from '@app/common/user-state.service';
-import { RoomState, Vote, Player, VoteState } from '@pointing/room-state.class';
+import { RoomState, Vote, VoteState } from '@pointing/room-state.class';
 import { Observable } from 'rxjs';
-import * as moment from 'moment';
 
 describe('RoomComponent', () => {
 	let component: RoomComponent;
@@ -87,8 +86,6 @@ describe('RoomComponent', () => {
 			expect(component.showMiniProgress()).toBeTruthy();
 			setState(state([5, undefined, VoteState.none]));
 			expect(component.showMiniProgress()).toBeTruthy();
-			setState(state([5, 3, VoteState.wait]));
-			expect(component.showMiniProgress()).toBeTruthy();
 			setState(state([5, 3, undefined], true));
 			expect(component.showMiniProgress()).toBeFalsy();
 			setState(state([5, 3, VoteState.none], true));
@@ -107,17 +104,4 @@ describe('RoomComponent', () => {
 		
 	});
 
-	it('should initialize christmas progress on dec/jan', () => {
-		let today = new Date('2018-12-02');
-		jasmine.clock().mockDate(today);
-		init();
-		expect(component.progressIndicator).toEqual('christmas');
-	});
-
-	it('should initialize default progress on other months', () => {
-		let today = new Date('2018-10-02');
-		jasmine.clock().mockDate(today);
-		init();
-		expect(component.progressIndicator).toEqual('soyuz');
-	});
 });

@@ -16,13 +16,11 @@ describe('PointingUtilsService', () => {
 	it('isVotingFinished', () => {
 		expect(PointingUtils.isVotingFinished(votes(1, 2, undefined))).toBeFalsy();
 		expect(PointingUtils.isVotingFinished(votes(1, null))).toBeTruthy();
-		expect(PointingUtils.isVotingFinished(votes(1, VoteState.wait, 2))).toBeFalsy();
 		expect(PointingUtils.isVotingFinished(votes(1, VoteState.none, 2))).toBeTruthy();
 		expect(PointingUtils.isVotingFinished(votes(1, VoteState.none, null, 2))).toBeTruthy();
 	});
 
 	it('isVoted', () => {
-		expect(PointingUtils.isVoted(VoteState.wait)).toBeFalsy();
 		expect(PointingUtils.isVoted(undefined)).toBeFalsy();
 		expect(PointingUtils.isVoted(3)).toBeTruthy();
 		expect(PointingUtils.isVoted(null)).toBeTruthy();
@@ -30,7 +28,6 @@ describe('PointingUtilsService', () => {
 
 	it('getProgress', () => {
 		expect(PointingUtils.getProgress(votes(2, 3, undefined))).toBe(2 / 3);
-		expect(PointingUtils.getProgress(votes(2, 3, null, VoteState.wait))).toBe(3 / 4);
 		expect(PointingUtils.getProgress(votes(2, null, null, 5))).toBe(1);
 	});
 

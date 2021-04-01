@@ -1,11 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { RetroHistoryService, RetroSession } from '@app/retro/retro-history.service';
-import * as _ from 'lodash';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { RetroState, RetroMessage } from '@app/retro/retro-state.class';
+import { RetroState } from '@app/retro/retro-state.class';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { find, sortBy, values } from 'lodash';
 
 @Component({
 	selector: 'retro-import',
@@ -38,7 +38,7 @@ export class RetroImportComponent implements OnInit {
 	}
 
 	private refreshHistory(): void {
-		let items = _.sortBy(_.values(this.retroHistory.getSessions()), 'startDate').reverse();
+		let items = sortBy(values(this.retroHistory.getSessions()), 'startDate').reverse();
 		this.historyData = new MatTableDataSource<RetroSession>(items);
 		this.historyData.paginator = this.paginator;
 	}
@@ -61,7 +61,7 @@ export class RetroImportComponent implements OnInit {
 			}
 			this.retroHistory.saveSession(session as RetroState);
 			this.refreshHistory();
-			this.selectedState = _.find(this.historyData.data, {sessionId: session.sessionId});
+			this.selectedState = find(this.historyData.data, {sessionId: session.sessionId});
 			let requiredPage = Math.floor(this.historyData.data.indexOf(this.selectedState) / this.paginator.pageSize);
 			this.paginator.firstPage();
 

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { UserStateService } from '@app/common/user-state.service';
 import { RetroState, RetroConfig, MessageType, MessageSubtype } from '@app/retro/retro-state.class';
-import * as _ from 'lodash';
+import { map, pick } from 'lodash';
 
 export interface HistoryRetroMessage {
 	authorName: string;
@@ -34,8 +34,8 @@ export class RetroHistoryService {
 	}
 
 	convertToSession(state: RetroState): RetroSession {
-		let session = _.pick(state, 'config', 'startDate', 'sessionId') as RetroSession;
-		let messages = _.map(state.messages, message => ({
+		let session = pick(state, 'config', 'startDate', 'sessionId') as RetroSession;
+		let messages = map(state.messages, message => ({
 			authorName: message.authorName,
 			text: message.text,
 			type: message.type,

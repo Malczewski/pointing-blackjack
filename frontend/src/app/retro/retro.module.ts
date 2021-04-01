@@ -12,8 +12,6 @@ import { TrinityRingsSpinnerModule } from 'angular-epic-spinners';
 import { SocketIoModule } from 'ngx-socket-io';
 import { NgPipesModule } from 'ngx-pipes';
 import { FormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { RetroLanesComponent } from './retro-lanes/retro-lanes.component';
 import {MatExpansionModule} from '@angular/material/expansion';
@@ -35,6 +33,9 @@ import { MatDialogModule } from '@angular/material/dialog';
 import {MatTableModule} from '@angular/material/table';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { CoreModule } from '@app/common/core.module';
+import { RetroRoutingModule } from '@app/retro/routing/retro-routing.module';
+import { RetroExportService } from '@app/retro/retro-export.service';
 
 @NgModule({
 	declarations: [
@@ -49,14 +50,16 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 		RetroLanesComponent, 
 		ResizeableTextareaComponent, 
 		RetroTimelineComponent, RetroImportComponent],
+	providers: [
+		RetroExportService,
+	],
 	imports: [
 		CommonModule,
+		RetroRoutingModule,
 		TrinityRingsSpinnerModule,
 		SocketIoModule,
 		NgPipesModule,
 		FormsModule,
-		BrowserModule,
-		BrowserAnimationsModule,
 		MatExpansionModule,
 		MatSelectModule,
 		MatSlideToggleModule,
@@ -82,6 +85,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 				},
 			}
 		}),
+		CoreModule,
 	]
 })
 export class RetroModule { }

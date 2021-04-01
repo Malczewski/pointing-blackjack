@@ -1,5 +1,4 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import * as _ from 'lodash';
 import { ColorUtils } from '@app/common/color-utils.class';
 @Pipe({
 	name: 'shade'

@@ -8,6 +8,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { By } from '@angular/platform-browser';
 import { RetroConfig } from '@app/retro/retro-state.class';
 import { noop } from 'rxjs';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('RetroImportComponent', () => {
 	let component: RetroImportComponent;
@@ -35,7 +36,7 @@ describe('RetroImportComponent', () => {
 			}})
 		} as any);
 		TestBed.configureTestingModule({
-			imports: [RetroModule],
+			imports: [RetroModule, NoopAnimationsModule],
 			declarations: [ RetroImportComponent ],
 			providers: [
 				{provide: RetroHistoryService, useValue: historySpy},

@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ProgressAnimation } from '@pointing/progress/progress-animation.class';
+import { ProgressBase } from '@pointing/progress/progress-base.interface';
 
 @Component({
 	selector: 'soyuz-progress',
@@ -7,7 +8,7 @@ import { ProgressAnimation } from '@pointing/progress/progress-animation.class';
 	styleUrls: ['./soyuz-progress.component.scss'],
 	animations: [ProgressAnimation.defaultAnimation()],
 })
-export class SoyuzProgressComponent {
+export class SoyuzProgressComponent implements ProgressBase {
 
 	@Input() progress: number;
 

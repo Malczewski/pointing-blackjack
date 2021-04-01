@@ -6,6 +6,7 @@ import { UserStateService } from '@app/common/user-state.service';
 import { RetroApiService } from '@app/retro/retro-api.service';
 import { RetroType, MessageSubtype, MessageType } from '@app/retro/retro-state.class';
 import { LaneDefinition } from '@app/retro/lanes/lane-definitions.class';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('LaneInputComponent', () => {
 	let component: LaneInputComponent;
@@ -17,7 +18,7 @@ describe('LaneInputComponent', () => {
 		apiMock = jasmine.createSpyObj(['saveMessage']);
 		userStateMock = jasmine.createSpyObj(['getUid', 'getName']);
 		TestBed.configureTestingModule({
-			imports: [RetroModule],
+			imports: [RetroModule, NoopAnimationsModule],
 			declarations: [ LaneInputComponent ],
 			providers: [ 
 				{provide: UserStateService, useValue: userStateMock},

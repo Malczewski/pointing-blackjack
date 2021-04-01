@@ -1,13 +1,12 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { RoomState, Vote, VoteState, Player, PlayerRole } from '@pointing/room-state.class';
-import * as _ from 'lodash';
+import { RoomState, Vote, VoteState, Player } from '@pointing/room-state.class';
 import { UserStateService } from '@app/common/user-state.service';
 import { PointingConstants } from '@pointing/pointing-constants.class';
-import { PointingUtils } from '@pointing/pointing-utils.service';
+import { IPointingResult, PointingUtils } from '@pointing/pointing-utils.service';
 import { ColorUtils } from '@app/common/color-utils.class';
 import { PointingApiService } from '@pointing/pointing-api.service';
-import { trigger, state, style, transition, animate, keyframes } from '@angular/animations';
-
+import { trigger, state, style, transition, animate } from '@angular/animations';
+import { chain, find, isNumber, maxBy } from 'lodash';
 
 @Component({
 	selector: 'room-players',
@@ -64,7 +63,7 @@ export class RoomPlayersComponent implements OnInit, OnChanges {
 		if (this.isPlayer())
 			return;
 		this.pointingApi.switchToPlayer();
-		//let current = _.remove(this.state.spectators, {uid: this.userState.getUid()})[0];
+		//let current = remove(this.state.spectators, {uid: this.userState.getUid()})[0];
 		//this.state.players.push(current);
 	}
 
@@ -73,12 +72,12 @@ export class RoomPlayersComponent implements OnInit, OnChanges {
 		if (this.isSpectator())
 			return;
 		this.pointingApi.switchToSpectator();
-		//let current = _.remove(this.state.players, {uid: this.userState.getUid()})[0];
+		//let current = remove(this.state.players, {uid: this.userState.getUid()})[0];
 		//this.state.spectators.push(current);
 	}
 
 	changeVote(direction: number): void {
-		let myUser = _.find(this.state.players, player => this.isMyUser(player));
+		let myUser = find(this.state.players, player => this.isMyUser(player));
 		let currentVote = myUser.vote;
 		let vote = !this.isNumber(currentVote)
 			? 1
@@ -95,7 +94,7 @@ export class RoomPlayersComponent implements OnInit, OnChanges {
 	}
 
 	isNumber(vote: Vote): boolean {
-		return _.isNumber(vote);
+		return isNumber(vote);
 	}
 	getVoteColor(vote: Vote): string {
 		return PointingConstants.VOTE_COLORS[vote];
@@ -103,14 +102,11 @@ export class RoomPlayersComponent implements OnInit, OnChanges {
 	isVoted(vote: Vote): boolean {
 		return PointingUtils.isVoted(vote);
 	}
-	isWait(vote: Vote): boolean {
-		return vote === VoteState.wait;
-	}
 	isPlayer(): boolean {
-		return !!_.find(this.state.players, {uid: this.userState.getUid()});
+		return !!find(this.state.players, {uid: this.userState.getUid()});
 	}
 	isSpectator(): boolean {
-		return !!_.find(this.state.spectators, {uid: this.userState.getUid()});
+		return !!find(this.state.spectators, {uid: this.userState.getUid()});
 	}
 	isMyUser(user: Player): boolean {
 		return this.userState.getUid() === user.uid;
@@ -135,29 +131,19 @@ export class RoomPlayersComponent implements OnInit, OnChanges {
 	recalculateDifferences(): void {
 		this.calculatedDifference = {};
 		let topVotes = PointingUtils.getAggregatedResults(this.state).filter(topVote => topVote.isTop);
-		/* let voteIndex = PointingConstants.VOTE_VALUES.indexOf(vote);
-		let indexDiff = _.chain(topVotes)
-		.map(topVote => PointingConstants.VOTE_VALUES.indexOf(topVote.vote))
-		.map(index => Math.abs(index - voteIndex))
-		.max()
-		.value();
-		if (indexDiff === 0)
-		return green + alpha;
-		let totalValues = PointingConstants.VOTE_VALUES.length - 2; // none and wait
-		return ColorUtils.blendColors(green, red, indexDiff / totalValues) + alpha; */
-		let maxVote = _.maxBy(PointingConstants.VOTE_VALUES, v => _.isNumber(v) ? v : 0) as number;
-		_.chain(PointingConstants.VOTE_VALUES)
-			.filter(vote => _.isNumber(vote))
-			.each((vote: number) => {
-				let diff = _.chain(topVotes)
-					.map(topVote => topVote.vote)
+		let maxVote = maxBy(PointingConstants.VOTE_VALUES, v => isNumber(v) ? v : 0) as number;
+		PointingConstants.VOTE_VALUES
+			.filter(vote => isNumber(vote))
+			.forEach((vote: number) => {
+				let diff = chain(topVotes)
+					.map((topVote: IPointingResult) => topVote.vote)
 					.filter(topVote => topVote > 0)
 					.map((topVote: number) => Math.abs(topVote - vote))
 					.max()
 					.value();
-				this.calculatedDifference[vote] = Math.sqrt(diff / (maxVote - 1));
 				
-			}).value();
+				this.calculatedDifference[vote] = Math.sqrt(diff / (maxVote - 1));
+			});
 		
 	}
 

@@ -1,10 +1,8 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { RetroMessage, MessageType } from '@app/retro/retro-state.class';
 import { LaneDefinition } from '@app/retro/lanes/lane-definitions.class';
-import * as _ from 'lodash';
 import { trigger, state, style, transition, animate } from '@angular/animations';
-
-
+import { extend, find, map } from 'lodash';
 
 @Component({
 	selector: 'lane',
@@ -36,11 +34,11 @@ export class LaneComponent implements OnInit, OnChanges {
 
 	ngOnChanges(changes: SimpleChanges): void {
 		if (changes.messages && changes.messages.currentValue !== changes.messages.previousValue) {
-			this.currentMessages = _.map(changes.messages.currentValue, updatedMessage => {
-				let existing = _.find(this.currentMessages, 
+			this.currentMessages = map(changes.messages.currentValue, updatedMessage => {
+				let existing = find(this.currentMessages, 
 					msg => msg.uid === updatedMessage.uid && msg.text === updatedMessage.text);
 				if (existing) {
-					_.extend(existing, updatedMessage);
+					extend(existing, updatedMessage);
 					return existing;
 				} else return updatedMessage;
 			});

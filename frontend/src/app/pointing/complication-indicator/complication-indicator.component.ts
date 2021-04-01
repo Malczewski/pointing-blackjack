@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import * as _ from 'lodash';
+import { map, range } from 'lodash';
 @Component({
 	selector: 'complication-indicator',
 	templateUrl: './complication-indicator.component.html',
@@ -10,10 +10,10 @@ export class ComplicationIndicatorComponent implements OnInit {
 	private readonly COMPLEXITY_MAPPING = {
 		1: [2],
 		2: [1, 2, 5],
-		3: _.range(1, 6),
-		5: _.range(1, 8),
-		8: _.range(1, 11),
-		13: _.range(1, 14)
+		3: range(1, 6),
+		5: range(1, 8),
+		8: range(1, 11),
+		13: range(1, 14)
 	};
 
 	@Input() complexity: number;
@@ -24,7 +24,7 @@ export class ComplicationIndicatorComponent implements OnInit {
 	}
 
 	getClasses(): string {
-		return _.map(this.COMPLEXITY_MAPPING[this.complexity], i => `show-m${i}`).join(' ');
+		return map(this.COMPLEXITY_MAPPING[this.complexity], i => `show-m${i}`).join(' ');
 	}
 
 }

@@ -8,7 +8,7 @@ import { UserStateService } from '@app/common/user-state.service';
 import { RetroState } from '@app/retro/retro-state.class';
 import { Observable } from 'rxjs';
 import { RetroHistoryService } from '@app/retro/retro-history.service';
-import * as moment from 'moment';
+import * as dayjs from 'dayjs';
 
 describe('RetroRoomComponent', () => {
 	let component: RetroRoomComponent;
@@ -59,7 +59,7 @@ describe('RetroRoomComponent', () => {
 
 	it('should save session if it is fresh', () => {
 		setState({
-			startDate: moment().add(-4, 'hour').toISOString(),
+			startDate: dayjs().add(-4, 'hour').toISOString(),
 			viewMode: true
 		} as RetroState);
 		expect(historyMock.saveSession).toHaveBeenCalled();
@@ -67,7 +67,7 @@ describe('RetroRoomComponent', () => {
 
 	it('should not save session if it is old', () => {
 		setState({
-			startDate: moment().add(-30, 'hour').toISOString(),
+			startDate: dayjs().add(-30, 'hour').toISOString(),
 			viewMode: true
 		} as RetroState);
 		expect(historyMock.saveSession).not.toHaveBeenCalled();

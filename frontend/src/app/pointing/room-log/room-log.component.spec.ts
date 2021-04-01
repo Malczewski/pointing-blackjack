@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed, fakeAsync, tick, flush, discardPeriod
 
 import { RoomLogComponent } from './room-log.component';
 import { RoomState } from '@pointing/room-state.class';
-import * as _ from 'lodash';
+import { map } from 'lodash';
 
 describe('RoomLogComponent', () => {
 	let component: RoomLogComponent;
@@ -39,7 +39,7 @@ describe('RoomLogComponent', () => {
 		expect(getTimestamps(compiled)).toEqual(['a few seconds ago', 'a minute ago']);
 
 		let messages = compiled.querySelectorAll('.message .message-text');
-		expect(_.map(messages, elm => elm.textContent.trim())).toEqual(['who is there?', 'knock-knock']);
+		expect(map(messages, elm => elm.textContent.trim())).toEqual(['who is there?', 'knock-knock']);
 	});
 
 	it('should update messages on changing state', () => {
@@ -61,7 +61,7 @@ describe('RoomLogComponent', () => {
 
 	function getTimestamps(element: HTMLElement): string[] {
 		let timestamps = element.querySelectorAll('.message .message-time');
-		return _.map(timestamps, elm => elm.textContent.trim());
+		return map(timestamps, elm => elm.textContent.trim());
 	}
 
 	it('should update labels every N seconds', fakeAsync(() => {

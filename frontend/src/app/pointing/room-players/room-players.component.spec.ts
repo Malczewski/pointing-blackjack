@@ -6,7 +6,6 @@ import { ShadePipe } from '@app/common/shade.pipe';
 import { UserStateService } from '@app/common/user-state.service';
 import { Vote, RoomState, VoteState } from '@pointing/room-state.class';
 import { By } from '@angular/platform-browser';
-import { CirclesToRhumbusesSpinnerModule } from 'angular-epic-spinners';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { Component } from '@angular/core';
 import { noop } from 'rxjs';
@@ -27,7 +26,7 @@ describe('RoomPlayersComponent', () => {
 	beforeEach(async(() => {
 		pointingApiMock = jasmine.createSpyObj(['vote', 'switchToPlayer', 'switchToSpectator']);
 		TestBed.configureTestingModule({
-			imports: [CirclesToRhumbusesSpinnerModule, NoopAnimationsModule],
+			imports: [NoopAnimationsModule],
 			declarations: [TestWrapperComponent, RoomPlayersComponent, ShadePipe],
 			providers: [
 				{provide: PointingApiService, useValue: pointingApiMock},
@@ -95,14 +94,6 @@ describe('RoomPlayersComponent', () => {
 		fixture.detectChanges();
 		expect(count('.vote-ready')).toBe(0);
 		expect(count('.vote-number')).toBe(3);
-	});
-
-	it('should show placeholders if someone is slow', () => {
-		component.state = state([1, 3, VoteState.wait]);
-		fixture.detectChanges();
-		expect(count('.vote-ready')).toBe(2);
-		expect(count('.vote-wait')).toBe(1);
-		expect(count('.vote-number')).toBe(0);
 	});
 
 	it('should show empty if someone is skipped', () => {

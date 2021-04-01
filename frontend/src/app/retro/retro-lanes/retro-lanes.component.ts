@@ -1,8 +1,7 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { RetroState, RetroConfig, RetroType, RetroMessage } from '@app/retro/retro-state.class';
 import { LaneDefinition, LaneDefinitionType, LaneDefinitions, LanePredicates } from '@app/retro/lanes/lane-definitions.class';
-import * as _ from 'lodash';
-
+import { cloneDeep, each, filter, find, isEqual, map, pick } from 'lodash';
 
 @Component({
 	selector: 'retro-lanes',
@@ -28,7 +27,7 @@ export class RetroLanesComponent implements OnInit, OnChanges {
 			let currentState = changes.state.currentValue as RetroState;
 			if (!this.lastState 
 				|| this.lastState.viewMode !== currentState.viewMode 
-				|| !_.isEqual(this.lastState.config, currentState.config)) {
+				|| !isEqual(this.lastState.config, currentState.config)) {
 					this.initLanes();
 				}
 		}
@@ -54,19 +53,19 @@ export class RetroLanesComponent implements OnInit, OnChanges {
 			types.push(LaneDefinitionType.ACHIEVEMENTS);
 		if (this.state.isViewMode())
 			types.push(LaneDefinitionType.ACTION);
-		let newLanes = _.map(types, type => LaneDefinitions.getDefinition(type, this.state.config));
+		let newLanes = map(types, type => LaneDefinitions.getDefinition(type, this.state.config));
 		let oldLanes = this.lanes.splice(0, this.lanes.length);
-		_.each(newLanes, newLane => {
-			let exisingLane = _.find(oldLanes, oldLane => _.isEqual(oldLane, newLane));
+		each(newLanes, newLane => {
+			let exisingLane = find(oldLanes, oldLane => isEqual(oldLane, newLane));
 			this.lanes.push(exisingLane || newLane);
 		});
 
 		this.viewMode = this.state.isViewMode();
-		this.lastState = _.cloneDeep(_.pick(this.state, 'config', 'viewMode'));
+		this.lastState = cloneDeep(pick(this.state, 'config', 'viewMode'));
 	}
 
 	getLaneMessages(lane: LaneDefinition): RetroMessage[] {
-		return _.filter(this.state.messages, message => LanePredicates.matchFilters(message, lane.filters));
+		return filter(this.state.messages, message => LanePredicates.matchFilters(message, lane.filters));
 	}
 
 

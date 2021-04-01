@@ -5,6 +5,7 @@ import { RetroModule } from '@app/retro/retro.module';
 import { Component, DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 @Component({
 	template: `<resizeable-textarea
@@ -34,7 +35,7 @@ describe('ResizeableTextareaComponent', () => {
 
 	beforeEach(async(() => {
 		TestBed.configureTestingModule({
-			imports: [ RetroModule, FormsModule ],
+			imports: [ RetroModule, FormsModule, NoopAnimationsModule ],
 			declarations: [ WrapperComponent, ResizeableTextareaComponent ]
 		})
 		.compileComponents();

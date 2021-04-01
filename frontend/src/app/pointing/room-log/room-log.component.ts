@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
-import * as _ from 'lodash';
-import * as moment from 'moment';
 import { RoomState } from '@pointing/room-state.class';
+import * as dayjs from 'dayjs';
+import { map } from 'lodash';
 @Component({
 	selector: 'room-log',
 	templateUrl: './room-log.component.html',
@@ -27,10 +27,23 @@ export class RoomLogComponent implements OnInit, OnChanges {
 	}
 
 	private updateMessages(): void {
-		this.messages = _.map(this.state.log, log => ({
-			time: moment(new Date(log.timestamp)).fromNow(),
-			text: log.text
-		})).reverse();
+		this.messages = map(this.state.log, log => {
+			let seconds = Math.abs(dayjs(new Date(log.timestamp)).diff(dayjs(), 'seconds'));
+			return {
+				time: this.getElapsedTime(seconds),
+				text: log.text
+			};
+		}).reverse();
+	}
+
+	private getElapsedTime(seconds: number): string {
+		if (seconds <= 10)
+			return 'a few seconds ago';
+		if (seconds < 60)
+			return 'less than a minute ago';
+		if (seconds < 120)
+			return 'a minute ago';
+		else return `${Math.round(seconds / 60)} minutes ago`;
 	}
 
 }

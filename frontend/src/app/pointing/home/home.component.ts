@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import * as _ from 'lodash';
 import { Router } from '@angular/router';
 import { Planets } from '@pointing/home/planets.const';
 import { Pages } from '@app/common/pages.class';
+import { map, random } from 'lodash';
 
 interface Door {
 	id: string;
@@ -22,11 +22,11 @@ export class HomeComponent implements OnInit {
 	constructor(private router: Router) { }
 
 	ngOnInit() {
-		this.doors = _.map(Planets, planet => ({ 
+		this.doors = map(Planets, planet => ({ 
 			id: planet, 
 			name: planet, url: `assets/planets/${planet}.jpg`,
-			rotation: _.random(0, 359, false),
-			glass: _.random(100) > 80 ? _.random(2, 3, false) : undefined,
+			rotation: random(0, 359, false),
+			glass: random(100) > 80 ? random(2, 3, false) : undefined,
 		}));
 	}
 

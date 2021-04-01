@@ -1,7 +1,6 @@
 import { UserState } from '@app/common/user-state.service';
 
 export enum VoteState {
-	wait = 'wait',
 	none = 'none'
 }
 export interface Player extends UserState {
