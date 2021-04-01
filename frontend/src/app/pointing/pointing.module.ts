@@ -9,20 +9,16 @@ import { RoomPlayersComponent } from '@pointing/room-players/room-players.compon
 import { RoomCardsComponent } from '@pointing/room-cards/room-cards.component';
 import { RoomResultsComponent } from '@pointing/room-results/room-results.component';
 import { RoomLogComponent } from '@pointing/room-log/room-log.component';
-import { HangmanProgressComponent } from '@pointing/progress/hangman-progress/hangman-progress.component';
 import { ComplicationIndicatorComponent } from '@pointing/complication-indicator/complication-indicator.component';
-import { ShadePipe } from '@app/common/shade.pipe';
 import { NgPipesModule } from 'ngx-pipes';
 import { PointingSocket } from '@pointing/pointing-socket';
 import { FormsModule } from '@angular/forms';
 import { HomeComponent } from '@pointing/home/home.component';
-import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
 import { MatRippleModule } from '@angular/material/core';
-import { ShuttleProgressComponent } from './progress/shuttle-progress/shuttle-progress.component';
-import { SoyuzProgressComponent } from '@pointing/progress/soyuz-progress/soyuz-progress.component';
-import { ChristmasComponent } from './progress/christmas/christmas.component';
+import { PointingRoutingModule } from '@pointing/routing/pointing-routing.module';
+import { CoreModule } from '@app/common/core.module';
 
 @NgModule({
 	declarations: [
@@ -32,15 +28,11 @@ import { ChristmasComponent } from './progress/christmas/christmas.component';
 		RoomCardsComponent,
 		RoomResultsComponent,
 		RoomLogComponent,
-		HangmanProgressComponent,
 		ComplicationIndicatorComponent,
-		ShadePipe,
-		ShuttleProgressComponent,
-		SoyuzProgressComponent,
-		ChristmasComponent,
 	],
 	imports: [
 		CommonModule,
+		PointingRoutingModule,
 		ClipboardModule,
 		SelfBuildingSquareSpinnerModule,
 		CirclesToRhumbusesSpinnerModule,
@@ -48,10 +40,9 @@ import { ChristmasComponent } from './progress/christmas/christmas.component';
 		SocketIoModule,
 		NgPipesModule,
 		FormsModule,
-		BrowserModule,
-		BrowserAnimationsModule,
 		MatButtonModule,
 		MatRippleModule,
+		CoreModule,
 	],
 	providers: [
 		PointingSocket,

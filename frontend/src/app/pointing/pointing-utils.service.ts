@@ -24,7 +24,7 @@ export class PointingUtils {
 	}
 
 	static getAggregatedResults(roomState: RoomState): IPointingResult[] {
-		let max: number;
+		let max = 0;
 		return chain(roomState.players)
 			.countBy((player: Player) => player.vote)
 			.each((count: number) => max = count > max ? count : max)

@@ -28,13 +28,22 @@ export class RoomLogComponent implements OnInit, OnChanges {
 
 	private updateMessages(): void {
 		this.messages = map(this.state.log, log => {
-			let seconds = dayjs(new Date(log.timestamp)).diff(dayjs());
-			let msg = seconds >= 60 ? `${Math.round(seconds / 60)} minutes ago` : `${seconds} seconds ago`;
+			let seconds = Math.abs(dayjs(new Date(log.timestamp)).diff(dayjs(), 'seconds'));
 			return {
-				time: msg,
+				time: this.getElapsedTime(seconds),
 				text: log.text
 			};
 		}).reverse();
+	}
+
+	private getElapsedTime(seconds: number): string {
+		if (seconds <= 10)
+			return 'a few seconds ago';
+		if (seconds < 60)
+			return 'less than a minute ago';
+		if (seconds < 120)
+			return 'a minute ago';
+		else return `${Math.round(seconds / 60)} minutes ago`;
 	}
 
 }

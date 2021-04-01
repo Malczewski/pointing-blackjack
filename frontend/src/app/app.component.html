@@ -29,7 +29,14 @@
 
 <!-- Begin page content -->
 <main role="main" class="">
-	<router-outlet></router-outlet>
+	<app-scaling-squares-spinner
+		*ngIf="loading"
+		class="loading-indicator"
+		[animationDuration]="1250"
+		[size]="120"
+		[color]="'#3f51b5'"
+	></app-scaling-squares-spinner>
+	<router-outlet *ngIf="!loading"></router-outlet>
 </main>
 
 <footer class="footer">
