@@ -8,7 +8,7 @@
 		"express": "^4.17.1",
 		"lodash": "^4.17.19",
 		"moment": "^2.26.0",
-		"socket.io": "^2.3.0",
+		"socket.io": "^2.4.0",
 		"ws": "^7.2.3"
 	},
 	"devDependencies": {},
