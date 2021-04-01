@@ -1,7 +1,13 @@
 <header>
 	<!-- Fixed navbar -->
 	<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-		<a class="navbar-brand m-r-64">Pointing Blackjack</a>
+		<div class="navbar-brand m-r-64 position-relative">
+			<a>Pointing Blackjack</a>
+			<a class="version-badge" href="https://github.com/Malczewski/pointing-blackjack">
+				{{version}}
+			</a>
+		</div>
+		
 		<div class="collapse navbar-collapse" id="navbarCollapse">
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item active">
@@ -38,12 +44,3 @@
 	></app-scaling-squares-spinner>
 	<router-outlet *ngIf="!loading"></router-outlet>
 </main>
-
-<footer class="footer">
-	<div class="container">
-		<span class="text-muted">v{{version}}</span>
-		<a href="https://github.com/Malczewski/pointing-blackjack" target="_blank" class="float-right github-link">
-			<i class="fa fa-github"></i>
-		</a>
-	</div>
-</footer>
