@@ -15,7 +15,7 @@
 		"directive-class-suffix": true,
 		"directive-selector": [true, "attribute", "app", "camelCase"],
 		"component-selector": [false, "element", "", "kebab-case"],
-		"eofline": true,
+		"eofline": false,
 		"import-blacklist": [true, "rxjs/Rx"],
 		"indent": [true, "tabs", 2],
 		"import-spacing": true,
