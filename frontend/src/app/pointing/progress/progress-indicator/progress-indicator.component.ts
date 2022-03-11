@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ComponentFactoryResolver, ComponentRef, 
+import { ChangeDetectionStrategy, Component, ComponentFactoryResolver, ComponentRef,
 	Input, OnChanges, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { ProgressBase } from '@pointing/progress/progress-base.interface';
 import dayjs from 'dayjs';
@@ -9,7 +9,7 @@ import dayjs from 'dayjs';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProgressIndicatorComponent implements OnInit, OnChanges {
-	
+
 	@ViewChild('indicator', { read: ViewContainerRef }) private indicatorRef: ViewContainerRef;
 	@Input() progress: number;
 	@Input() randomSeed: string;
@@ -23,7 +23,6 @@ export class ProgressIndicatorComponent implements OnInit, OnChanges {
 	ngOnInit() {
 		let today = dayjs();
 		let indicators = [
-			() => this.initHangman(),
 			() => this.initSoyuz(),
 			() => this.initShuttle()
 		];
@@ -41,13 +40,13 @@ export class ProgressIndicatorComponent implements OnInit, OnChanges {
 			//indicators.push(() => this.initAutumn());
 			//indicators.push(() => this.initAutumn());
 		}
-		
+
 		let progressIndicatorIndex = (this.randomSeed.length * 31 + dayjs().date()) % indicators.length;
 		indicators[progressIndicatorIndex]().then(() => {
 			this.component.instance.progress = this.progress || 0;
 			this.component.changeDetectorRef.markForCheck();
 		});
-		
+
 	}
 
 	ngOnChanges() {
@@ -55,28 +54,28 @@ export class ProgressIndicatorComponent implements OnInit, OnChanges {
 			this.component.instance.progress = this.progress;
 		}
 	}
-	
+
 	async initHangman() {
 		const { HangmanProgressComponent } = await import('../hangman-progress/hangman-progress.component');
 		this.component = this.indicatorRef.createComponent(
 			this.cfr.resolveComponentFactory(HangmanProgressComponent)
 		);
 	}
-	
+
 	async initChristmas() {
 		const { ChristmasProgressComponent } = await import('../christmas-progress/christmas-progress.component');
 		this.component = this.indicatorRef.createComponent(
 			this.cfr.resolveComponentFactory(ChristmasProgressComponent)
 		);
 	}
-	
+
 	async initShuttle() {
 		const { ShuttleProgressComponent } = await import('../shuttle-progress/shuttle-progress.component');
 		this.component = this.indicatorRef.createComponent(
 			this.cfr.resolveComponentFactory(ShuttleProgressComponent)
 		);
 	}
-	
+
 	async initSoyuz() {
 		const { SoyuzProgressComponent } = await import('../soyuz-progress/soyuz-progress.component');
 		this.component = this.indicatorRef.createComponent(
