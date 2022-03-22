@@ -1,6 +1,6 @@
 {
 	"name": "blackjack-server",
-	"version": "0.3.0",
+	"version": "0.3.1",
 	"description": "Socket based server for pointing",
 	"dependencies": {
 		"@types/compression": "^1.7.0",
