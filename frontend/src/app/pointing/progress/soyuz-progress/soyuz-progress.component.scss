@@ -29,3 +29,13 @@
 .line-8 {
 	fill:#ff0000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.82999998;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;
 }
+
+.blink {
+	animation: blinker 1s normal infinite;
+}
+
+@keyframes blinker {
+	50% {
+		fill: #ffffff;
+	}
+}

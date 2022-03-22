@@ -5,7 +5,6 @@ import { ProgressBase } from '@pointing/progress/progress-base.interface';
 @Component({
 	selector: 'hangman-progress',
 	templateUrl: './hangman-progress.component.html',
-	styleUrls: ['./hangman-progress.component.scss'],
 	animations: [ProgressAnimation.defaultAnimation(true)],
 })
 export class HangmanProgressComponent implements ProgressBase {

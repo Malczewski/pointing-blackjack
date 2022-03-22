@@ -67,3 +67,19 @@
 .style-fire {
 	stroke-width: 0;
 }
+
+svg {
+	position: absolute;
+	top: 0;
+}
+
+.style-flight {
+	animation: moveup 2s cubic-bezier(.78,.08,.75,.62) 1;
+	animation-fill-mode: forwards;
+}
+
+@keyframes moveup {
+	100% {
+		top: -150%;
+	}
+}
