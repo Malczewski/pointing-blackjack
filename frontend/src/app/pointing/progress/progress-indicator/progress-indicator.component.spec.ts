@@ -16,7 +16,6 @@ describe('ProgressIndicatorComponent', () => {
 		jasmine.clock().install();
 		fixture = TestBed.createComponent(ProgressIndicatorComponent);
 		component = fixture.componentInstance;
-		component.randomSeed = 'room';
 	}));
 
 	afterEach(() => {
@@ -28,6 +27,7 @@ describe('ProgressIndicatorComponent', () => {
 	}
 
 	it('christmas when winter', fakeAsync(() => {
+		component.randomSeed = 'room';
 		jasmine.clock().mockDate(new Date(2020, 0, 1));
 		fixture.detectChanges();
 		tick();
@@ -35,26 +35,26 @@ describe('ProgressIndicatorComponent', () => {
 	}));
 
 	it('not christmas when not winter', fakeAsync(() => {
+		component.randomSeed = 'room';
 		jasmine.clock().mockDate(new Date(2020, 4, 1));
 		fixture.detectChanges();
 		tick();
-		expect(getIndicatorClass()).toBe('ShuttleProgressComponent');
+		expect(getIndicatorClass()).toBe('StarwarsProgressComponent');
 	}));
 
-	it('hangman', fakeAsync(() => {
+	/* it('hangman', fakeAsync(() => {
 		jasmine.clock().mockDate(new Date(2020, 4, 1));
 		component.randomSeed = 'rooom';
 		fixture.detectChanges();
 		tick();
 		expect(getIndicatorClass()).toBe('HangmanProgressComponent');
-	}));
+	})); */
 
 	it('soyuz', fakeAsync(() => {
 		jasmine.clock().mockDate(new Date(2020, 4, 1));
-		component.randomSeed = 'roooom';
+		component.randomSeed = 'rooom';
 		fixture.detectChanges();
 		tick();
 		expect(getIndicatorClass()).toBe('SoyuzProgressComponent');
 	}));
-
 });

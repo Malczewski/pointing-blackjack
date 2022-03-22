@@ -19,6 +19,7 @@ import { MatRippleModule } from '@angular/material/core';
 import { PointingRoutingModule } from '@pointing/routing/pointing-routing.module';
 import { CoreModule } from '@app/common/core.module';
 import { ProgressIndicatorComponent } from './progress/progress-indicator/progress-indicator.component';
+import { StarwarsProgressComponent } from './progress/starwars-progress/starwars-progress.component';
 
 @NgModule({
 	declarations: [
@@ -30,6 +31,7 @@ import { ProgressIndicatorComponent } from './progress/progress-indicator/progre
 		RoomLogComponent,
 		ComplicationIndicatorComponent,
 		ProgressIndicatorComponent,
+		StarwarsProgressComponent,
 	],
 	imports: [
 		CommonModule,
