@@ -3,16 +3,16 @@ import { ProgressAnimation } from '@pointing/progress/progress-animation.class';
 import { ProgressBase } from '@pointing/progress/progress-base.interface';
 
 @Component({
-	selector: 'hangman-progress',
-	templateUrl: './hangman-progress.component.html',
-	animations: [ProgressAnimation.defaultAnimation(true)],
+	selector: 'starwars-progress',
+	templateUrl: './starwars-progress.component.html',
+	styleUrls: ['./starwars-progress.component.scss'],
+	animations: [ProgressAnimation.defaultAnimation()],
 })
-export class HangmanProgressComponent implements ProgressBase {
+export class StarwarsProgressComponent implements ProgressBase {
 
 	@Input() progress: number;
 
 	getState(threshold: number): string {
 		return this.progress >= threshold ? 'show' : 'hide';
 	}
-
 }

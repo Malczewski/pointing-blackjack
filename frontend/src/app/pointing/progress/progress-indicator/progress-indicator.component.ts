@@ -24,7 +24,8 @@ export class ProgressIndicatorComponent implements OnInit, OnChanges {
 		let today = dayjs();
 		let indicators = [
 			() => this.initSoyuz(),
-			() => this.initShuttle()
+			() => this.initShuttle(),
+			() => this.initStarwars(),
 		];
 		if (today.month() >= 11 || today.month() === 0 && today.date() < 15) {
 			indicators.push(() => this.initChristmas());
@@ -80,6 +81,13 @@ export class ProgressIndicatorComponent implements OnInit, OnChanges {
 		const { SoyuzProgressComponent } = await import('../soyuz-progress/soyuz-progress.component');
 		this.component = this.indicatorRef.createComponent(
 			this.cfr.resolveComponentFactory(SoyuzProgressComponent)
+		);
+	}
+
+	async initStarwars() {
+		const { StarwarsProgressComponent } = await import('../starwars-progress/starwars-progress.component');
+		this.component = this.indicatorRef.createComponent(
+			this.cfr.resolveComponentFactory(StarwarsProgressComponent)
 		);
 	}
 
