@@ -3,6 +3,7 @@ import * as moment from 'moment';
 import { RandomUtils } from '../../utils/random-utils';
 import { RetroPlayer } from './player';
 import { RetroMessage } from './message';
+import { LogMessage } from '../../common/log-message';
 
 export enum RetroType {
 	startStop = 'startStop',
@@ -28,6 +29,8 @@ export class RetroRoomState {
 	lastMessageUpdate?: string;
 	lastPlayerUpdate?: string;
 
+	log: LogMessage[];
+
 	constructor(id: string) {
 		this.id = id;
 		this.config = new RetroConfig();
@@ -36,6 +39,7 @@ export class RetroRoomState {
 		this.players = [];
 		this.viewMode = false;
 		this.messages = [];
+		this.log = [];
 	}
 
 	removePlayer(player: RetroPlayer) {
@@ -85,7 +89,14 @@ export class RetroRoomState {
 		message.likes = message.likes || [];
 		if (_.includes(message.likes, playerUid)) {
 			_.remove(message.likes, like => like === playerUid);
-		} else message.likes.push(playerUid); 
+		} else message.likes.push(playerUid);
+	}
+
+	addLog(msg: string) {
+		this.log.push(new LogMessage(msg));
+		if (this.log.length > 20) {
+			this.log.splice(0, 1);
+		}
 	}
 
 }

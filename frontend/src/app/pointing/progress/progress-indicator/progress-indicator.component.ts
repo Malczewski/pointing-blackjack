@@ -27,7 +27,7 @@ export class ProgressIndicatorComponent implements OnInit, OnChanges {
 			() => this.initShuttle(),
 			() => this.initStarwars(),
 		];
-		if (today.month() >= 11 || today.month() === 0 && today.date() < 15) {
+		if (today.month() >= 11 || today.month() === 0) {
 			indicators.push(() => this.initChristmas());
 			indicators.push(() => this.initChristmas());
 			indicators.push(() => this.initChristmas());

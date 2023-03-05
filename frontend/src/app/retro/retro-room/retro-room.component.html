@@ -1,7 +1,23 @@
 <div class="left-panel" *ngIf="loaded">
-	<retro-settings [state]="state" class="m-b-8"></retro-settings>
-	<retro-controls [state]="state" class="m-b-8"></retro-controls>
-	<retro-players [state]="state" class="flex-fill overflow-hidden"></retro-players>
+	<perfect-scrollbar
+		[scrollIndicators]="true"
+		[config]="{suppressScrollX: true}">
+		<div class="left-panel-content">
+			<retro-settings [state]="state" class="m-b-8"></retro-settings>
+			<retro-controls [state]="state" class="m-b-8"></retro-controls>
+			<mat-accordion>
+				<mat-expansion-panel >
+					<mat-expansion-panel-header collapsedHeight="48px" expandedHeight="48px">
+						<mat-panel-title>
+							Logs
+						</mat-panel-title>
+					</mat-expansion-panel-header>
+					<room-log [logs]="state?.log"></room-log>
+				</mat-expansion-panel>
+			</mat-accordion>
+			<retro-players [state]="state" class="flex-fill mt-2"></retro-players>
+		</div>
+	</perfect-scrollbar>
 </div>
 <retro-lanes [state]="state" *ngIf="loaded"></retro-lanes>
 <div *ngIf="!loaded" class="w-100 h-100 d-flex justify-content-center align-items-center">

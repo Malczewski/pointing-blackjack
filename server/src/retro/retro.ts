@@ -28,7 +28,7 @@ interface ConfigData {
 export class Retro {
 	private globalState = new RetroGlobalState();
 	private retroSocket!: socketio.Server;
-	
+
 	constructor(private server: http.Server) {}
 
 	start() {
@@ -40,14 +40,14 @@ export class Retro {
 		this.retroSocket.on("connection", (socket: RetroSocket) => {
 			console.log("new connection");
 			socket.on("join", arg => this.onJoin(socket, arg));
-		
+
 			socket.on('config', arg => this.changeConfig(socket, arg));
 			socket.on('view-mode', viewMode => this.changeViewMode(socket, viewMode));
 			socket.on('message:save', message => this.saveMessage(socket, message));
 			socket.on('message:show', message => this.showMessage(socket, message));
 			socket.on('message:delete', messageUid => this.deleteMessage(socket, messageUid));
 			socket.on('message:like', messageUid => this.likeMessage(socket, messageUid));
-		
+
 			socket.on("disconnect", () => this.disconnect(socket));
 			socket.on("room:ping", () => {
 				let player = socket.player;
@@ -71,6 +71,7 @@ export class Retro {
 		this.globalState.removePlayer(player);
 		let roomState = this.globalState.getRoom(room);
 		roomState.addPlayer(player);
+		roomState.addLog(`${player.name} joined.`);
 
 		this.refreshRoom(room, player);
 	}
@@ -82,6 +83,7 @@ export class Retro {
 		if (room) {
 			let roomState = this.globalState.getRoom(room);
 			roomState.setConfig(property, value);
+			roomState.addLog(`${player.name} changed config.`);
 			this.refreshRoom(room, player);
 		}
 	}
@@ -96,6 +98,7 @@ export class Retro {
 				roomState.startDate = moment().toISOString();
 				roomState.sessionId = RandomUtils.generateUID();
 			}
+			roomState.addLog(`${player.name} changed to ${viewMode ? 'view' : 'read'} mode.`);
 			this.refreshRoom(room, player);
 		}
 	}
@@ -106,6 +109,7 @@ export class Retro {
 		if (room) {
 			let roomState = this.globalState.getRoom(room);
 			roomState.saveMessage(message);
+			roomState.addLog(`${player.name} added new message.`);
 			this.refreshRoom(room, player, message.uid);
 		}
 	}
@@ -117,6 +121,7 @@ export class Retro {
 		if (room) {
 			let roomState = this.globalState.getRoom(room);
 			roomState.showMessage(messageUid);
+			roomState.addLog(`${player.name} revealed a message.`);
 			this.refreshRoom(room, player, messageUid);
 		}
 	}
@@ -128,6 +133,7 @@ export class Retro {
 		if (room) {
 			let roomState = this.globalState.getRoom(room);
 			roomState.deleteMessage(messageUid);
+			roomState.addLog(`${player.name} deleted a message.`);
 			this.refreshRoom(room, player);
 		}
 	}
@@ -139,6 +145,7 @@ export class Retro {
 		if (room) {
 			let roomState = this.globalState.getRoom(room);
 			roomState.toggleLike(messageUid, player.uid);
+			roomState.addLog(`${player.name} liked a message.`);
 			this.refreshRoom(room, player, messageUid);
 		}
 	}
@@ -146,6 +153,10 @@ export class Retro {
 	private disconnect(socket: RetroSocket) {
 		console.log(`disconnect: ${JSON.stringify(socket.player)}, room: ${socket.room}`);
 		if (socket.room) {
+			if (socket.player) {
+				let roomState = this.globalState.getRoom(socket.room);
+				roomState.addLog(`${socket.player.name} left.`);
+			}
 			socket.leave(socket.room);
 		}
 		if (socket.player) {
@@ -171,11 +182,12 @@ export class Retro {
 				message.uid = RandomUtils.generateUID();
 				message.opened = true;
 			});
+			roomState.addLog(`${socket.player.name} imported saved retrospective.`);
 			this.refreshRoom(room, socket.player);
 		}
-		
+
 	}
-	
+
 	private async refreshRoom(room: string, lastPlayer?: RetroPlayer | null, lastMessageUid?: string) {
 		let state = this.globalState.getRoom(room);
 		if (lastPlayer)

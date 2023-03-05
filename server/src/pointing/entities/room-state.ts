@@ -1,6 +1,7 @@
 import { PointingPlayer, Vote, VoteState } from "./player";
 import * as _ from "lodash";
-import { LogMessage } from "./log-message";
+import { LogMessage } from '../../common/log-message';
+
 export class PointingRoomState {
 	id: string;
 	players: PointingPlayer[];

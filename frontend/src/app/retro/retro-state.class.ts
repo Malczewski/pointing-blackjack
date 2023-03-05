@@ -57,7 +57,9 @@ export class RetroState {
 	lastMessageUpdate?: string;
 	lastPlayerUpdate?: string;
 
+	log: {timestamp: number, text: string}[];
+
 	isViewMode(): boolean {
-		return this.viewMode/*  || this.config.transparentMode */;
+		return this.viewMode;
 	}
 }
