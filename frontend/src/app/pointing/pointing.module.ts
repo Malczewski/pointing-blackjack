@@ -18,7 +18,6 @@ import { ClipboardModule } from 'ngx-clipboard';
 import { NgPipesModule } from 'ngx-pipes';
 import { SocketIoModule } from 'ngx-socket-io';
 import { ProgressIndicatorComponent } from './progress/progress-indicator/progress-indicator.component';
-import { StarwarsProgressComponent } from './progress/starwars-progress/starwars-progress.component';
 
 @NgModule({
 	declarations: [
@@ -29,7 +28,6 @@ import { StarwarsProgressComponent } from './progress/starwars-progress/starwars
 		RoomResultsComponent,
 		ComplicationIndicatorComponent,
 		ProgressIndicatorComponent,
-		StarwarsProgressComponent,
 	],
 	imports: [
 		CommonModule,
