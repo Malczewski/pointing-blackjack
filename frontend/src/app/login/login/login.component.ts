@@ -8,6 +8,7 @@ import { UserStateService } from '../../common/user-state.service';
 	template: `
 		<div class="login-container">
 			<form role="form" (ngSubmit)="onSubmit()">
+				<label>Who the hell are you? <a href="https://youtu.be/MPYlxeG-8_w?t=119" target="_blank">(c)</a></label>
 				<div class="input-group">
 					<input type="text"
 						[(ngModel)]="userName"

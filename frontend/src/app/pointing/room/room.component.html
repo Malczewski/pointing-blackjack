@@ -23,7 +23,7 @@
 </div>
 <div class="room-content" [ngSwitch]="getMode()">
 	<div class="room-content-center">
-		<room-cards class="room-cards" 
+		<room-cards class="room-cards"
 			*ngSwitchCase="'cards'"
 			[state]="roomState">
 		</room-cards>
@@ -33,8 +33,8 @@
 		</room-results>
 		<div *ngSwitchCase="'progress'" class="room-progress-center">
 			<progress-indicator
-				class="flex-fill" 
-				[randomSeed]="roomId" 
+				class="flex-fill"
+				[randomSeed]="roomId"
 				[progress]="getProgress()">
 			</progress-indicator>
 			<span class="progress-text">Vote in progress...</span>
@@ -51,12 +51,12 @@
 </div>
 <div class="room-progress">
 	<progress-indicator
-		class="flex-fill" 
+		class="flex-fill"
 		[hidden]="!showMiniProgress()"
-		[randomSeed]="roomId" 
+		[randomSeed]="roomId"
 		[progress]="getProgress()">
 	</progress-indicator>
 </div>
 <div class="room-log">
-	<room-log [state]="roomState"></room-log>
+	<room-log [logs]="roomState?.log"></room-log>
 </div>

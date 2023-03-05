@@ -1,5 +1,6 @@
 $left-width: 20%;
 $header-height: 0; //44px;
+$log: 200px;
 
 * {
 	color: #343a40
@@ -19,7 +20,9 @@ $header-height: 0; //44px;
 	width: $left-width;
 	top: $header-height;
 	bottom: 0;
+}
 
+.left-panel-content {
 	display: flex;
 	flex-direction: column;
 
@@ -34,4 +37,9 @@ retro-lanes {
 	bottom: 0;
 	padding: 10px;
 	padding-bottom: 0;
+}
+
+room-log {
+	max-height: 300px;
+	overflow: auto;
 }

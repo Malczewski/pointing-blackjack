@@ -1,13 +1,10 @@
-import { async, ComponentFixture, TestBed, fakeAsync, tick, flush, discardPeriodicTasks } from '@angular/core/testing';
-
-import { RoomLogComponent } from './room-log.component';
-import { RoomState } from '@pointing/room-state.class';
+import { async, ComponentFixture, discardPeriodicTasks, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { map } from 'lodash';
+import { RoomLogComponent } from './room-log.component';
 
 describe('RoomLogComponent', () => {
 	let component: RoomLogComponent;
 	let fixture: ComponentFixture<RoomLogComponent>;
-	let state: RoomState;
 
 	beforeEach(async(() => {
 		TestBed.configureTestingModule({
@@ -16,12 +13,9 @@ describe('RoomLogComponent', () => {
 	}));
 
 	beforeEach(() => {
-		state = {
-			log: []
-		} as RoomState;
 		fixture = TestBed.createComponent(RoomLogComponent);
 		component = fixture.componentInstance;
-		component.state = state;
+		component.logs = [];
 	});
 
 	it('should create', () => {
@@ -30,7 +24,7 @@ describe('RoomLogComponent', () => {
 	});
 
 	it('should show messages in reverse order', () => {
-		state.log = [
+		component.logs = [
 			{text: 'knock-knock', timestamp: new Date().getTime() - 60000},
 			{text: 'who is there?', timestamp: new Date().getTime() - 10000}
 		];
@@ -46,14 +40,12 @@ describe('RoomLogComponent', () => {
 		const compiled: HTMLElement = fixture.debugElement.nativeElement;
 		fixture.detectChanges();
 		expect(compiled.querySelectorAll('.message .message-text').length).toBe(0);
-		component.state = {
-			log: [
-				{text: 'knock-knock', timestamp: new Date().getTime() - 60000}
-			]
-		} as RoomState;
+		component.logs = [
+			{text: 'knock-knock', timestamp: new Date().getTime() - 60000}
+		];
 		component.ngOnChanges({state: {
-			currentValue: component.state,
-			previousValue: state
+			currentValue: component.logs,
+			previousValue: []
 		} as any});
 		fixture.detectChanges();
 		expect(compiled.querySelectorAll('.message .message-text').length).toBe(1);
@@ -65,14 +57,14 @@ describe('RoomLogComponent', () => {
 	}
 
 	it('should update labels every N seconds', fakeAsync(() => {
-		state.log = [
+		component.logs = [
 			{text: 'knock-knock', timestamp: new Date().getTime() - 60000}
 		];
 		fixture.detectChanges();
 		const compiled: HTMLElement = fixture.debugElement.nativeElement;
 		expect(getTimestamps(compiled)).toEqual(['a minute ago']);
 
-		state.log[0].timestamp = new Date().getTime() - 5 * 60000;
+		component.logs[0].timestamp = new Date().getTime() - 5 * 60000;
 		fixture.detectChanges(); // should not update yet
 		expect(getTimestamps(compiled)).toEqual(['a minute ago']);
 		tick(15000);
